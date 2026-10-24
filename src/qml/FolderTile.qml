@@ -5,6 +5,7 @@ Item {
     id: root
 
     property string name
+    property string path
     property string subtitle
     property int scheme: 0
 
@@ -12,6 +13,7 @@ Item {
 
     signal selectRequested(int mode)
     signal opened
+    signal contextMenuRequested(point position)
 
     function pick(first, second, third, fourth) {
         switch (scheme % 4) {
@@ -106,5 +108,6 @@ Item {
         anchors.fill: parent
         onSelectRequested: mode => root.selectRequested(mode)
         onOpened: root.opened()
+        onContextMenuRequested: position => root.contextMenuRequested(position)
     }
 }

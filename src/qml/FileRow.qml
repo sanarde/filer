@@ -5,6 +5,7 @@ Item {
     id: root
 
     property string name
+    property string path
     property string icon
     property bool directory: false
     property string typeText
@@ -15,6 +16,7 @@ Item {
 
     signal selectRequested(int mode)
     signal opened
+    signal contextMenuRequested(point position)
 
     implicitHeight: 56
 
@@ -89,5 +91,6 @@ Item {
         anchors.fill: parent
         onSelectRequested: mode => root.selectRequested(mode)
         onOpened: root.opened()
+        onContextMenuRequested: position => root.contextMenuRequested(position)
     }
 }
