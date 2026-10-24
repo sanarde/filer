@@ -39,3 +39,5 @@ usb
 view_column
 view_list
 movie
+draft
+arrow_downward
