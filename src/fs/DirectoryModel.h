@@ -103,6 +103,8 @@ public:
     QString selectedPath() const { return m_selected.size() == 1 ? *m_selected.constBegin() : QString(); }
 
     Q_INVOKABLE void select(const QString &path, SelectMode mode);
+    Q_INVOKABLE void reload();
+    Q_INVOKABLE void selectPaths(const QStringList &paths);
     Q_INVOKABLE void selectAll();
     Q_INVOKABLE void clearSelection();
     Q_INVOKABLE QStringList selectedPaths() const;

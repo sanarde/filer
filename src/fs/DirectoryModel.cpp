@@ -314,6 +314,21 @@ void DirectoryModel::select(const QString &path, SelectMode mode)
     setSelection(selection);
 }
 
+void DirectoryModel::reload()
+{
+    load();
+}
+
+void DirectoryModel::selectPaths(const QStringList &paths)
+{
+    QSet<QString> selection;
+    for (const QString &path : paths) {
+        if (rowOf(path) >= 0)
+            selection.insert(path);
+    }
+    setSelection(selection);
+}
+
 void DirectoryModel::selectAll()
 {
     QSet<QString> selection;
