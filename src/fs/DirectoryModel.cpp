@@ -314,6 +314,21 @@ void DirectoryModel::select(const QString &path, SelectMode mode)
     setSelection(selection);
 }
 
+qint64 DirectoryModel::selectedSize() const
+{
+    qint64 total = 0;
+    for (const Entry &entry : m_rows) {
+        if (entry.kind != FileKinds::Folder && m_selected.contains(entry.path))
+            total += entry.size;
+    }
+    return total;
+}
+
+QString DirectoryModel::selectedSizeText() const
+{
+    return formatSize(selectedSize());
+}
+
 void DirectoryModel::reload()
 {
     load();

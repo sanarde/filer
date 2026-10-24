@@ -20,6 +20,9 @@ class FileDetails : public QObject
     Q_PROPERTY(QString modifiedText READ modifiedText NOTIFY changed FINAL)
     Q_PROPERTY(QString createdText READ createdText NOTIFY changed FINAL)
     Q_PROPERTY(QString permissionsText READ permissionsText NOTIFY changed FINAL)
+    Q_PROPERTY(QString mimeText READ mimeText NOTIFY changed FINAL)
+    Q_PROPERTY(QString ownerText READ ownerText NOTIFY changed FINAL)
+    Q_PROPERTY(QString pathText READ pathText NOTIFY changed FINAL)
     Q_PROPERTY(QString locationText READ locationText NOTIFY changed FINAL)
 
 public:
@@ -37,6 +40,9 @@ public:
     QString createdText() const { return m_createdText; }
     QString permissionsText() const { return m_permissionsText; }
     QString locationText() const { return m_locationText; }
+    QString mimeText() const { return m_mimeText; }
+    QString ownerText() const { return m_ownerText; }
+    QString pathText() const { return m_pathText; }
 
 signals:
     void changed();
@@ -55,4 +61,7 @@ private:
     QString m_createdText;
     QString m_permissionsText;
     QString m_locationText;
+    QString m_mimeText;
+    QString m_ownerText;
+    QString m_pathText;
 };

@@ -83,6 +83,9 @@ void FileDetails::load()
         m_createdText.clear();
         m_permissionsText.clear();
         m_locationText.clear();
+        m_mimeText.clear();
+        m_ownerText.clear();
+        m_pathText.clear();
         return;
     }
 
@@ -95,6 +98,9 @@ void FileDetails::load()
     m_createdText = formatTime(info.birthTime());
     m_permissionsText = formatPermissions(info.permissions());
     m_locationText = locationOf(info);
+    m_mimeText = mime.name();
+    m_ownerText = info.owner() + u':' + info.group();
+    m_pathText = info.absoluteFilePath();
 
     if (info.isDir()) {
         m_kind = FileKinds::Folder;
