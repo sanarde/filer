@@ -13,9 +13,11 @@ Item {
     function open() {
         aboutOpen = false
         visible = true
+        forceActiveFocus()
     }
 
     visible: false
+    focus: true
 
     Shortcut {
         sequence: "Esc"
@@ -28,8 +30,12 @@ Item {
         radius: root.radius
         color: Qt.alpha("black", 0.5)
 
-        TapHandler {
-            onTapped: root.closeRequested()
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            acceptedButtons: Qt.AllButtons
+            onClicked: root.closeRequested()
+            onWheel: wheel => wheel.accepted = true
         }
     }
 
@@ -42,7 +48,11 @@ Item {
         color: Theme.surface
         clip: true
 
-        TapHandler {
+        MouseArea {
+            anchors.fill: parent
+            hoverEnabled: true
+            acceptedButtons: Qt.AllButtons
+            onWheel: wheel => wheel.accepted = true
         }
 
         ColumnLayout {

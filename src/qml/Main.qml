@@ -124,6 +124,7 @@ Window {
                     clip: true
 
                     DirectoryPage {
+                        id: page
                         anchors.fill: parent
                         navigator: pathNavigator
                         directory: dirModel
@@ -146,6 +147,7 @@ Window {
             anchors.fill: parent
             radius: parent.radius
             onCloseRequested: visible = false
+            onVisibleChanged: if (!visible) page.forceActiveFocus()
         }
     }
 
