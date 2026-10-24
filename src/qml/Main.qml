@@ -1,31 +1,39 @@
 import QtQuick
+import QtQuick.Layouts
 import Sanar.Filer
 
 Window {
+    id: root
+
     width: 1400
     height: 860
+    minimumWidth: 640
+    minimumHeight: 420
     visible: true
     title: "Sanar Filer"
-    color: Theme.desk
+    color: "transparent"
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     Rectangle {
         anchors.fill: parent
-        anchors.margins: 20
-        radius: 32
         color: Theme.background
+        radius: root.visibility === Window.Maximized ? 0 : 32
 
-        Row {
-            anchors.centerIn: parent
-            spacing: 12
-            Icon { name: "home"; filled: true; color: Theme.primary }
-            Icon { name: "folder" }
-            Icon { name: "hard_drive"; filled: true }
-            Text {
-                text: "Sanar Filer"
-                color: Theme.onSurface
-                font.pixelSize: 24
-                font.weight: Font.Bold
+        ColumnLayout {
+            anchors.fill: parent
+            spacing: 0
+
+            TopBar {
+                Layout.fillWidth: true
+                window: root
             }
+
+            Item { Layout.fillHeight: true }
         }
+    }
+
+    ResizeHandles {
+        anchors.fill: parent
+        window: root
     }
 }

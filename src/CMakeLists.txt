@@ -8,6 +8,12 @@ qt_add_qml_module(sanar-filer
     QML_FILES
         qml/Main.qml
         qml/Icon.qml
+        qml/IconButton.qml
+        qml/NavigationButtons.qml
+        qml/ResizeHandles.qml
+        qml/SearchField.qml
+        qml/TopBar.qml
+        qml/WindowControls.qml
     SOURCES
         theme/ColorSet.h
         theme/ColorSets.cpp
