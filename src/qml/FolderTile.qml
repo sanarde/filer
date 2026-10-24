@@ -8,6 +8,9 @@ Item {
     property string subtitle
     property int scheme: 0
 
+    property bool selected: false
+
+    signal selectRequested(int mode)
     signal opened
 
     function pick(first, second, third, fourth) {
@@ -41,13 +44,15 @@ Item {
         anchors.fill: parent
         radius: 22
         color: root.tileColor
+        border.width: root.selected ? 2 : 0
+        border.color: Theme.primary
     }
 
     Rectangle {
         anchors.fill: parent
         radius: 22
         color: Qt.alpha(root.textColor, 0.08)
-        visible: hover.hovered
+        visible: input.hovered
     }
 
     Rectangle {
@@ -96,13 +101,10 @@ Item {
         }
     }
 
-    HoverHandler {
-        id: hover
-        cursorShape: Qt.PointingHandCursor
-    }
-
-    TapHandler {
-        gesturePolicy: TapHandler.ReleaseWithinBounds
-        onDoubleTapped: root.opened()
+    EntryInput {
+        id: input
+        anchors.fill: parent
+        onSelectRequested: mode => root.selectRequested(mode)
+        onOpened: root.opened()
     }
 }

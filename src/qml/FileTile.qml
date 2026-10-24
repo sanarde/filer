@@ -9,6 +9,9 @@ Item {
     property string icon
     property int kind: FileKind.Other
 
+    property bool selected: false
+
+    signal selectRequested(int mode)
     signal opened
 
     implicitHeight: 144
@@ -20,7 +23,8 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: 24
-        color: hover.hovered ? Theme.surface : "transparent"
+        color: root.selected ? Theme.secondaryContainer
+                             : input.hovered ? Theme.surface : "transparent"
     }
 
     Rectangle {
@@ -29,7 +33,7 @@ Item {
         y: 8
         width: parent.width - 16
         height: 104
-        radius: 18
+        radius: root.selected ? 28 : 18
         color: Theme.surfaceHighest
 
         Rectangle {
@@ -85,6 +89,24 @@ Item {
                 font.pixelSize: 36
             }
         }
+
+        Rectangle {
+            visible: root.selected
+            x: 8
+            y: 8
+            width: 24
+            height: 24
+            radius: 12
+            color: Theme.primary
+
+            Icon {
+                anchors.centerIn: parent
+                name: "check"
+                filled: true
+                color: Theme.onPrimary
+                font.pixelSize: 18
+            }
+        }
     }
 
     Column {
@@ -100,7 +122,7 @@ Item {
             width: parent.width
             text: root.name
             elide: Text.ElideMiddle
-            color: Theme.onSurface
+            color: root.selected ? Theme.onSecondaryContainer : Theme.onSurface
             font.pixelSize: 14
             font.weight: Font.DemiBold
         }
@@ -109,18 +131,16 @@ Item {
             width: parent.width
             text: root.subtitle
             elide: Text.ElideRight
-            color: Theme.onSurfaceVariant
+            color: root.selected ? Theme.onSecondaryContainer : Theme.onSurfaceVariant
+            opacity: root.selected ? 0.78 : 1
             font.pixelSize: 12
         }
     }
 
-    HoverHandler {
-        id: hover
-        cursorShape: Qt.PointingHandCursor
-    }
-
-    TapHandler {
-        gesturePolicy: TapHandler.ReleaseWithinBounds
-        onDoubleTapped: root.opened()
+    EntryInput {
+        id: input
+        anchors.fill: parent
+        onSelectRequested: mode => root.selectRequested(mode)
+        onOpened: root.opened()
     }
 }

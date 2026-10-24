@@ -11,6 +11,9 @@ Item {
     property string sizeText
     property date modified
 
+    property bool selected: false
+
+    signal selectRequested(int mode)
     signal opened
 
     implicitHeight: 56
@@ -22,7 +25,8 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: 16
-        color: hover.hovered ? Theme.surface : "transparent"
+        color: root.selected ? Theme.secondaryContainer
+                             : input.hovered ? Theme.surface : "transparent"
     }
 
     Icon {
@@ -80,13 +84,10 @@ Item {
         font.pixelSize: 13
     }
 
-    HoverHandler {
-        id: hover
-        cursorShape: Qt.PointingHandCursor
-    }
-
-    TapHandler {
-        gesturePolicy: TapHandler.ReleaseWithinBounds
-        onDoubleTapped: root.opened()
+    EntryInput {
+        id: input
+        anchors.fill: parent
+        onSelectRequested: mode => root.selectRequested(mode)
+        onOpened: root.opened()
     }
 }
