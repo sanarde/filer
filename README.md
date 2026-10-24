@@ -1,6 +1,6 @@
 # Sanar Filer
 
-File manager for SanarDE with a Qt Quick interface and a C++ backend. Part of NurOS, independent of the distribution.
+File manager for SanarDE.
 
 ## Dependencies
 
