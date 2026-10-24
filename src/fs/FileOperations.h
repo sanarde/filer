@@ -16,11 +16,13 @@ class FileOperations : public QObject
     Q_PROPERTY(bool busy READ busy NOTIFY busyChanged FINAL)
     Q_PROPERTY(double progress READ progress NOTIFY progressChanged FINAL)
     Q_PROPERTY(QString currentName READ currentName NOTIFY progressChanged FINAL)
-    Q_PROPERTY(bool moving READ moving NOTIFY busyChanged FINAL)
+    Q_PROPERTY(Kind kind READ kind NOTIFY busyChanged FINAL)
 
 public:
     enum Conflict { Replace, Skip, KeepBoth };
     Q_ENUM(Conflict)
+    enum Kind { Copy, Move, Trash, Remove };
+    Q_ENUM(Kind)
 
     explicit FileOperations(QObject *parent = nullptr);
     ~FileOperations() override;
@@ -28,7 +30,7 @@ public:
     bool busy() const { return m_busy; }
     double progress() const { return m_progress; }
     QString currentName() const { return m_currentName; }
-    bool moving() const { return m_moving; }
+    Kind kind() const { return m_kind; }
 
     Q_INVOKABLE QStringList conflicts(const QStringList &sources, const QString &target) const;
     Q_INVOKABLE void copy(const QStringList &sources, const QString &target, Conflict conflict);
@@ -45,12 +47,12 @@ signals:
     void finished(bool success, const QString &error);
 
 private:
-    void start(std::unique_ptr<TransferJob> job, bool moving);
+    void start(std::unique_ptr<TransferJob> job, Kind kind);
 
     std::unique_ptr<TransferJob> m_job;
     QThread *m_thread = nullptr;
     bool m_busy = false;
-    bool m_moving = false;
+    Kind m_kind = Copy;
     double m_progress = 0;
     QString m_currentName;
 };

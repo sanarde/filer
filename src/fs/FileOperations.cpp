@@ -36,24 +36,24 @@ QStringList FileOperations::conflicts(const QStringList &sources, const QString 
 
 void FileOperations::copy(const QStringList &sources, const QString &target, Conflict conflict)
 {
-    start(std::make_unique<TransferJob>(sources, target, TransferJob::Copy, static_cast<TransferJob::Conflict>(conflict)), false);
+    start(std::make_unique<TransferJob>(sources, target, TransferJob::Copy, static_cast<TransferJob::Conflict>(conflict)), Copy);
 }
 
 void FileOperations::move(const QStringList &sources, const QString &target, Conflict conflict)
 {
-    start(std::make_unique<TransferJob>(sources, target, TransferJob::Move, static_cast<TransferJob::Conflict>(conflict)), true);
+    start(std::make_unique<TransferJob>(sources, target, TransferJob::Move, static_cast<TransferJob::Conflict>(conflict)), Move);
 }
 
 void FileOperations::trash(const QStringList &sources)
 {
     auto job = std::make_unique<TransferJob>(sources, Trash::filesDirectory(), TransferJob::Move, TransferJob::KeepBoth);
     job->setNaming(Trash::reserveName);
-    start(std::move(job), true);
+    start(std::move(job), Trash);
 }
 
 void FileOperations::remove(const QStringList &sources)
 {
-    start(std::make_unique<TransferJob>(sources, QString(), TransferJob::Remove, TransferJob::Replace), true);
+    start(std::make_unique<TransferJob>(sources, QString(), TransferJob::Remove, TransferJob::Replace), Remove);
 }
 
 static QString message(const char *msgid)
@@ -102,7 +102,7 @@ void FileOperations::cancel()
         m_job->cancel();
 }
 
-void FileOperations::start(std::unique_ptr<TransferJob> job, bool moving)
+void FileOperations::start(std::unique_ptr<TransferJob> job, Kind kind)
 {
     if (m_busy)
         return;
@@ -117,7 +117,7 @@ void FileOperations::start(std::unique_ptr<TransferJob> job, bool moving)
     });
 
     m_busy = true;
-    m_moving = moving;
+    m_kind = kind;
     m_progress = 0;
     m_currentName.clear();
     emit busyChanged();
