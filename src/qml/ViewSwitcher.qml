@@ -4,7 +4,7 @@ import Sanar.Filer
 Row {
     id: root
 
-    property string viewMode: "grid"
+    readonly property string viewMode: Settings.viewMode
 
     spacing: 2
 
@@ -19,7 +19,7 @@ Row {
         radius: root.viewMode === "list" ? 24 : 8
         topLeftRadius: 24
         bottomLeftRadius: 24
-        onClicked: root.viewMode = "list"
+        onClicked: Settings.viewMode = "list"
     }
 
     IconButton {
@@ -33,6 +33,6 @@ Row {
         radius: root.viewMode === "grid" ? 24 : 8
         topRightRadius: 24
         bottomRightRadius: 24
-        onClicked: root.viewMode = "grid"
+        onClicked: Settings.viewMode = "grid"
     }
 }

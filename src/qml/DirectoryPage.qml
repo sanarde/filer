@@ -73,7 +73,7 @@ Item {
         anchors.leftMargin: 28
         anchors.rightMargin: 28
         directory: root.directory
-        viewMode: header.viewMode
+        viewMode: Settings.viewMode
         onOpenRequested: path => root.navigator.open(path)
         onSelectRequested: (path, mode) => {
             root.forceActiveFocus()
@@ -104,7 +104,6 @@ Item {
         visible: false
         x: header.x + header.sortButtonX
         y: header.y + header.height + 4
-        directory: root.directory
         onClosed: visible = false
     }
 }

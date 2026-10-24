@@ -6,12 +6,11 @@ Item {
 
     required property DirectoryModel directory
     property string title
-    property alias viewMode: switcher.viewMode
 
     signal sortMenuRequested
 
     readonly property string sortLabel: {
-        switch (directory.sortKey) {
+        switch (Settings.sortKey) {
         case DirectoryModel.SortByModified:
             return Tr.t("By date")
         case DirectoryModel.SortBySize:

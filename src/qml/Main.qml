@@ -5,8 +5,8 @@ import Sanar.Filer
 Window {
     id: root
 
-    width: 1400
-    height: 860
+    width: Settings.windowWidth
+    height: Settings.windowHeight
     minimumWidth: 640
     minimumHeight: 420
     visible: true
@@ -21,9 +21,48 @@ Window {
     DirectoryModel {
         id: dirModel
         path: pathNavigator.path
+        sortKey: Settings.sortKey
+        sortDescending: Settings.sortDescending
+        showHidden: Settings.showHidden
+        foldersFirst: Settings.separateFolders
+    }
+
+    Binding {
+        target: Theme
+        property: "mode"
+        value: Settings.themeMode
+    }
+
+    Binding {
+        target: Theme
+        property: "palette"
+        value: Settings.palette
+    }
+
+    Component.onCompleted: {
+        if (Settings.windowMaximized)
+            showMaximized()
+    }
+
+    onClosing: {
+        Settings.windowMaximized = visibility === Window.Maximized
+        if (visibility === Window.Windowed) {
+            Settings.windowWidth = width
+            Settings.windowHeight = height
+        }
     }
 
     property string dismissedDetails
+
+    Shortcut {
+        sequence: "Ctrl+,"
+        onActivated: settingsDialog.open()
+    }
+
+    Shortcut {
+        sequence: "Ctrl+H"
+        onActivated: Settings.showHidden = !Settings.showHidden
+    }
 
     Shortcut {
         sequence: "Alt+Left"
@@ -58,6 +97,7 @@ Window {
                 onBackRequested: pathNavigator.back()
                 onForwardRequested: pathNavigator.forward()
                 onUpRequested: pathNavigator.up()
+                onSettingsRequested: settingsDialog.open()
             }
 
             RowLayout {
@@ -99,6 +139,13 @@ Window {
                     onOpenRequested: path => pathNavigator.open(path)
                 }
             }
+        }
+
+        SettingsDialog {
+            id: settingsDialog
+            anchors.fill: parent
+            radius: parent.radius
+            onCloseRequested: visible = false
         }
     }
 

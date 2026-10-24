@@ -51,9 +51,37 @@ Item {
         boundsBehavior: Flickable.StopAtBounds
         cellWidth: root.cellWidth
         cellHeight: 144 + 12
-        model: files
+        model: Settings.separateFolders ? files : root.directory
+        header: Settings.separateFolders ? sectionHeader : null
 
-        header: Column {
+        delegate: Item {
+            id: cell
+
+            required property var model
+
+            width: grid.cellWidth
+            height: grid.cellHeight
+
+            FileTile {
+                width: parent.width - root.gap
+                height: 144
+                name: cell.model.name
+                subtitle: cell.model.isDirectory ? root.itemCountText(cell.model.itemCount)
+                                                 : root.fileSubtitle(cell.model.typeLabel, cell.model.sizeText)
+                icon: cell.model.icon
+                path: cell.model.path
+                kind: cell.model.kind
+                selected: cell.model.selected
+                onSelectRequested: mode => root.selectRequested(cell.model.path, mode)
+                onOpened: root.openRequested(cell.model.path)
+            }
+        }
+    }
+
+    Component {
+        id: sectionHeader
+
+        Column {
             width: grid.width
 
             SectionTitle {
@@ -90,28 +118,6 @@ Item {
                 visible: root.directory.fileCount > 0
                 title: Tr.t("Files")
                 count: root.directory.fileCount
-            }
-        }
-
-        delegate: Item {
-            id: cell
-
-            required property var model
-
-            width: grid.cellWidth
-            height: grid.cellHeight
-
-            FileTile {
-                width: parent.width - root.gap
-                height: 144
-                name: cell.model.name
-                subtitle: root.fileSubtitle(cell.model.typeLabel, cell.model.sizeText)
-                icon: cell.model.icon
-                path: cell.model.path
-                kind: cell.model.kind
-                selected: cell.model.selected
-                onSelectRequested: mode => root.selectRequested(cell.model.path, mode)
-                onOpened: root.openRequested(cell.model.path)
             }
         }
     }

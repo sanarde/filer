@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 11:20+0500\n"
+"POT-Creation-Date: 2026-10-24 11:45+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: src/fs/FileDetails.cpp:98 src/qml/DirectoryHeader.qml:47
+#: src/fs/FileDetails.cpp:98 src/qml/DirectoryHeader.qml:46
 #: src/qml/DirectoryView.qml:33
 msgid "%1 item"
 msgid_plural "%1 items"
@@ -54,7 +54,7 @@ msgstr ""
 msgid "TB"
 msgstr ""
 
-#: src/places/DevicesModel.cpp:49
+#: src/places/DevicesModel.cpp:49 src/qml/ThemeModeSelector.qml:71
 msgid "System"
 msgstr ""
 
@@ -86,6 +86,38 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
+#: src/qml/AboutPage.qml:49
+msgid "Version"
+msgstr ""
+
+#: src/qml/AboutPage.qml:59
+msgid "File manager for SanarDE, part of NurOS."
+msgstr ""
+
+#: src/qml/AboutPage.qml:69
+msgid "License"
+msgstr ""
+
+#: src/qml/AboutPage.qml:70
+msgid "Toolkit"
+msgstr ""
+
+#: src/qml/AccentPicker.qml:11
+msgid "Teal"
+msgstr ""
+
+#: src/qml/AccentPicker.qml:12
+msgid "Coral"
+msgstr ""
+
+#: src/qml/AccentPicker.qml:13
+msgid "Indigo"
+msgstr ""
+
+#: src/qml/AccentPicker.qml:14
+msgid "Green"
+msgstr ""
+
 #: src/qml/DetailsPanel.qml:72
 msgid "Details"
 msgstr ""
@@ -94,63 +126,63 @@ msgstr ""
 msgid "Close panel"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:146 src/qml/DetailsPanel.qml:175
+#: src/qml/DetailsPanel.qml:148 src/qml/DetailsPanel.qml:177
 msgid "Open"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:197 src/qml/SortMenu.qml:94
+#: src/qml/DetailsPanel.qml:199 src/qml/SortMenu.qml:92
 msgid "Size"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:202
+#: src/qml/DetailsPanel.qml:204
 msgid "Modified"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:207
+#: src/qml/DetailsPanel.qml:209
 msgid "Created"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:212
+#: src/qml/DetailsPanel.qml:214
 msgid "Permissions"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:217
+#: src/qml/DetailsPanel.qml:219
 msgid "Location"
 msgstr ""
 
-#: src/qml/DirectoryHeader.qml:16
+#: src/qml/DirectoryHeader.qml:15
 msgid "By date"
 msgstr ""
 
-#: src/qml/DirectoryHeader.qml:18
+#: src/qml/DirectoryHeader.qml:17
 msgid "By size"
 msgstr ""
 
-#: src/qml/DirectoryHeader.qml:20
+#: src/qml/DirectoryHeader.qml:19
 msgid "By type"
 msgstr ""
 
-#: src/qml/DirectoryHeader.qml:22
+#: src/qml/DirectoryHeader.qml:21
 msgid "By name"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:61 src/qml/FilterChips.qml:20
+#: src/qml/DirectoryView.qml:89 src/qml/FilterChips.qml:20
 msgid "Folders"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:91
+#: src/qml/DirectoryView.qml:119 src/qml/SettingsDialog.qml:105
 msgid "Files"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:153
+#: src/qml/DirectoryView.qml:160
 msgid "Folder not found"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:155
+#: src/qml/DirectoryView.qml:162
 msgid "Access denied"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:157
+#: src/qml/DirectoryView.qml:164
 msgid "Nothing here"
 msgstr ""
 
@@ -170,7 +202,7 @@ msgstr ""
 msgid "Archives"
 msgstr ""
 
-#: src/qml/NavigationButtons.qml:19
+#: src/qml/NavigationButtons.qml:19 src/qml/SettingsDialog.qml:60
 msgid "Back"
 msgstr ""
 
@@ -204,28 +236,72 @@ msgid_plural "%1 items selected"
 msgstr[0] ""
 msgstr[1] ""
 
+#: src/qml/SettingsDialog.qml:66
+msgid "About"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:66 src/qml/TopBar.qml:65
+msgid "Settings"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:74 src/qml/WindowControls.qml:42
+msgid "Close"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:85
+msgid "Theme"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:95
+msgid "Accent color"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:113
+msgid "Show hidden files"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:120
+msgid "Separate folders and files"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:121
+msgid "Show folders first, in their own section"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:130
+msgid "About Sanar Filer"
+msgstr ""
+
 #: src/qml/Sidebar.qml:47
 msgid "Devices"
 msgstr ""
 
-#: src/qml/SortMenu.qml:82
+#: src/qml/SortMenu.qml:80
 msgid "Name"
 msgstr ""
 
-#: src/qml/SortMenu.qml:88
+#: src/qml/SortMenu.qml:86
 msgid "Date modified"
 msgstr ""
 
-#: src/qml/SortMenu.qml:100
+#: src/qml/SortMenu.qml:98
 msgid "Type"
 msgstr ""
 
-#: src/qml/SortMenu.qml:113
+#: src/qml/SortMenu.qml:111
 msgid "Ascending"
 msgstr ""
 
-#: src/qml/SortMenu.qml:120
+#: src/qml/SortMenu.qml:118
 msgid "Descending"
+msgstr ""
+
+#: src/qml/ThemeModeSelector.qml:78
+msgid "Light"
+msgstr ""
+
+#: src/qml/ThemeModeSelector.qml:84
+msgid "Dark"
 msgstr ""
 
 #: src/qml/ViewSwitcher.qml:16
@@ -246,8 +322,4 @@ msgstr ""
 
 #: src/qml/WindowControls.qml:29
 msgid "Restore"
-msgstr ""
-
-#: src/qml/WindowControls.qml:42
-msgid "Close"
 msgstr ""

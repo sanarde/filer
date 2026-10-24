@@ -10,6 +10,11 @@ qt_add_qml_module(sanar-filer
     VERSION 1.0
     QML_FILES
         qml/Main.qml
+        qml/ThemeModeSelector.qml
+        qml/SettingsSwitch.qml
+        qml/SettingsDialog.qml
+        qml/AccentPicker.qml
+        qml/AboutPage.qml
         qml/Breadcrumbs.qml
         qml/Icon.qml
         qml/IconButton.qml
@@ -38,6 +43,8 @@ qt_add_qml_module(sanar-filer
         qml/WaveProgress.qml
         qml/WindowControls.qml
     SOURCES
+        settings/Settings.h
+        settings/Settings.cpp
         places/DevicesModel.h
         places/DevicesModel.cpp
         places/PlacesModel.h
@@ -73,7 +80,7 @@ qt_add_resources(sanar-filer resources
         ${PROJECT_SOURCE_DIR}/resources/fonts/MaterialSymbolsRounded.ttf
 )
 
-target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/theme ${CMAKE_CURRENT_SOURCE_DIR}/i18n ${CMAKE_CURRENT_SOURCE_DIR}/fs ${CMAKE_CURRENT_SOURCE_DIR}/nav ${CMAKE_CURRENT_SOURCE_DIR}/places ${CMAKE_CURRENT_SOURCE_DIR}/thumbs)
+target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/theme ${CMAKE_CURRENT_SOURCE_DIR}/i18n ${CMAKE_CURRENT_SOURCE_DIR}/fs ${CMAKE_CURRENT_SOURCE_DIR}/nav ${CMAKE_CURRENT_SOURCE_DIR}/settings ${CMAKE_CURRENT_SOURCE_DIR}/places ${CMAKE_CURRENT_SOURCE_DIR}/thumbs)
 
 target_link_libraries(sanar-filer PRIVATE Qt6::Core Qt6::Gui Qt6::Quick)
 

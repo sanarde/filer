@@ -15,6 +15,7 @@ Item {
     signal backRequested
     signal forwardRequested
     signal upRequested
+    signal settingsRequested
 
     implicitHeight: 72
 
@@ -58,6 +59,12 @@ Item {
         }
 
         Item { Layout.fillWidth: true }
+
+        IconButton {
+            icon: "settings"
+            label: Tr.t("Settings")
+            onClicked: root.settingsRequested()
+        }
 
         WindowControls {
             window: root.window

@@ -6,8 +6,6 @@ import Sanar.Filer
 Rectangle {
     id: root
 
-    required property DirectoryModel directory
-
     signal closed
 
     width: 220
@@ -80,26 +78,26 @@ Rectangle {
 
         MenuEntry {
             label: Tr.t("Name")
-            checked: root.directory.sortKey === DirectoryModel.SortByName
-            onTriggered: root.directory.sortKey = DirectoryModel.SortByName
+            checked: Settings.sortKey === DirectoryModel.SortByName
+            onTriggered: Settings.sortKey = DirectoryModel.SortByName
         }
 
         MenuEntry {
             label: Tr.t("Date modified")
-            checked: root.directory.sortKey === DirectoryModel.SortByModified
-            onTriggered: root.directory.sortKey = DirectoryModel.SortByModified
+            checked: Settings.sortKey === DirectoryModel.SortByModified
+            onTriggered: Settings.sortKey = DirectoryModel.SortByModified
         }
 
         MenuEntry {
             label: Tr.t("Size")
-            checked: root.directory.sortKey === DirectoryModel.SortBySize
-            onTriggered: root.directory.sortKey = DirectoryModel.SortBySize
+            checked: Settings.sortKey === DirectoryModel.SortBySize
+            onTriggered: Settings.sortKey = DirectoryModel.SortBySize
         }
 
         MenuEntry {
             label: Tr.t("Type")
-            checked: root.directory.sortKey === DirectoryModel.SortByType
-            onTriggered: root.directory.sortKey = DirectoryModel.SortByType
+            checked: Settings.sortKey === DirectoryModel.SortByType
+            onTriggered: Settings.sortKey = DirectoryModel.SortByType
         }
 
         Rectangle {
@@ -112,15 +110,15 @@ Rectangle {
         MenuEntry {
             label: Tr.t("Ascending")
             icon: "arrow_upward"
-            checked: !root.directory.sortDescending
-            onTriggered: root.directory.sortDescending = false
+            checked: !Settings.sortDescending
+            onTriggered: Settings.sortDescending = false
         }
 
         MenuEntry {
             label: Tr.t("Descending")
             icon: "arrow_downward"
-            checked: root.directory.sortDescending
-            onTriggered: root.directory.sortDescending = true
+            checked: Settings.sortDescending
+            onTriggered: Settings.sortDescending = true
         }
     }
 }
