@@ -29,6 +29,10 @@ Window {
         foldersFirst: Settings.separateFolders
     }
 
+    FileClipboard {
+        id: fileClipboard
+    }
+
     FileOperations {
         id: fileOps
         onFinished: (success, error) => root.operationError = error
@@ -48,24 +52,22 @@ Window {
     }
 
     property string renamePath
-    property var clipboard: []
-    property bool clipboardCut: false
     property string confirmAction
     property var pendingPaths: []
     readonly property bool inTrash: pathNavigator.crumbs[0].root === "trash"
+    readonly property bool inRecent: pathNavigator.crumbs[0].root === "recent"
 
     function copySelection(cut) {
         const paths = dirModel.selectedPaths()
         if (paths.length === 0)
             return
-        clipboard = paths
-        clipboardCut = cut
+        fileClipboard.set(paths, cut)
     }
 
     function paste() {
-        if (clipboard.length === 0 || inTrash)
+        if (fileClipboard.paths.length === 0 || inTrash || inRecent)
             return
-        const conflicts = fileOps.conflicts(clipboard, pathNavigator.path)
+        const conflicts = fileOps.conflicts(fileClipboard.paths, pathNavigator.path)
         if (conflicts.length === 0) {
             runPaste(FileOperations.KeepBoth)
             return
@@ -78,11 +80,11 @@ Window {
     }
 
     function runPaste(conflict) {
-        if (clipboardCut) {
-            fileOps.move(clipboard, pathNavigator.path, conflict)
-            clipboard = []
+        if (fileClipboard.cut) {
+            fileOps.move(fileClipboard.paths, pathNavigator.path, conflict)
+            fileClipboard.clear()
         } else {
-            fileOps.copy(clipboard, pathNavigator.path, conflict)
+            fileOps.copy(fileClipboard.paths, pathNavigator.path, conflict)
         }
     }
 
@@ -100,6 +102,13 @@ Window {
                            Tr.n("Delete %1 item permanently? This cannot be undone.", "Delete %1 items permanently? This cannot be undone.", paths.length)
                                .replace("%1", paths.length),
                            [Tr.t("Delete")], 0)
+    }
+
+    function confirmEmptyTrash() {
+        confirmAction = "emptyTrash"
+        confirmDialog.open(Tr.t("Empty trash"),
+                           Tr.t("Delete all items in the trash permanently? This cannot be undone."),
+                           [Tr.t("Empty trash")], 0)
     }
 
     Binding {
@@ -187,7 +196,7 @@ Window {
 
     Shortcut {
         sequence: "Ctrl+Shift+N"
-        enabled: !root.dialogOpen
+        enabled: !root.dialogOpen && !root.inTrash && !root.inRecent
         onActivated: page.newFolderRequested()
     }
 
@@ -270,13 +279,15 @@ Window {
                             root.renamePath = path
                             nameDialog.open(Tr.t("Rename"), Tr.t("Rename"), path.substring(path.lastIndexOf("/") + 1))
                         }
-                        canPaste: root.clipboard.length > 0
+                        canPaste: fileClipboard.paths.length > 0
                         inTrash: root.inTrash
+                        inRecent: root.inRecent
                         onCopyRequested: root.copySelection(false)
                         onCutRequested: root.copySelection(true)
                         onPasteRequested: root.paste()
                         onDeleteRequested: root.deleteSelection(false)
                         onRestoreRequested: fileOps.restore(dirModel.selectedPaths())
+                        onEmptyTrashRequested: root.confirmEmptyTrash()
                         onNewFolderRequested: {
                             root.renamePath = ""
                             nameDialog.open(Tr.t("New folder"), Tr.t("Create"), "")
@@ -347,6 +358,8 @@ Window {
                 visible = false
                 if (root.confirmAction === "paste")
                     root.runPaste(index)
+                else if (root.confirmAction === "emptyTrash")
+                    fileOps.emptyTrash()
                 else
                     fileOps.remove(root.pendingPaths)
             }

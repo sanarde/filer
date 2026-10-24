@@ -35,9 +35,11 @@ Item {
     signal pasteRequested
     signal deleteRequested
     signal restoreRequested
+    signal emptyTrashRequested
 
     property bool canPaste: false
     property bool inTrash: false
+    property bool inRecent: false
 
     function closeMenus() {
         sortMenu.visible = false
@@ -101,7 +103,8 @@ Item {
         anchors.topMargin: 8
         directory: root.directory
         title: root.lastCrumb.root === "home" ? Tr.t("Home")
-               : root.lastCrumb.root === "trash" ? Tr.t("Trash") : root.lastCrumb.label
+               : root.lastCrumb.root === "trash" ? Tr.t("Trash")
+               : root.lastCrumb.root === "recent" ? Tr.t("Recent") : root.lastCrumb.label
         onSortMenuRequested: {
             root.sortMenuPosition = Qt.point(-1, -1)
             sortMenu.visible = !sortMenu.visible
@@ -167,6 +170,8 @@ Item {
         selectedCount: root.directory.selectedCount
         canPaste: root.canPaste
         inTrash: root.inTrash
+        inRecent: root.inRecent
+        onShowInFolderRequested: root.navigator.goTo(root.contextPath.substring(0, root.contextPath.lastIndexOf("/")))
         onOpenRequested: root.navigator.open(root.contextPath)
         onDetailsRequested: root.detailsRequested(root.contextPath)
         onRenameRequested: root.renameRequested(root.contextPath)
@@ -176,6 +181,7 @@ Item {
         onPasteRequested: root.pasteRequested()
         onDeleteRequested: root.deleteRequested()
         onRestoreRequested: root.restoreRequested()
+        onEmptyTrashRequested: root.emptyTrashRequested()
         onSelectAllRequested: root.directory.selectAll()
         onRefreshRequested: root.directory.reload()
         onSortRequested: {

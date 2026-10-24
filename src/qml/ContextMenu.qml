@@ -8,8 +8,10 @@ Rectangle {
     property int selectedCount: 0
     property bool canPaste: false
     property bool inTrash: false
+    property bool inRecent: false
 
     signal openRequested
+    signal showInFolderRequested
     signal detailsRequested
     signal renameRequested
     signal copyRequested
@@ -17,6 +19,7 @@ Rectangle {
     signal pasteRequested
     signal deleteRequested
     signal restoreRequested
+    signal emptyTrashRequested
     signal newFolderRequested
     signal selectAllRequested
     signal refreshRequested
@@ -51,6 +54,17 @@ Rectangle {
             label: Tr.t("Open")
             onTriggered: {
                 root.openRequested()
+                root.closed()
+            }
+        }
+
+        MenuEntry {
+            visible: root.single && root.inRecent
+            icon: "folder_open"
+            showIcon: true
+            label: Tr.t("Show in folder")
+            onTriggered: {
+                root.showInFolderRequested()
                 root.closed()
             }
         }
@@ -130,7 +144,7 @@ Rectangle {
         }
 
         MenuEntry {
-            visible: !root.onEntry && !root.inTrash
+            visible: !root.onEntry && !root.inTrash && !root.inRecent
             enabled: root.canPaste
             icon: "content_paste"
             showIcon: true
@@ -142,12 +156,23 @@ Rectangle {
         }
 
         MenuEntry {
-            visible: !root.onEntry && !root.inTrash
+            visible: !root.onEntry && !root.inTrash && !root.inRecent
             icon: "create_new_folder"
             showIcon: true
             label: Tr.t("New folder")
             onTriggered: {
                 root.newFolderRequested()
+                root.closed()
+            }
+        }
+
+        MenuEntry {
+            visible: !root.onEntry && root.inTrash
+            icon: "delete_forever"
+            showIcon: true
+            label: Tr.t("Empty trash")
+            onTriggered: {
+                root.emptyTrashRequested()
                 root.closed()
             }
         }
