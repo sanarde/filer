@@ -121,6 +121,15 @@ void DirectoryModel::setFilter(Filter filter)
     rebuild();
 }
 
+void DirectoryModel::setFoldersFirst(bool first)
+{
+    if (m_foldersFirst == first)
+        return;
+    m_foldersFirst = first;
+    emit foldersFirstChanged();
+    rebuild();
+}
+
 void DirectoryModel::setShowHidden(bool show)
 {
     if (m_showHidden == show)
@@ -232,7 +241,7 @@ bool DirectoryModel::lessThan(const Entry &a, const Entry &b) const
 {
     const bool aDir = a.kind == FileKinds::Folder;
     const bool bDir = b.kind == FileKinds::Folder;
-    if (aDir != bDir)
+    if (m_foldersFirst && aDir != bDir)
         return aDir;
 
     int result = 0;

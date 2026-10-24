@@ -20,6 +20,7 @@ class DirectoryModel : public QAbstractListModel
     Q_PROPERTY(SortKey sortKey READ sortKey WRITE setSortKey NOTIFY sortChanged FINAL)
     Q_PROPERTY(bool sortDescending READ sortDescending WRITE setSortDescending NOTIFY sortChanged FINAL)
     Q_PROPERTY(Filter filter READ filter WRITE setFilter NOTIFY filterChanged FINAL)
+    Q_PROPERTY(bool foldersFirst READ foldersFirst WRITE setFoldersFirst NOTIFY foldersFirstChanged FINAL)
     Q_PROPERTY(bool showHidden READ showHidden WRITE setShowHidden NOTIFY showHiddenChanged FINAL)
     Q_PROPERTY(int folderCount READ folderCount NOTIFY totalsChanged FINAL)
     Q_PROPERTY(int fileCount READ fileCount NOTIFY totalsChanged FINAL)
@@ -90,6 +91,8 @@ public:
     void setSortDescending(bool descending);
     Filter filter() const { return m_filter; }
     void setFilter(Filter filter);
+    bool foldersFirst() const { return m_foldersFirst; }
+    void setFoldersFirst(bool first);
     bool showHidden() const { return m_showHidden; }
     void setShowHidden(bool show);
     int folderCount() const { return m_folderCount; }
@@ -109,6 +112,7 @@ signals:
     void errorChanged();
     void sortChanged();
     void filterChanged();
+    void foldersFirstChanged();
     void showHiddenChanged();
     void totalsChanged();
     void selectionChanged();
@@ -137,6 +141,7 @@ private:
     SortKey m_sortKey = SortByName;
     bool m_sortDescending = false;
     Filter m_filter = ShowAll;
+    bool m_foldersFirst = true;
     bool m_showHidden = false;
     QList<Entry> m_all;
     QList<Entry> m_rows;
