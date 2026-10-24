@@ -104,3 +104,7 @@ install(FILES
     ${PROJECT_SOURCE_DIR}/resources/icons/org.nuros.sanar.filer.svg
     ${PROJECT_SOURCE_DIR}/resources/icons/org.nuros.sanar.filer-symbolic.svg
     DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)
+install(FILES ${PROJECT_SOURCE_DIR}/resources/desktop/org.nuros.sanar.filer.desktop
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
+install(FILES ${PROJECT_SOURCE_DIR}/resources/desktop/org.nuros.sanar.filer.metainfo.xml
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
