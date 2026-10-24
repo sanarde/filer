@@ -79,6 +79,7 @@ qt_add_resources(sanar-filer resources
         ${PROJECT_SOURCE_DIR}/resources/icons/org.nuros.sanar.filer.svg
         ${PROJECT_SOURCE_DIR}/resources/fonts/RobotoFlex.ttf
         ${PROJECT_SOURCE_DIR}/resources/fonts/MaterialSymbolsRounded.ttf
+        ${PROJECT_SOURCE_DIR}/resources/fonts/MaterialSymbolsRoundedFilled.ttf
 )
 
 target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/theme ${CMAKE_CURRENT_SOURCE_DIR}/i18n ${CMAKE_CURRENT_SOURCE_DIR}/fs ${CMAKE_CURRENT_SOURCE_DIR}/nav ${CMAKE_CURRENT_SOURCE_DIR}/settings ${CMAKE_CURRENT_SOURCE_DIR}/places ${CMAKE_CURRENT_SOURCE_DIR}/thumbs)

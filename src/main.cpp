@@ -23,6 +23,7 @@ int main(int argc, char *argv[])
     bind_textdomain_codeset("sanar-filer", "UTF-8");
 
     QFontDatabase::addApplicationFont(":/fonts/MaterialSymbolsRounded.ttf");
+    QFontDatabase::addApplicationFont(":/fonts/MaterialSymbolsRoundedFilled.ttf");
     const int textFont = QFontDatabase::addApplicationFont(":/fonts/RobotoFlex.ttf");
     app.setFont(QFont(QFontDatabase::applicationFontFamilies(textFont).value(0)));
 

@@ -7,11 +7,10 @@ Text {
 
     text: Icons.glyph(name)
     color: Theme.onSurfaceVariant
-    font.family: "Material Symbols Rounded"
+    font.family: filled ? "Material Symbols Rounded Filled" : "Material Symbols Rounded"
     font.pixelSize: 24
     font.hintingPreference: Font.PreferNoHinting
     renderType: Text.CurveRendering
-    font.variableAxes: ({ "FILL": filled ? 1 : 0, "wght": 400, "GRAD": 0, "opsz": 24 })
     verticalAlignment: Text.AlignVCenter
     horizontalAlignment: Text.AlignHCenter
 }
