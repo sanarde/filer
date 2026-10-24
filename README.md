@@ -1,5 +1,17 @@
 # Sanar Filer
 
+> [!NOTE]
+> **Repository Mirrors**
+>
+> - **git.nuros.org** ([sanarde/filer](https://git.nuros.org/sanarde/filer)): primary, self-hosted Forgejo instance, accounts restricted to the core team.
+> - **GitHub** ([sanarde/filer](https://github.com/sanarde/filer)): mirror for external contributors. Issues and Pull Requests opened here are welcome and are reviewed and processed by the core team.
+
+![Grid view, light theme](docs/screenshots/grid-light.png)
+
+![List view, dark theme](docs/screenshots/list-dark.png)
+
+![Settings dialog](docs/screenshots/settings.png)
+
 ## About
 
 Sanar Filer is a file manager for SanarDE.
