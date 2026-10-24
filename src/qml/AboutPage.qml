@@ -8,25 +8,14 @@ Column {
 
     Item {
         width: parent.width
-        height: 120
+        height: 136
 
-        Rectangle {
+        Image {
             anchors.centerIn: parent
-            width: 96
-            height: 96
-            color: Theme.primary
-            topLeftRadius: 36
-            topRightRadius: 36
-            bottomRightRadius: 36
-            bottomLeftRadius: 10
-
-            Icon {
-                anchors.centerIn: parent
-                name: "folder"
-                filled: true
-                color: Theme.onPrimary
-                font.pixelSize: 56
-            }
+            width: 120
+            height: 120
+            source: "qrc:/icons/org.nuros.sanar.filer.svg"
+            sourceSize: Qt.size(240, 240)
         }
     }
 

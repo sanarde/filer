@@ -76,6 +76,7 @@ qt_add_resources(sanar-filer resources
     BASE ${PROJECT_SOURCE_DIR}/resources
     FILES
         ${PROJECT_SOURCE_DIR}/resources/icons.txt
+        ${PROJECT_SOURCE_DIR}/resources/icons/org.nuros.sanar.filer.svg
         ${PROJECT_SOURCE_DIR}/resources/fonts/RobotoFlex.ttf
         ${PROJECT_SOURCE_DIR}/resources/fonts/MaterialSymbolsRounded.ttf
 )
@@ -85,3 +86,7 @@ target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/theme
 target_link_libraries(sanar-filer PRIVATE Qt6::Core Qt6::Gui Qt6::Quick)
 
 install(TARGETS sanar-filer RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(FILES
+    ${PROJECT_SOURCE_DIR}/resources/icons/org.nuros.sanar.filer.svg
+    ${PROJECT_SOURCE_DIR}/resources/icons/org.nuros.sanar.filer-symbolic.svg
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/icons/hicolor/scalable/apps)

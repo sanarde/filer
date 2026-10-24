@@ -1,6 +1,7 @@
 #include <QFont>
 #include <QFontDatabase>
 #include <QGuiApplication>
+#include <QIcon>
 #include <QQmlApplicationEngine>
 
 #include <libintl.h>
@@ -15,6 +16,7 @@ int main(int argc, char *argv[])
     app.setApplicationName("sanar-filer");
     app.setApplicationVersion(PROJECT_VERSION);
     app.setDesktopFileName("org.nuros.sanar.filer");
+    app.setWindowIcon(QIcon(":/icons/org.nuros.sanar.filer.svg"));
 
     setlocale(LC_MESSAGES, "");
     bindtextdomain("sanar-filer", LOCALEDIR);
