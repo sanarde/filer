@@ -1,0 +1,16 @@
+[Desktop Entry]
+Type=Application
+Name=Sanar Filer
+Name[ru]=Sanar Filer
+GenericName=File Manager
+GenericName[ru]=Файловый менеджер
+Comment=Browse and manage files
+Comment[ru]=Просмотр файлов и управление ими
+Exec=sanar-filer
+Icon=org.nuros.sanar.filer
+Terminal=false
+Categories=System;FileTools;FileManager;Qt;
+Keywords=files;folders;directory;browser;
+Keywords[ru]=файлы;папки;каталог;обзор;
+StartupNotify=true
+StartupWMClass=org.nuros.sanar.filer
