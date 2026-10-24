@@ -61,21 +61,25 @@ Window {
 
     Shortcut {
         sequence: "Ctrl+H"
+        enabled: !settingsDialog.visible
         onActivated: Settings.showHidden = !Settings.showHidden
     }
 
     Shortcut {
         sequence: "Alt+Left"
+        enabled: !settingsDialog.visible
         onActivated: pathNavigator.back()
     }
 
     Shortcut {
         sequence: "Alt+Right"
+        enabled: !settingsDialog.visible
         onActivated: pathNavigator.forward()
     }
 
     Shortcut {
         sequence: "Alt+Up"
+        enabled: !settingsDialog.visible
         onActivated: pathNavigator.up()
     }
 
@@ -87,6 +91,7 @@ Window {
         ColumnLayout {
             anchors.fill: parent
             spacing: 0
+            enabled: !settingsDialog.visible
 
             TopBar {
                 Layout.fillWidth: true
