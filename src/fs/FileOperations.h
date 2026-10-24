@@ -21,7 +21,7 @@ class FileOperations : public QObject
 public:
     enum Conflict { Replace, Skip, KeepBoth };
     Q_ENUM(Conflict)
-    enum Kind { Copy, Move, Trash, Remove };
+    enum Kind { Copy, Move, Trash, Restore, Remove };
     Q_ENUM(Kind)
 
     explicit FileOperations(QObject *parent = nullptr);
@@ -36,6 +36,7 @@ public:
     Q_INVOKABLE void copy(const QStringList &sources, const QString &target, Conflict conflict);
     Q_INVOKABLE void move(const QStringList &sources, const QString &target, Conflict conflict);
     Q_INVOKABLE void trash(const QStringList &sources);
+    Q_INVOKABLE void restore(const QStringList &sources);
     Q_INVOKABLE void remove(const QStringList &sources);
     Q_INVOKABLE QString rename(const QString &path, const QString &name);
     Q_INVOKABLE QString createFolder(const QString &directory, const QString &name);

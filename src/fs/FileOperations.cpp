@@ -47,8 +47,20 @@ void FileOperations::move(const QStringList &sources, const QString &target, Con
 void FileOperations::trash(const QStringList &sources)
 {
     auto job = std::make_unique<TransferJob>(sources, Trash::filesDirectory(), TransferJob::Move, TransferJob::KeepBoth);
-    job->setNaming(Trash::reserveName);
+    job->setDestination([](const QString &source) { return Trash::filesDirectory() + u'/' + Trash::reserveName(source); });
     start(std::move(job), Trash);
+}
+
+void FileOperations::restore(const QStringList &sources)
+{
+    auto job = std::make_unique<TransferJob>(sources, Trash::filesDirectory(), TransferJob::Move, TransferJob::KeepBoth);
+    job->setDestination([](const QString &source) {
+        const QString original = Trash::originalPath(source);
+        const QString destination = original.isEmpty() ? QDir::homePath() + u'/' + QFileInfo(source).fileName() : original;
+        QDir().mkpath(QFileInfo(destination).path());
+        return destination;
+    });
+    start(std::move(job), Restore);
 }
 
 void FileOperations::remove(const QStringList &sources)
