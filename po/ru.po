@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sanar-filer 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 18:14+0500\n"
+"POT-Creation-Date: 2026-10-24 19:26+0500\n"
 "PO-Revision-Date: 2026-10-24 10:47+0500\n"
 "Last-Translator: AnmiTaliDev <anmitalidev@nuros.org>\n"
 "Language-Team: Russian\n"
@@ -17,12 +17,12 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/fs/FileDetails.cpp:66 src/places/PlacesModel.cpp:28
-#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:94
+#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:104
 msgid "Trash"
 msgstr "Корзина"
 
 #: src/fs/FileDetails.cpp:68 src/places/PlacesModel.cpp:15
-#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:93
+#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:103
 msgid "Home"
 msgstr "Домашняя"
 
@@ -156,22 +156,6 @@ msgstr "Лицензия"
 msgid "Toolkit"
 msgstr "Библиотека интерфейса"
 
-#: src/qml/AccentPicker.qml:11
-msgid "Teal"
-msgstr "Бирюзовый"
-
-#: src/qml/AccentPicker.qml:12
-msgid "Coral"
-msgstr "Коралловый"
-
-#: src/qml/AccentPicker.qml:13
-msgid "Indigo"
-msgstr "Индиго"
-
-#: src/qml/AccentPicker.qml:14
-msgid "Green"
-msgstr "Зелёный"
-
 #: src/qml/ConfirmDialog.qml:99 src/qml/NameDialog.qml:126
 #: src/qml/OperationPanel.qml:78
 msgid "Cancel"
@@ -298,19 +282,19 @@ msgstr "Папки"
 msgid "Files"
 msgstr "Файлы"
 
-#: src/qml/DirectoryView.qml:329
+#: src/qml/DirectoryView.qml:353
 msgid "Folder not found"
 msgstr "Папка не найдена"
 
-#: src/qml/DirectoryView.qml:331
+#: src/qml/DirectoryView.qml:355
 msgid "Access denied"
 msgstr "Доступ запрещён"
 
-#: src/qml/DirectoryView.qml:335
+#: src/qml/DirectoryView.qml:359
 msgid "No matches"
 msgstr "Ничего не найдено"
 
-#: src/qml/DirectoryView.qml:335
+#: src/qml/DirectoryView.qml:359
 msgid "Nothing here"
 msgstr "Здесь пусто"
 

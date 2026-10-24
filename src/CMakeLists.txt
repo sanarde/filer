@@ -1,4 +1,7 @@
-qt_add_executable(sanar-filer main.cpp thumbs/ThumbnailProvider.h thumbs/ThumbnailProvider.cpp)
+qt_add_executable(sanar-filer main.cpp
+    thumbs/ThumbnailProvider.h thumbs/ThumbnailProvider.cpp
+    thumbs/ThumbnailCache.h thumbs/ThumbnailCache.cpp
+    thumbs/Thumbnailers.h thumbs/Thumbnailers.cpp)
 
 target_compile_definitions(sanar-filer PRIVATE
     PROJECT_VERSION="${PROJECT_VERSION}"
@@ -77,7 +80,8 @@ qt_add_qml_module(sanar-filer
         i18n/Translator.h
         i18n/Translator.cpp
         theme/ColorSet.h
-        theme/ColorSets.cpp
+        theme/Palettes.h
+        theme/Palettes.cpp
         theme/Theme.h
         theme/Theme.cpp
         theme/Icons.h
@@ -91,6 +95,10 @@ qt_add_resources(sanar-filer resources
         ${PROJECT_SOURCE_DIR}/resources/icons.txt
         ${PROJECT_SOURCE_DIR}/resources/icons/org.nuros.sanar.filer.svg
         ${PROJECT_SOURCE_DIR}/resources/fonts/RobotoFlex.ttf
+        ${PROJECT_SOURCE_DIR}/resources/palettes/10-teal.json
+        ${PROJECT_SOURCE_DIR}/resources/palettes/20-coral.json
+        ${PROJECT_SOURCE_DIR}/resources/palettes/30-indigo.json
+        ${PROJECT_SOURCE_DIR}/resources/palettes/40-green.json
         ${PROJECT_SOURCE_DIR}/resources/fonts/MaterialSymbolsRounded.ttf
         ${PROJECT_SOURCE_DIR}/resources/fonts/MaterialSymbolsRoundedFilled.ttf
 )

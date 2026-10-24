@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 18:14+0500\n"
+"POT-Creation-Date: 2026-10-24 19:26+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: src/fs/FileDetails.cpp:66 src/places/PlacesModel.cpp:28
-#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:94
+#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:104
 msgid "Trash"
 msgstr ""
 
 #: src/fs/FileDetails.cpp:68 src/places/PlacesModel.cpp:15
-#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:93
+#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:103
 msgid "Home"
 msgstr ""
 
@@ -157,22 +157,6 @@ msgstr ""
 msgid "Toolkit"
 msgstr ""
 
-#: src/qml/AccentPicker.qml:11
-msgid "Teal"
-msgstr ""
-
-#: src/qml/AccentPicker.qml:12
-msgid "Coral"
-msgstr ""
-
-#: src/qml/AccentPicker.qml:13
-msgid "Indigo"
-msgstr ""
-
-#: src/qml/AccentPicker.qml:14
-msgid "Green"
-msgstr ""
-
 #: src/qml/ConfirmDialog.qml:99 src/qml/NameDialog.qml:126
 #: src/qml/OperationPanel.qml:78
 msgid "Cancel"
@@ -299,19 +283,19 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:329
+#: src/qml/DirectoryView.qml:353
 msgid "Folder not found"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:331
+#: src/qml/DirectoryView.qml:355
 msgid "Access denied"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:335
+#: src/qml/DirectoryView.qml:359
 msgid "No matches"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:335
+#: src/qml/DirectoryView.qml:359
 msgid "Nothing here"
 msgstr ""
 
