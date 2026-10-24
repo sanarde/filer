@@ -50,7 +50,7 @@ Item {
         clip: true
         boundsBehavior: Flickable.StopAtBounds
         cellWidth: root.cellWidth
-        cellHeight: 144 + 12
+        cellHeight: 170 + 12
         model: Settings.separateFolders ? files : root.directory
         header: Settings.separateFolders ? sectionHeader : null
 
@@ -64,7 +64,7 @@ Item {
 
             FileTile {
                 width: parent.width - root.gap
-                height: 144
+                height: 170
                 name: cell.model.name
                 subtitle: cell.model.isDirectory ? root.itemCountText(cell.model.itemCount)
                                                  : root.fileSubtitle(cell.model.typeLabel, cell.model.sizeText)

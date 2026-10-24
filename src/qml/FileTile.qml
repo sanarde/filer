@@ -15,7 +15,7 @@ Item {
     signal selectRequested(int mode)
     signal opened
 
-    implicitHeight: 144
+    implicitHeight: 170
 
     Accessible.role: Accessible.Button
     Accessible.name: name
