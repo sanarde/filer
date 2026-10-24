@@ -13,6 +13,13 @@ Rectangle {
     border.width: 1
     border.color: Theme.outlineVariant
 
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        acceptedButtons: Qt.AllButtons
+        onWheel: wheel => wheel.accepted = true
+    }
+
     Column {
         id: column
         y: 8

@@ -53,6 +53,7 @@ Item {
     }
 
     TapHandler {
+        gesturePolicy: TapHandler.ReleaseWithinBounds
         onTapped: root.triggered()
     }
 }
