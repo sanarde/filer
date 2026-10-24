@@ -13,12 +13,18 @@ DevicesModel::DevicesModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_devices(scan())
 {
+    connect(&m_udisks, &Udisks::blocksChanged, this, [this](const QList<UdisksBlock> &blocks) {
+        m_blocks = blocks;
+        refresh();
+    });
+    connect(&m_udisks, &Udisks::mountReady, this, &DevicesModel::mountReady);
+    connect(&m_udisks, &Udisks::failed, this, &DevicesModel::failed);
     m_timer.setInterval(5000);
     connect(&m_timer, &QTimer::timeout, this, &DevicesModel::refresh);
     m_timer.start();
 }
 
-QList<DevicesModel::Device> DevicesModel::scan()
+QList<DevicesModel::Device> DevicesModel::scan() const
 {
     QList<Device> devices;
     for (const QStorageInfo &storage : QStorageInfo::mountedVolumes()) {
@@ -49,15 +55,39 @@ QList<DevicesModel::Device> DevicesModel::scan()
             device.label = path == u"/" ? QString::fromUtf8(dgettext("sanar-filer", "System"))
                                          : QDir(path).dirName();
         }
-        const bool removable = path.startsWith(u"/run/media/") || path.startsWith(u"/media/");
+        auto block = std::find_if(m_blocks.cbegin(), m_blocks.cend(),
+                                  [&](const UdisksBlock &b) { return b.device == node; });
+        const bool known = block != m_blocks.cend();
+        const bool removable = known ? !block->system
+                                     : path.startsWith(u"/run/media/") || path.startsWith(u"/media/");
         device.icon = removable ? "usb" : "hard_drive";
+        if (known) {
+            device.block = block->path;
+            device.ejectable = !block->system;
+        }
+        devices.append(device);
+    }
+
+    for (const UdisksBlock &block : m_blocks) {
+        if (block.mounted || block.system)
+            continue;
+
+        Device device;
+        device.label = block.label;
+        device.icon = "usb";
+        device.deviceNode = block.device;
+        device.block = block.path;
+        device.mounted = false;
+        device.total = block.size;
         devices.append(device);
     }
 
     std::sort(devices.begin(), devices.end(), [](const Device &a, const Device &b) {
         if ((a.path == u"/") != (b.path == u"/"))
             return a.path == u"/";
-        return a.path < b.path;
+        if (a.mounted != b.mounted)
+            return a.mounted;
+        return a.mounted ? a.path < b.path : a.label < b.label;
     });
     return devices;
 }
@@ -99,6 +129,10 @@ QVariant DevicesModel::data(const QModelIndex &index, int role) const
         return device.total > 0 ? double(device.used) / double(device.total) : 0.0;
     case PrimaryRole:
         return device.path == u"/";
+    case MountedRole:
+        return device.mounted;
+    case EjectableRole:
+        return device.ejectable;
     }
     return {};
 }
@@ -112,5 +146,17 @@ QHash<int, QByteArray> DevicesModel::roleNames() const
         {UsedTextRole, "usedText"},
         {UsedFractionRole, "usedFraction"},
         {PrimaryRole, "primary"},
+        {MountedRole, "mounted"},
+        {EjectableRole, "ejectable"},
     };
+}
+
+void DevicesModel::mount(int row)
+{
+    m_udisks.mount(m_devices.at(row).block);
+}
+
+void DevicesModel::eject(int row)
+{
+    m_udisks.eject(m_devices.at(row).block);
 }
