@@ -2,7 +2,7 @@
 
 ## About
 
-Sanar Filer is a file manager for SanarDE, the desktop environment of NurOS. It does not depend on a particular distribution. The interface is written in QML and the file system logic in C++.
+Sanar Filer is a file manager for SanarDE.
 
 The application id is `org.nuros.sanar.filer`.
 
