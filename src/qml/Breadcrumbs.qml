@@ -48,16 +48,17 @@ ListView {
                 spacing: 6
 
                 Icon {
-                    visible: item.modelData.isHome
+                    visible: item.modelData.root !== ""
                     anchors.verticalCenter: parent.verticalCenter
-                    name: "home"
+                    name: item.modelData.root === "trash" ? "delete" : "home"
                     color: Theme.onSurfaceVariant
                     font.pixelSize: 18
                 }
 
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
-                    text: item.modelData.isHome ? Tr.t("Home") : item.modelData.label
+                    text: item.modelData.root === "home" ? Tr.t("Home")
+                          : item.modelData.root === "trash" ? Tr.t("Trash") : item.modelData.label
                     color: item.current ? Theme.onSurface : Theme.onSurfaceVariant
                     font.pixelSize: 14
                     font.weight: item.current ? Font.Bold : Font.Medium

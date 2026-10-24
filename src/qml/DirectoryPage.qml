@@ -50,7 +50,8 @@ Item {
         anchors.rightMargin: 28
         anchors.topMargin: 8
         directory: root.directory
-        title: root.lastCrumb.isHome ? Tr.t("Home") : root.lastCrumb.label
+        title: root.lastCrumb.root === "home" ? Tr.t("Home")
+               : root.lastCrumb.root === "trash" ? Tr.t("Trash") : root.lastCrumb.label
         onSortMenuRequested: sortMenu.visible = !sortMenu.visible
     }
 

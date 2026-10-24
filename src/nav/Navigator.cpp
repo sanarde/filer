@@ -3,6 +3,7 @@
 #include <QDesktopServices>
 #include <QDir>
 #include <QFileInfo>
+#include <QStandardPaths>
 #include <QUrl>
 #include <QVariantMap>
 
@@ -17,17 +18,32 @@ bool Navigator::canGoUp() const
     return m_path != QDir::rootPath();
 }
 
+static bool isWithin(const QString &path, const QString &base)
+{
+    return path == base || path.startsWith(base + u'/');
+}
+
 QVariantList Navigator::crumbs() const
 {
     const QString home = QDir::cleanPath(QDir::homePath());
-    const bool underHome = m_path == home || m_path.startsWith(home + u'/');
-    const QString base = underHome ? home : QDir::rootPath();
+    const QString trash = QDir::cleanPath(
+        QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/Trash/files");
+
+    QString base = QDir::rootPath();
+    QString root;
+    if (isWithin(m_path, trash)) {
+        base = trash;
+        root = "trash";
+    } else if (isWithin(m_path, home)) {
+        base = home;
+        root = "home";
+    }
 
     QVariantList result;
     result.append(QVariantMap{
-        {"label", underHome ? QString() : base},
+        {"label", root.isEmpty() ? base : QString()},
         {"path", base},
-        {"isHome", underHome},
+        {"root", root},
     });
 
     QString current = base;
@@ -37,7 +53,7 @@ QVariantList Navigator::crumbs() const
         result.append(QVariantMap{
             {"label", part},
             {"path", current},
-            {"isHome", false},
+            {"root", QString()},
         });
     }
     return result;
