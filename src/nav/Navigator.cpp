@@ -7,6 +7,8 @@
 #include <QUrl>
 #include <QVariantMap>
 
+#include "RecentFiles.h"
+
 Navigator::Navigator(QObject *parent)
     : QObject(parent)
     , m_path(QDir::cleanPath(QDir::homePath()))
@@ -15,7 +17,7 @@ Navigator::Navigator(QObject *parent)
 
 bool Navigator::canGoUp() const
 {
-    return m_path != QDir::rootPath();
+    return m_path != QDir::rootPath() && m_path != RecentFiles::location;
 }
 
 static bool isWithin(const QString &path, const QString &base)
@@ -25,6 +27,9 @@ static bool isWithin(const QString &path, const QString &base)
 
 QVariantList Navigator::crumbs() const
 {
+    if (m_path == RecentFiles::location)
+        return {QVariantMap{{"label", QString()}, {"path", m_path}, {"root", "recent"}}};
+
     const QString home = QDir::cleanPath(QDir::homePath());
     const QString trash = QDir::cleanPath(
         QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/Trash/files");
@@ -61,7 +66,7 @@ QVariantList Navigator::crumbs() const
 
 void Navigator::goTo(const QString &path)
 {
-    const QString clean = QDir::cleanPath(QDir(path).absolutePath());
+    const QString clean = path == RecentFiles::location ? path : QDir::cleanPath(QDir(path).absolutePath());
     if (clean == m_path)
         return;
 

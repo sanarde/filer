@@ -9,6 +9,7 @@
 
 #include <algorithm>
 
+#include "RecentFiles.h"
 #include "SizeFormat.h"
 
 DirectoryModel::DirectoryModel(QObject *parent)
@@ -85,7 +86,9 @@ QHash<int, QByteArray> DirectoryModel::roleNames() const
 
 void DirectoryModel::setPath(const QString &path)
 {
-    const QString clean = path.isEmpty() ? QString() : QDir::cleanPath(QDir(path).absolutePath());
+    const QString clean = path.isEmpty() || path == RecentFiles::location
+                              ? path
+                              : QDir::cleanPath(QDir(path).absolutePath());
     if (m_path == clean)
         return;
 
@@ -159,9 +162,35 @@ QString DirectoryModel::totalSizeText() const
     return formatSize(m_totalSize);
 }
 
+DirectoryModel::Entry DirectoryModel::makeEntry(const QFileInfo &info, const QMimeDatabase &mimeDb)
+{
+    Entry entry;
+    entry.name = info.fileName();
+    entry.path = info.filePath();
+    entry.modified = info.lastModified();
+    if (info.isDir()) {
+        entry.kind = FileKinds::Folder;
+    } else {
+        entry.size = info.size();
+        entry.suffix = info.suffix();
+        entry.kind = FileKinds::kindOf(mimeDb.mimeTypeForFile(info, QMimeDatabase::MatchExtension));
+    }
+    return entry;
+}
+
 DirectoryModel::ScanResult DirectoryModel::scan(const QString &path, bool showHidden)
 {
     ScanResult result;
+    if (path == RecentFiles::location) {
+        const QMimeDatabase mimeDb;
+        for (const RecentFiles::Item &item : RecentFiles::read()) {
+            Entry entry = makeEntry(QFileInfo(item.path), mimeDb);
+            entry.visited = item.visited;
+            result.entries.append(entry);
+        }
+        return result;
+    }
+
     const QFileInfo dir(path);
     if (path.isEmpty())
         return result;
@@ -179,22 +208,8 @@ DirectoryModel::ScanResult DirectoryModel::scan(const QString &path, bool showHi
         flags |= QDirListing::IteratorFlag::IncludeHidden;
 
     QMimeDatabase mimeDb;
-    for (const auto &item : QDirListing(path, flags)) {
-        const QFileInfo info = item.fileInfo();
-        Entry entry;
-        entry.name = info.fileName();
-        entry.path = info.filePath();
-        entry.modified = info.lastModified();
-        if (info.isDir()) {
-            entry.kind = FileKinds::Folder;
-        } else {
-            entry.size = info.size();
-            entry.suffix = info.suffix();
-            entry.kind = FileKinds::kindOf(
-                mimeDb.mimeTypeForFile(info, QMimeDatabase::MatchExtension));
-        }
-        result.entries.append(entry);
-    }
+    for (const auto &item : QDirListing(path, flags))
+        result.entries.append(makeEntry(item.fileInfo(), mimeDb));
     return result;
 }
 
@@ -219,7 +234,8 @@ void DirectoryModel::apply()
     m_all = result.entries;
     m_itemCounts.clear();
     setError(result.error);
-    if (result.error == NoError && !m_path.isEmpty() && !m_watcher.directories().contains(m_path))
+    if (result.error == NoError && !m_path.isEmpty() && m_path != RecentFiles::location
+        && !m_watcher.directories().contains(m_path))
         m_watcher.addPath(m_path);
     m_loading = false;
     emit loadingChanged();
@@ -281,6 +297,9 @@ bool DirectoryModel::accepts(const Entry &entry) const
 
 bool DirectoryModel::lessThan(const Entry &a, const Entry &b) const
 {
+    if (m_path == RecentFiles::location)
+        return a.visited > b.visited;
+
     const bool aDir = a.kind == FileKinds::Folder;
     const bool bDir = b.kind == FileKinds::Folder;
     if (m_foldersFirst && aDir != bDir)

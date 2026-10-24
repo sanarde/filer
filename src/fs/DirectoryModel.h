@@ -5,7 +5,9 @@
 #include <QDateTime>
 #include <QFileSystemWatcher>
 #include <QFutureWatcher>
+#include <QFileInfo>
 #include <QHash>
+#include <QMimeDatabase>
 #include <QSet>
 #include <QTimer>
 #include <QtQml/qqmlregistration.h>
@@ -139,6 +141,7 @@ private:
         QString path;
         QString suffix;
         QDateTime modified;
+        QDateTime visited;
         qint64 size = 0;
         FileKinds::Kind kind = FileKinds::Other;
     };
@@ -148,6 +151,7 @@ private:
         QList<Entry> entries;
     };
 
+    static Entry makeEntry(const QFileInfo &info, const QMimeDatabase &mimeDb);
     static ScanResult scan(const QString &path, bool showHidden);
     void load();
     void apply();
