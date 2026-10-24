@@ -40,6 +40,19 @@ QString Trash::reserveName(const QString &source)
     }
 }
 
+QString Trash::originalPath(const QString &trashed)
+{
+    QFile entry(trashRoot() + "/info/" + QFileInfo(trashed).fileName() + ".trashinfo");
+    if (!entry.open(QIODevice::ReadOnly))
+        return QString();
+    while (!entry.atEnd()) {
+        const QByteArray line = entry.readLine().trimmed();
+        if (line.startsWith("Path="))
+            return QUrl::fromPercentEncoding(line.mid(5));
+    }
+    return QString();
+}
+
 void Trash::pruneOrphans()
 {
     const QDir infoDirectory(trashRoot() + "/info");
