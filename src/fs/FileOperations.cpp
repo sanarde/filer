@@ -3,6 +3,8 @@
 #include "TransferJob.h"
 #include "Trash.h"
 
+#include <libintl.h>
+
 #include <QDir>
 #include <QFileInfo>
 #include <QThread>
@@ -52,6 +54,46 @@ void FileOperations::trash(const QStringList &sources)
 void FileOperations::remove(const QStringList &sources)
 {
     start(std::make_unique<TransferJob>(sources, QString(), TransferJob::Remove, TransferJob::Replace), true);
+}
+
+static QString message(const char *msgid)
+{
+    return QString::fromUtf8(dgettext("sanar-filer", msgid));
+}
+
+static QString nameError(const QString &directory, const QString &name)
+{
+    if (name.isEmpty() || name == "." || name == "..")
+        return message("The name is not valid");
+    if (name.contains(u'/'))
+        return message("The name cannot contain /");
+    const QFileInfo existing(QDir(directory).filePath(name));
+    if (existing.exists() || existing.isSymLink())
+        return message("An item with this name already exists");
+    return QString();
+}
+
+QString FileOperations::rename(const QString &path, const QString &name)
+{
+    const QFileInfo info(path);
+    if (name == info.fileName())
+        return QString();
+    const QString error = nameError(info.absolutePath(), name);
+    if (!error.isEmpty())
+        return error;
+    if (!QDir().rename(path, info.dir().filePath(name)))
+        return message("Cannot rename %1").arg(info.fileName());
+    return QString();
+}
+
+QString FileOperations::createFolder(const QString &directory, const QString &name)
+{
+    const QString error = nameError(directory, name);
+    if (!error.isEmpty())
+        return error;
+    if (!QDir(directory).mkdir(name))
+        return message("Cannot create folder %1").arg(name);
+    return QString();
 }
 
 void FileOperations::cancel()
