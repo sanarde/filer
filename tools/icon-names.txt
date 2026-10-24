@@ -39,6 +39,7 @@ music_note
 open_in_new
 refresh
 remove
+restore_from_trash
 schedule
 search
 select_all

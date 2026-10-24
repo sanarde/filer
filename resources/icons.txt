@@ -39,6 +39,7 @@ music_note e405
 open_in_new e89e
 refresh e5d5
 remove e15b
+restore_from_trash e938
 schedule efd6
 search ef7a
 select_all e162
