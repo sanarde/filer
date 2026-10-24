@@ -29,6 +29,19 @@ Window {
 
     FileOperations {
         id: fileOps
+        onFinished: (success, error) => root.operationError = error
+        onBusyChanged: if (busy) root.operationError = ""
+    }
+
+    property string operationError
+
+    readonly property string operationTitle: {
+        switch (fileOps.kind) {
+        case FileOperations.Copy: return Tr.t("Copying")
+        case FileOperations.Move: return Tr.t("Moving")
+        case FileOperations.Trash: return Tr.t("Moving to trash")
+        default: return Tr.t("Deleting")
+        }
     }
 
     property string renamePath
@@ -302,6 +315,19 @@ Window {
                     nameDialog.error = error
             }
             onVisibleChanged: if (!visible) page.forceActiveFocus()
+        }
+
+        OperationPanel {
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 24
+            busy: fileOps.busy
+            progress: fileOps.progress
+            title: root.operationTitle
+            detail: fileOps.currentName
+            error: root.operationError
+            onCancelRequested: fileOps.cancel()
+            onDismissed: root.operationError = ""
         }
 
         ConfirmDialog {

@@ -40,6 +40,7 @@ qt_add_qml_module(sanar-filer
         qml/MenuSeparator.qml
         qml/NameDialog.qml
         qml/NavItem.qml
+        qml/OperationPanel.qml
         qml/NavigationButtons.qml
         qml/ResizeHandles.qml
         qml/SearchField.qml
