@@ -13,11 +13,13 @@ qt_add_qml_module(sanar-filer
         qml/Breadcrumbs.qml
         qml/Icon.qml
         qml/IconButton.qml
+        qml/DetailsPanel.qml
         qml/DeviceCard.qml
         qml/DirectoryHeader.qml
         qml/DirectoryPage.qml
         qml/DirectoryView.qml
         qml/EntryInput.qml
+        qml/EntryThumb.qml
         qml/FileRow.qml
         qml/FileTile.qml
         qml/FilterChip.qml
@@ -46,6 +48,8 @@ qt_add_qml_module(sanar-filer
         fs/DirectoryModel.cpp
         fs/EntrySectionModel.h
         fs/EntrySectionModel.cpp
+        fs/FileDetails.h
+        fs/FileDetails.cpp
         fs/FileKind.h
         fs/FileKind.cpp
         fs/SizeFormat.h

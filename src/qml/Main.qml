@@ -23,6 +23,8 @@ Window {
         path: pathNavigator.path
     }
 
+    property string dismissedDetails
+
     Shortcut {
         sequence: "Alt+Left"
         onActivated: pathNavigator.back()
@@ -86,6 +88,15 @@ Window {
                         navigator: pathNavigator
                         directory: dirModel
                     }
+                }
+
+                DetailsPanel {
+                    Layout.preferredWidth: 332
+                    Layout.fillHeight: true
+                    visible: dirModel.selectedPath !== "" && dirModel.selectedPath !== root.dismissedDetails
+                    path: dirModel.selectedPath
+                    onCloseRequested: root.dismissedDetails = dirModel.selectedPath
+                    onOpenRequested: path => pathNavigator.open(path)
                 }
             }
         }

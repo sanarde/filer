@@ -15,7 +15,7 @@ add_custom_target(update-po
             --add-comments --sort-by-file
             -o ${POT_FILE} ${QML_SOURCES}
     COMMAND ${XGETTEXT_EXECUTABLE} --language=C++ --from-code=UTF-8
-            --keyword=dgettext:2 --add-comments --sort-by-file --join-existing
+            --keyword=dgettext:2 --keyword=dngettext:2,3 --add-comments --sort-by-file --join-existing
             -o ${POT_FILE} ${CPP_SOURCES}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     VERBATIM

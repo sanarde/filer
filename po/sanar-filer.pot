@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 11:18+0500\n"
+"POT-Creation-Date: 2026-10-24 11:20+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,22 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+#: src/fs/FileDetails.cpp:57 src/places/PlacesModel.cpp:15
+#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:53
+msgid "Home"
+msgstr ""
+
+#: src/fs/FileDetails.cpp:92
+msgid "Folder"
+msgstr ""
+
+#: src/fs/FileDetails.cpp:98 src/qml/DirectoryHeader.qml:47
+#: src/qml/DirectoryView.qml:33
+msgid "%1 item"
+msgid_plural "%1 items"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/fs/SizeFormat.cpp:10
 msgid "B"
@@ -46,11 +62,6 @@ msgstr ""
 msgid "%1 of %2 used"
 msgstr ""
 
-#: src/places/PlacesModel.cpp:15 src/qml/Breadcrumbs.qml:60
-#: src/qml/DirectoryPage.qml:53
-msgid "Home"
-msgstr ""
-
 #: src/places/PlacesModel.cpp:18 src/qml/FilterChips.qml:34
 msgid "Documents"
 msgstr ""
@@ -75,6 +86,38 @@ msgstr ""
 msgid "Trash"
 msgstr ""
 
+#: src/qml/DetailsPanel.qml:72
+msgid "Details"
+msgstr ""
+
+#: src/qml/DetailsPanel.qml:80
+msgid "Close panel"
+msgstr ""
+
+#: src/qml/DetailsPanel.qml:146 src/qml/DetailsPanel.qml:175
+msgid "Open"
+msgstr ""
+
+#: src/qml/DetailsPanel.qml:197 src/qml/SortMenu.qml:94
+msgid "Size"
+msgstr ""
+
+#: src/qml/DetailsPanel.qml:202
+msgid "Modified"
+msgstr ""
+
+#: src/qml/DetailsPanel.qml:207
+msgid "Created"
+msgstr ""
+
+#: src/qml/DetailsPanel.qml:212
+msgid "Permissions"
+msgstr ""
+
+#: src/qml/DetailsPanel.qml:217
+msgid "Location"
+msgstr ""
+
 #: src/qml/DirectoryHeader.qml:16
 msgid "By date"
 msgstr ""
@@ -90,12 +133,6 @@ msgstr ""
 #: src/qml/DirectoryHeader.qml:22
 msgid "By name"
 msgstr ""
-
-#: src/qml/DirectoryHeader.qml:47 src/qml/DirectoryView.qml:33
-msgid "%1 item"
-msgid_plural "%1 items"
-msgstr[0] ""
-msgstr[1] ""
 
 #: src/qml/DirectoryView.qml:61 src/qml/FilterChips.qml:20
 msgid "Folders"
@@ -177,10 +214,6 @@ msgstr ""
 
 #: src/qml/SortMenu.qml:88
 msgid "Date modified"
-msgstr ""
-
-#: src/qml/SortMenu.qml:94
-msgid "Size"
 msgstr ""
 
 #: src/qml/SortMenu.qml:100
