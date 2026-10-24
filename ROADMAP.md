@@ -3,6 +3,5 @@
 Planned, not started:
 
 - Recursive search and search filters
-- File operations: undo, system clipboard integration, per-volume trash directories
+- File operations: undo, "Open with", per-volume trash directories
 - Columns view
-- Recent files location

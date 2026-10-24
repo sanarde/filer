@@ -1,6 +1,10 @@
 # Sanar Filer
 
-File manager for SanarDE.
+## About
+
+Sanar Filer is a file manager for SanarDE, the desktop environment of NurOS. It does not depend on a particular distribution. The interface is written in QML and the file system logic in C++.
+
+The application id is `org.nuros.sanar.filer`.
 
 ## Dependencies
 
@@ -9,6 +13,11 @@ File manager for SanarDE.
 - A C++20 compiler
 - gettext tools (xgettext, msgmerge, msgfmt)
 
+Optional at run time:
+
+- UDisks2, for mounting and ejecting devices
+- Thumbnailers in `/usr/share/thumbnailers`, for video and PDF thumbnails
+
 ## Build
 
 ```
@@ -16,6 +25,8 @@ cmake -S . -B build -G Ninja
 cmake --build build
 ./build/src/sanar-filer
 ```
+
+To install, run `cmake --install build --prefix <prefix>`. This installs the executable, the icons, the desktop file and the AppStream metadata.
 
 ## Translations
 
@@ -35,6 +46,14 @@ Thumbnails are cached in `$XDG_CACHE_HOME/thumbnails` following the freedesktop 
 
 Removable volumes are listed in the sidebar. Mounting, unmounting and powering off use the UDisks2 service on the system bus. Without the service only mounted volumes are shown and the eject button is not available.
 
+## Recent files
+
+The Recent location lists existing files from `$XDG_DATA_HOME/recently-used.xbel`, newest first. The file is read only. Sanar Filer does not add entries to it.
+
+## Clipboard
+
+Copy and cut place the selected files on the system clipboard as `text/uri-list` and `x-special/gnome-copied-files`, so files can be pasted between applications.
+
 ## Acknowledgments
 
 - [Roboto Flex](https://github.com/TypeNetwork/Roboto-Flex), SIL Open Font License 1.1
@@ -42,9 +61,10 @@ Removable volumes are listed in the sidebar. Mounting, unmounting and powering o
 
 Font files and license texts are in `resources/fonts`. The icon font is a subset; to change the icon set, edit `tools/icon-names.txt` and run `tools/subset-icons.sh` with the full font and codepoints file.
 
-## Roadmap
+## Links
 
-See [ROADMAP.md](ROADMAP.md).
+- [ROADMAP.md](ROADMAP.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## License
 
