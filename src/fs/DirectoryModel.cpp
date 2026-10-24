@@ -307,6 +307,8 @@ void DirectoryModel::select(const QString &path, SelectMode mode)
         if (!selection.remove(path))
             selection.insert(path);
         m_anchor = path;
+    } else if (mode == SelectClick && selection.size() == 1 && selection.contains(path)) {
+        selection.clear();
     } else {
         selection = {path};
         m_anchor = path;
