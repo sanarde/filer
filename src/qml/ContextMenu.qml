@@ -16,6 +16,7 @@ Rectangle {
     signal cutRequested
     signal pasteRequested
     signal deleteRequested
+    signal restoreRequested
     signal newFolderRequested
     signal selectAllRequested
     signal refreshRequested
@@ -98,6 +99,17 @@ Rectangle {
             label: Tr.t("Cut")
             onTriggered: {
                 root.cutRequested()
+                root.closed()
+            }
+        }
+
+        MenuEntry {
+            visible: root.onEntry && root.inTrash
+            icon: "restore_from_trash"
+            showIcon: true
+            label: Tr.t("Restore")
+            onTriggered: {
+                root.restoreRequested()
                 root.closed()
             }
         }

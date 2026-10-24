@@ -30,6 +30,7 @@ Item {
     signal cutRequested
     signal pasteRequested
     signal deleteRequested
+    signal restoreRequested
 
     property bool canPaste: false
     property bool inTrash: false
@@ -164,6 +165,7 @@ Item {
         onCutRequested: root.cutRequested()
         onPasteRequested: root.pasteRequested()
         onDeleteRequested: root.deleteRequested()
+        onRestoreRequested: root.restoreRequested()
         onSelectAllRequested: root.directory.selectAll()
         onRefreshRequested: root.directory.reload()
         onSortRequested: {

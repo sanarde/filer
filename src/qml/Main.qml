@@ -40,6 +40,7 @@ Window {
         case FileOperations.Copy: return Tr.t("Copying")
         case FileOperations.Move: return Tr.t("Moving")
         case FileOperations.Trash: return Tr.t("Moving to trash")
+        case FileOperations.Restore: return Tr.t("Restoring")
         default: return Tr.t("Deleting")
         }
     }
@@ -270,6 +271,7 @@ Window {
                         onCutRequested: root.copySelection(true)
                         onPasteRequested: root.paste()
                         onDeleteRequested: root.deleteSelection(false)
+                        onRestoreRequested: fileOps.restore(dirModel.selectedPaths())
                         onNewFolderRequested: {
                             root.renamePath = ""
                             nameDialog.open(Tr.t("New folder"), Tr.t("Create"), "")
