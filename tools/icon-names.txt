@@ -11,11 +11,13 @@ close
 code
 content_copy
 content_cut
+content_paste
 create_new_folder
 crop_square
 dark_mode
 data_object
 delete
+delete_forever
 description
 download
 draft
