@@ -121,6 +121,15 @@ void DirectoryModel::setFilter(Filter filter)
     rebuild();
 }
 
+void DirectoryModel::setNameFilter(const QString &text)
+{
+    if (m_nameFilter == text)
+        return;
+    m_nameFilter = text;
+    emit nameFilterChanged();
+    rebuild();
+}
+
 void DirectoryModel::setFoldersFirst(bool first)
 {
     if (m_foldersFirst == first)
@@ -220,6 +229,9 @@ void DirectoryModel::rebuild()
 
 bool DirectoryModel::accepts(const Entry &entry) const
 {
+    if (!m_nameFilter.isEmpty() && !entry.name.contains(m_nameFilter, Qt::CaseInsensitive))
+        return false;
+
     switch (m_filter) {
     case ShowAll:
         return true;
