@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 18:06+0500\n"
+"POT-Creation-Date: 2026-10-24 18:08+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -174,7 +174,7 @@ msgid "Green"
 msgstr ""
 
 #: src/qml/ConfirmDialog.qml:99 src/qml/NameDialog.qml:126
-#: src/qml/OperationPanel.qml:69
+#: src/qml/OperationPanel.qml:78
 msgid "Cancel"
 msgstr ""
 
@@ -405,11 +405,17 @@ msgstr ""
 msgid "Up"
 msgstr ""
 
-#: src/qml/OperationPanel.qml:40
+#: src/qml/OperationPanel.qml:41
 msgid "Operation failed"
 msgstr ""
 
-#: src/qml/OperationPanel.qml:69 src/qml/SettingsDialog.qml:84
+#: src/qml/OperationPanel.qml:60
+msgid "%1 more queued"
+msgid_plural "%1 more queued"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/qml/OperationPanel.qml:78 src/qml/SettingsDialog.qml:84
 #: src/qml/WindowControls.qml:42
 msgid "Close"
 msgstr ""
