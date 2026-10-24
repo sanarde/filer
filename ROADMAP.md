@@ -9,3 +9,4 @@ Planned, not started:
 - Columns view
 - Persist sort, view mode and theme between sessions
 - Recent files location
+- Disk thumbnail cache (freedesktop thumbnail specification), thumbnails for video and PDF
