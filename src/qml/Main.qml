@@ -138,6 +138,7 @@ Window {
 
                     DirectoryPage {
                         id: page
+                        onDetailsRequested: root.dismissedDetails = ""
                         anchors.fill: parent
                         navigator: pathNavigator
                         directory: dirModel

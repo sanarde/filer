@@ -10,9 +10,35 @@ Item {
     focus: true
     Component.onCompleted: forceActiveFocus()
 
-    Keys.onEscapePressed: directory.clearSelection()
+    Keys.onEscapePressed: {
+        if (sortMenu.visible || contextMenu.visible)
+            closeMenus()
+        else
+            directory.clearSelection()
+    }
     Keys.onReturnPressed: openSelected()
     Keys.onEnterPressed: openSelected()
+
+    property point sortMenuPosition: Qt.point(-1, -1)
+
+    signal detailsRequested
+
+    function closeMenus() {
+        sortMenu.visible = false
+        contextMenu.visible = false
+    }
+
+    function showContextMenu(position, path) {
+        const local = root.mapFromItem(null, position.x, position.y)
+        sortMenu.visible = false
+        contextMenu.onEntry = path !== ""
+        if (path !== "" && directory.selectedPaths().indexOf(path) < 0)
+            directory.select(path, DirectoryModel.SelectReplace)
+        contextMenu.x = Math.max(8, Math.min(local.x, root.width - contextMenu.width - 8))
+        contextMenu.y = Math.max(8, Math.min(local.y, root.height - contextMenu.height - 8))
+        contextMenu.visible = true
+        root.forceActiveFocus()
+    }
 
     function openSelected() {
         const paths = directory.selectedPaths()
@@ -53,7 +79,10 @@ Item {
         directory: root.directory
         title: root.lastCrumb.root === "home" ? Tr.t("Home")
                : root.lastCrumb.root === "trash" ? Tr.t("Trash") : root.lastCrumb.label
-        onSortMenuRequested: sortMenu.visible = !sortMenu.visible
+        onSortMenuRequested: {
+            root.sortMenuPosition = Qt.point(-1, -1)
+            sortMenu.visible = !sortMenu.visible
+        }
     }
 
     FilterChips {
@@ -81,6 +110,8 @@ Item {
             root.forceActiveFocus()
             root.directory.select(path, mode)
         }
+        onContextMenuRequested: (path, position) => root.showContextMenu(position, path)
+        onBackgroundContextMenuRequested: position => root.showContextMenu(position, "")
         onBackgroundClicked: {
             root.forceActiveFocus()
             root.directory.clearSelection()
@@ -97,15 +128,31 @@ Item {
 
     MouseArea {
         anchors.fill: parent
-        visible: sortMenu.visible
-        onClicked: sortMenu.visible = false
+        visible: sortMenu.visible || contextMenu.visible
+        acceptedButtons: Qt.AllButtons
+        onClicked: root.closeMenus()
+    }
+
+    ContextMenu {
+        id: contextMenu
+        visible: false
+        selectedCount: root.directory.selectedCount
+        onOpenRequested: root.openSelected()
+        onDetailsRequested: root.detailsRequested()
+        onSelectAllRequested: root.directory.selectAll()
+        onRefreshRequested: root.directory.reload()
+        onSortRequested: {
+            root.sortMenuPosition = Qt.point(contextMenu.x, contextMenu.y)
+            sortMenu.visible = true
+        }
+        onClosed: visible = false
     }
 
     SortMenu {
         id: sortMenu
         visible: false
-        x: header.x + header.sortButtonX
-        y: header.y + header.height + 4
+        x: root.sortMenuPosition.x >= 0 ? root.sortMenuPosition.x : header.x + header.sortButtonX
+        y: root.sortMenuPosition.x >= 0 ? root.sortMenuPosition.y : header.y + header.height + 4
         onClosed: visible = false
     }
 }

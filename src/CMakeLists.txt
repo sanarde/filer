@@ -18,6 +18,7 @@ qt_add_qml_module(sanar-filer
         qml/Breadcrumbs.qml
         qml/Icon.qml
         qml/IconButton.qml
+        qml/ContextMenu.qml
         qml/DetailsPanel.qml
         qml/DeviceCard.qml
         qml/DirectoryHeader.qml
@@ -33,6 +34,8 @@ qt_add_qml_module(sanar-filer
         qml/SelectionBar.qml
         qml/SortMenu.qml
         qml/ViewSwitcher.qml
+        qml/MenuEntry.qml
+        qml/MenuSeparator.qml
         qml/NavItem.qml
         qml/NavigationButtons.qml
         qml/ResizeHandles.qml

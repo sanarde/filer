@@ -12,6 +12,8 @@ Item {
     signal openRequested(string path)
     signal selectRequested(string path, int mode)
     signal backgroundClicked
+    signal contextMenuRequested(string path, point position)
+    signal backgroundContextMenuRequested(point position)
 
     readonly property int gap: 12
     readonly property int columns: Math.max(1, Math.floor((width + gap) / (200 + gap)))
@@ -40,6 +42,12 @@ Item {
     TapHandler {
         gesturePolicy: TapHandler.ReleaseWithinBounds
         onTapped: root.backgroundClicked()
+    }
+
+    TapHandler {
+        acceptedButtons: Qt.RightButton
+        gesturePolicy: TapHandler.ReleaseWithinBounds
+        onTapped: point => root.backgroundContextMenuRequested(point.scenePosition)
     }
 
     GridView {
@@ -78,6 +86,7 @@ Item {
                 selected: cell.model.selected
                 onSelectRequested: mode => root.selectRequested(cell.model.path, mode)
                 onOpened: root.openRequested(cell.model.path)
+                onContextMenuRequested: position => root.contextMenuRequested(cell.model.path, position)
             }
         }
     }
@@ -123,6 +132,7 @@ Item {
                         selected: model.selected
                         onSelectRequested: mode => root.selectRequested(model.path, mode)
                         onOpened: root.openRequested(model.path)
+                        onContextMenuRequested: position => root.contextMenuRequested(model.path, position)
                     }
                 }
             }
@@ -161,6 +171,7 @@ Item {
             selected: model.selected
             onSelectRequested: mode => root.selectRequested(model.path, mode)
             onOpened: root.openRequested(model.path)
+            onContextMenuRequested: position => root.contextMenuRequested(model.path, position)
         }
     }
 
