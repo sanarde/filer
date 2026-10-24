@@ -53,6 +53,14 @@ Window {
     }
 
     property string dismissedDetails
+    property bool detailsVisible: false
+
+    Binding {
+        target: root
+        property: "detailsVisible"
+        value: dirModel.selectedPath !== "" && dirModel.selectedPath !== root.dismissedDetails
+        when: !page.selecting
+    }
 
     Shortcut {
         sequence: "Ctrl+,"
@@ -139,7 +147,7 @@ Window {
                 DetailsPanel {
                     Layout.preferredWidth: 332
                     Layout.fillHeight: true
-                    visible: dirModel.selectedPath !== "" && dirModel.selectedPath !== root.dismissedDetails
+                    visible: root.detailsVisible
                     path: dirModel.selectedPath
                     onCloseRequested: root.dismissedDetails = dirModel.selectedPath
                     onOpenRequested: path => pathNavigator.open(path)

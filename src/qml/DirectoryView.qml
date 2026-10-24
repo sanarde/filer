@@ -49,6 +49,7 @@ Item {
         anchors.rightMargin: -root.gap
         clip: true
         boundsBehavior: Flickable.StopAtBounds
+        interactive: false
         cellWidth: root.cellWidth
         cellHeight: 170 + 12
         model: Settings.separateFolders ? files : root.directory
@@ -59,10 +60,13 @@ Item {
 
             required property var model
 
+            readonly property Item tile: fileTile
+
             width: grid.cellWidth
             height: grid.cellHeight
 
             FileTile {
+                id: fileTile
                 width: parent.width - root.gap
                 height: 170
                 name: cell.model.name
@@ -84,6 +88,13 @@ Item {
         Column {
             width: grid.width
 
+            function folderTiles() {
+                const tiles = []
+                for (let i = 0; i < folderRepeater.count; ++i)
+                    tiles.push(folderRepeater.itemAt(i))
+                return tiles
+            }
+
             SectionTitle {
                 visible: root.directory.folderCount > 0
                 title: Tr.t("Folders")
@@ -97,6 +108,7 @@ Item {
                 width: grid.width
 
                 Repeater {
+                    id: folderRepeater
                     model: folders
 
                     FolderTile {
@@ -105,6 +117,7 @@ Item {
 
                         width: root.cellWidth - root.gap
                         name: model.name
+                        path: model.path
                         subtitle: root.itemCountText(model.itemCount)
                         scheme: index
                         selected: model.selected
@@ -128,6 +141,7 @@ Item {
         anchors.fill: parent
         clip: true
         boundsBehavior: Flickable.StopAtBounds
+        interactive: false
         spacing: 2
         model: root.directory
 
@@ -138,6 +152,7 @@ Item {
 
             width: list.width
             name: model.name
+            path: model.path
             icon: model.icon
             directory: model.isDirectory
             typeText: model.typeLabel
@@ -146,6 +161,124 @@ Item {
             selected: model.selected
             onSelectRequested: mode => root.selectRequested(model.path, mode)
             onOpened: root.openRequested(model.path)
+        }
+    }
+
+    readonly property bool bandActive: band.active
+    readonly property Flickable view: viewMode === "list" ? list : grid
+
+    function scrollBy(delta) {
+        const top = view.originY
+        const bottom = Math.max(top, top + view.contentHeight - view.height)
+        view.contentY = Math.max(top, Math.min(bottom, view.contentY - delta))
+    }
+
+    function visibleEntries() {
+        const items = []
+        if (viewMode === "list") {
+            for (const child of list.contentItem.children) {
+                if (child.path)
+                    items.push(child)
+            }
+        } else {
+            if (grid.headerItem)
+                items.push(...grid.headerItem.folderTiles())
+            for (const child of grid.contentItem.children) {
+                if (child.tile)
+                    items.push(child.tile)
+            }
+        }
+        return items
+    }
+
+    WheelHandler {
+        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
+        onWheel: event => root.scrollBy(event.pixelDelta.y !== 0 ? event.pixelDelta.y
+                                                                  : event.angleDelta.y / 120 * 96)
+    }
+
+    Item {
+        id: band
+
+        property bool additive: false
+        property var base: []
+        property real startX: 0
+        property real startContentY: 0
+        property real currentX: 0
+        property real currentY: 0
+        readonly property real startY: startContentY - root.view.contentY
+        readonly property real minX: Math.min(startX, currentX)
+        readonly property real minY: Math.min(startY, currentY)
+        readonly property real maxX: Math.max(startX, currentX)
+        readonly property real maxY: Math.max(startY, currentY)
+        readonly property bool active: dragPlain.active || dragAdditive.active
+
+        function begin(handler, additive) {
+            band.additive = additive
+            band.base = additive ? root.directory.selectedPaths() : []
+            band.startX = handler.centroid.pressPosition.x
+            band.startContentY = handler.centroid.pressPosition.y + root.view.contentY
+            track(handler)
+        }
+
+        function track(handler) {
+            currentX = Math.max(0, Math.min(width, handler.centroid.position.x))
+            currentY = Math.max(0, Math.min(height, handler.centroid.position.y))
+            update()
+        }
+
+        function update() {
+            const hits = []
+            for (const item of root.visibleEntries()) {
+                const origin = item.mapToItem(band, 0, 0)
+                if (origin.x < maxX && origin.x + item.width > minX
+                        && origin.y < maxY && origin.y + item.height > minY)
+                    hits.push(item.path)
+            }
+            root.directory.selectPaths(additive ? base.concat(hits) : hits)
+        }
+
+        anchors.fill: parent
+        z: 5
+
+        Rectangle {
+            visible: band.active && (band.maxX - band.minX > 3 || band.maxY - band.minY > 3)
+            x: band.minX
+            y: band.minY
+            width: band.maxX - band.minX
+            height: band.maxY - band.minY
+            radius: 6
+            color: Qt.alpha(Theme.primary, 0.14)
+            border.width: 1
+            border.color: Theme.primary
+        }
+
+        DragHandler {
+            id: dragPlain
+            target: null
+            acceptedButtons: Qt.LeftButton
+            acceptedModifiers: Qt.NoModifier
+            onActiveChanged: if (active) band.begin(dragPlain, false)
+            onCentroidChanged: if (active) band.track(dragPlain)
+        }
+
+        DragHandler {
+            id: dragAdditive
+            target: null
+            acceptedButtons: Qt.LeftButton
+            acceptedModifiers: Qt.ControlModifier
+            onActiveChanged: if (active) band.begin(dragAdditive, true)
+            onCentroidChanged: if (active) band.track(dragAdditive)
+        }
+
+        Timer {
+            interval: 16
+            repeat: true
+            running: band.active && (band.currentY < 24 || band.currentY > band.height - 24)
+            onTriggered: {
+                root.scrollBy(band.currentY < 24 ? 14 : -14)
+                band.update()
+            }
         }
     }
 

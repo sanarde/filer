@@ -26,6 +26,7 @@ Item {
         onActivated: root.directory.selectAll()
     }
 
+    readonly property bool selecting: view.bandActive
     readonly property var crumbs: navigator.crumbs
     readonly property var lastCrumb: crumbs[crumbs.length - 1]
 
