@@ -25,9 +25,11 @@ drive_file_move
 edit
 eject
 folder
+folder_open
 folder_zip
 grid_view
 hard_drive
+history
 home
 image
 info

@@ -25,9 +25,11 @@ drive_file_move e9a1
 edit f097
 eject e8fb
 folder e2c7
+folder_open e2c8
 folder_zip eb2c
 grid_view e9b0
 hard_drive f80e
+history e8b3
 home e9b2
 image e3f4
 info e88e

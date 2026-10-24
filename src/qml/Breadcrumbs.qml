@@ -50,7 +50,7 @@ ListView {
                 Icon {
                     visible: item.modelData.root !== ""
                     anchors.verticalCenter: parent.verticalCenter
-                    name: item.modelData.root === "trash" ? "delete" : "home"
+                    name: item.modelData.root === "trash" ? "delete" : item.modelData.root === "recent" ? "history" : "home"
                     color: Theme.onSurfaceVariant
                     font.pixelSize: 18
                 }
@@ -58,7 +58,8 @@ ListView {
                 Text {
                     anchors.verticalCenter: parent.verticalCenter
                     text: item.modelData.root === "home" ? Tr.t("Home")
-                          : item.modelData.root === "trash" ? Tr.t("Trash") : item.modelData.label
+                          : item.modelData.root === "trash" ? Tr.t("Trash")
+                          : item.modelData.root === "recent" ? Tr.t("Recent") : item.modelData.label
                     color: item.current ? Theme.onSurface : Theme.onSurfaceVariant
                     font.pixelSize: 14
                     font.weight: item.current ? Font.Bold : Font.Medium

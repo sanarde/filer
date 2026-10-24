@@ -5,6 +5,8 @@
 #include <QDir>
 #include <QStandardPaths>
 
+#include "RecentFiles.h"
+
 PlacesModel::PlacesModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -13,6 +15,7 @@ PlacesModel::PlacesModel(QObject *parent)
                           + "/Trash/files";
 
     m_places.append({QString::fromUtf8(dgettext("sanar-filer", "Home")), "home", home});
+    m_places.append({QString::fromUtf8(dgettext("sanar-filer", "Recent")), "history", RecentFiles::location});
 
     const QList<Place> candidates = {
         {QString::fromUtf8(dgettext("sanar-filer", "Documents")), "description",
