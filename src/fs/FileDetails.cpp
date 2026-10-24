@@ -8,6 +8,7 @@
 #include <QImageReader>
 #include <QLocale>
 #include <QMimeDatabase>
+#include <QStandardPaths>
 
 #include "SizeFormat.h"
 
@@ -47,16 +48,24 @@ static QString formatPermissions(QFileDevice::Permissions permissions)
     return text;
 }
 
+static QString locationFrom(const QString &parent, const QString &base, const QString &label)
+{
+    QStringList parts = parent.mid(base.size()).split(u'/', Qt::SkipEmptyParts);
+    parts.prepend(label);
+    return parts.join(QStringLiteral(" / "));
+}
+
 static QString locationOf(const QFileInfo &info)
 {
     const QString home = QDir::cleanPath(QDir::homePath());
+    const QString trash = QDir::cleanPath(
+        QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + "/Trash/files");
     const QString parent = info.absolutePath();
 
-    if (parent == home || parent.startsWith(home + u'/')) {
-        QStringList parts = parent.mid(home.size()).split(u'/', Qt::SkipEmptyParts);
-        parts.prepend(QString::fromUtf8(dgettext("sanar-filer", "Home")));
-        return parts.join(QStringLiteral(" / "));
-    }
+    if (parent == trash || parent.startsWith(trash + u'/'))
+        return locationFrom(parent, trash, QString::fromUtf8(dgettext("sanar-filer", "Trash")));
+    if (parent == home || parent.startsWith(home + u'/'))
+        return locationFrom(parent, home, QString::fromUtf8(dgettext("sanar-filer", "Home")));
     return parent;
 }
 
