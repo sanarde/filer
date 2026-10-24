@@ -32,6 +32,59 @@ Window {
     }
 
     property string renamePath
+    property var clipboard: []
+    property bool clipboardCut: false
+    property string confirmAction
+    property var pendingPaths: []
+    readonly property bool inTrash: pathNavigator.crumbs[0].root === "trash"
+
+    function copySelection(cut) {
+        const paths = dirModel.selectedPaths()
+        if (paths.length === 0)
+            return
+        clipboard = paths
+        clipboardCut = cut
+    }
+
+    function paste() {
+        if (clipboard.length === 0 || inTrash)
+            return
+        const conflicts = fileOps.conflicts(clipboard, pathNavigator.path)
+        if (conflicts.length === 0) {
+            runPaste(FileOperations.KeepBoth)
+            return
+        }
+        confirmAction = "paste"
+        confirmDialog.open(Tr.t("Name conflict"),
+                           Tr.n("%1 item already exists in this folder.", "%1 items already exist in this folder.", conflicts.length)
+                               .replace("%1", conflicts.length),
+                           [Tr.t("Replace"), Tr.t("Skip"), Tr.t("Keep both")], 2)
+    }
+
+    function runPaste(conflict) {
+        if (clipboardCut) {
+            fileOps.move(clipboard, pathNavigator.path, conflict)
+            clipboard = []
+        } else {
+            fileOps.copy(clipboard, pathNavigator.path, conflict)
+        }
+    }
+
+    function deleteSelection(permanent) {
+        const paths = dirModel.selectedPaths()
+        if (paths.length === 0)
+            return
+        if (!permanent && !inTrash) {
+            fileOps.trash(paths)
+            return
+        }
+        pendingPaths = paths
+        confirmAction = "delete"
+        confirmDialog.open(Tr.t("Delete permanently"),
+                           Tr.n("Delete %1 item permanently? This cannot be undone.", "Delete %1 items permanently? This cannot be undone.", paths.length)
+                               .replace("%1", paths.length),
+                           [Tr.t("Delete")], 0)
+    }
 
     Binding {
         target: Theme
@@ -60,7 +113,7 @@ Window {
 
     property string dismissedDetails
     property bool detailsVisible: false
-    readonly property bool dialogOpen: settingsDialog.visible || detailsDialog.visible || nameDialog.visible
+    readonly property bool dialogOpen: settingsDialog.visible || detailsDialog.visible || nameDialog.visible || confirmDialog.visible
 
     Binding {
         target: root
@@ -78,6 +131,36 @@ Window {
         sequence: "Alt+Return"
         enabled: dirModel.selectedPath !== "" && !root.dialogOpen
         onActivated: detailsDialog.open(dirModel.selectedPath)
+    }
+
+    Shortcut {
+        sequences: [StandardKey.Copy]
+        enabled: page.activeFocus && !root.dialogOpen && !root.inTrash
+        onActivated: root.copySelection(false)
+    }
+
+    Shortcut {
+        sequences: [StandardKey.Cut]
+        enabled: page.activeFocus && !root.dialogOpen && !root.inTrash
+        onActivated: root.copySelection(true)
+    }
+
+    Shortcut {
+        sequences: [StandardKey.Paste]
+        enabled: page.activeFocus && !root.dialogOpen
+        onActivated: root.paste()
+    }
+
+    Shortcut {
+        sequences: [StandardKey.Delete]
+        enabled: page.activeFocus && !root.dialogOpen
+        onActivated: root.deleteSelection(false)
+    }
+
+    Shortcut {
+        sequence: "Shift+Delete"
+        enabled: page.activeFocus && !root.dialogOpen
+        onActivated: root.deleteSelection(true)
     }
 
     Shortcut {
@@ -168,6 +251,12 @@ Window {
                             root.renamePath = path
                             nameDialog.open(Tr.t("Rename"), Tr.t("Rename"), path.substring(path.lastIndexOf("/") + 1))
                         }
+                        canPaste: root.clipboard.length > 0
+                        inTrash: root.inTrash
+                        onCopyRequested: root.copySelection(false)
+                        onCutRequested: root.copySelection(true)
+                        onPasteRequested: root.paste()
+                        onDeleteRequested: root.deleteSelection(false)
                         onNewFolderRequested: {
                             root.renamePath = ""
                             nameDialog.open(Tr.t("New folder"), Tr.t("Create"), "")
@@ -211,6 +300,21 @@ Window {
                     visible = false
                 else
                     nameDialog.error = error
+            }
+            onVisibleChanged: if (!visible) page.forceActiveFocus()
+        }
+
+        ConfirmDialog {
+            id: confirmDialog
+            anchors.fill: parent
+            radius: parent.radius
+            onCloseRequested: visible = false
+            onChosen: index => {
+                visible = false
+                if (root.confirmAction === "paste")
+                    root.runPaste(index)
+                else
+                    fileOps.remove(root.pendingPaths)
             }
             onVisibleChanged: if (!visible) page.forceActiveFocus()
         }

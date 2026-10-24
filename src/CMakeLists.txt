@@ -19,6 +19,7 @@ qt_add_qml_module(sanar-filer
         qml/Icon.qml
         qml/IconButton.qml
         qml/InfoStrip.qml
+        qml/ConfirmDialog.qml
         qml/ContextMenu.qml
         qml/DetailsDialog.qml
         qml/DetailsPanel.qml
