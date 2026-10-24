@@ -18,7 +18,8 @@ Item {
     TapHandler {
         acceptedModifiers: Qt.NoModifier
         gesturePolicy: TapHandler.ReleaseWithinBounds
-        onTapped: root.selectRequested(DirectoryModel.SelectReplace)
+        onTapped: root.selectRequested(tapCount > 1 ? DirectoryModel.SelectReplace
+                                                    : DirectoryModel.SelectClick)
         onDoubleTapped: root.opened()
     }
 
