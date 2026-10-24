@@ -21,6 +21,7 @@ Settings::Settings(QObject *parent)
     , m_palette(readEnum(m_file, "appearance/palette", Theme::Teal, Theme::Green))
     , m_showHidden(m_file.value("files/showHidden", false).toBool())
     , m_separateFolders(m_file.value("files/separateFolders", true).toBool())
+    , m_detailsPanel(m_file.value("experimental/detailsPanel", false).toBool())
     , m_sortKey(readEnum(m_file, "view/sortKey", DirectoryModel::SortByName, DirectoryModel::SortByType))
     , m_sortDescending(m_file.value("view/sortDescending", false).toBool())
     , m_viewMode(m_file.value("view/mode", "grid").toString() == "list" ? "list" : "grid")
@@ -64,6 +65,15 @@ void Settings::setSeparateFolders(bool separate)
     m_separateFolders = separate;
     m_file.setValue("files/separateFolders", separate);
     emit separateFoldersChanged();
+}
+
+void Settings::setDetailsPanel(bool enabled)
+{
+    if (m_detailsPanel == enabled)
+        return;
+    m_detailsPanel = enabled;
+    m_file.setValue("experimental/detailsPanel", enabled);
+    emit detailsPanelChanged();
 }
 
 void Settings::setSortKey(DirectoryModel::SortKey key)
