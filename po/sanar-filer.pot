@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 18:03+0500\n"
+"POT-Creation-Date: 2026-10-24 18:06+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: src/fs/FileDetails.cpp:66 src/places/PlacesModel.cpp:28
-#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:93
+#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:94
 msgid "Trash"
 msgstr ""
 
 #: src/fs/FileDetails.cpp:68 src/places/PlacesModel.cpp:15
-#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:92
+#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:93
 msgid "Home"
 msgstr ""
 
@@ -39,23 +39,23 @@ msgid_plural "%1 items"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/fs/FileOperations.cpp:67
+#: src/fs/FileOperations.cpp:79
 msgid "The name is not valid"
 msgstr ""
 
-#: src/fs/FileOperations.cpp:69
+#: src/fs/FileOperations.cpp:81
 msgid "The name cannot contain /"
 msgstr ""
 
-#: src/fs/FileOperations.cpp:72
+#: src/fs/FileOperations.cpp:84
 msgid "An item with this name already exists"
 msgstr ""
 
-#: src/fs/FileOperations.cpp:85
+#: src/fs/FileOperations.cpp:97
 msgid "Cannot rename %1"
 msgstr ""
 
-#: src/fs/FileOperations.cpp:95 src/fs/TransferJob.cpp:196
+#: src/fs/FileOperations.cpp:107 src/fs/TransferJob.cpp:197
 msgid "Cannot create folder %1"
 msgstr ""
 
@@ -80,36 +80,36 @@ msgid "TB"
 msgstr ""
 
 #: src/fs/TransferJob.cpp:105 src/fs/TransferJob.cpp:129
-#: src/fs/TransferJob.cpp:228
+#: src/fs/TransferJob.cpp:229
 msgid "Canceled"
 msgstr ""
 
 #: src/fs/TransferJob.cpp:115 src/fs/TransferJob.cpp:121
-#: src/fs/TransferJob.cpp:180 src/fs/TransferJob.cpp:208
+#: src/fs/TransferJob.cpp:181 src/fs/TransferJob.cpp:209
 msgid "Cannot remove %1"
 msgstr ""
 
-#: src/fs/TransferJob.cpp:139
+#: src/fs/TransferJob.cpp:140
 msgid "A folder cannot be copied into itself: %1"
 msgstr ""
 
-#: src/fs/TransferJob.cpp:154
+#: src/fs/TransferJob.cpp:155
 msgid "Cannot replace %1"
 msgstr ""
 
-#: src/fs/TransferJob.cpp:167 src/fs/TransferJob.cpp:192
+#: src/fs/TransferJob.cpp:168 src/fs/TransferJob.cpp:193
 msgid "Cannot move %1"
 msgstr ""
 
-#: src/fs/TransferJob.cpp:174
+#: src/fs/TransferJob.cpp:175
 msgid "Cannot copy %1"
 msgstr ""
 
-#: src/fs/TransferJob.cpp:216 src/fs/TransferJob.cpp:232
+#: src/fs/TransferJob.cpp:217 src/fs/TransferJob.cpp:233
 msgid "Cannot read %1: %2"
 msgstr ""
 
-#: src/fs/TransferJob.cpp:220 src/fs/TransferJob.cpp:236
+#: src/fs/TransferJob.cpp:221 src/fs/TransferJob.cpp:237
 msgid "Cannot write %1: %2"
 msgstr ""
 
@@ -178,60 +178,64 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:50 src/qml/DetailsPanel.qml:149
+#: src/qml/ContextMenu.qml:51 src/qml/DetailsPanel.qml:149
 #: src/qml/DetailsPanel.qml:178
 msgid "Open"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:61 src/qml/DetailsPanel.qml:73
+#: src/qml/ContextMenu.qml:62 src/qml/DetailsPanel.qml:73
 msgid "Details"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:72 src/qml/Main.qml:265
+#: src/qml/ContextMenu.qml:73 src/qml/Main.qml:266
 msgid "Rename"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:87
+#: src/qml/ContextMenu.qml:88
 msgid "Copy"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:98
+#: src/qml/ContextMenu.qml:99
 msgid "Cut"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:109 src/qml/Main.qml:96
+#: src/qml/ContextMenu.qml:110 src/qml/WindowControls.qml:29
+msgid "Restore"
+msgstr ""
+
+#: src/qml/ContextMenu.qml:121 src/qml/Main.qml:97
 msgid "Delete permanently"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:109
+#: src/qml/ContextMenu.qml:121
 msgid "Move to trash"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:125
+#: src/qml/ContextMenu.qml:137
 msgid "Paste"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:136 src/qml/Main.qml:275
+#: src/qml/ContextMenu.qml:148 src/qml/Main.qml:277
 msgid "New folder"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:146
+#: src/qml/ContextMenu.qml:158
 msgid "Select all"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:157
+#: src/qml/ContextMenu.qml:169
 msgid "Refresh"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:171 src/qml/SettingsDialog.qml:123
+#: src/qml/ContextMenu.qml:183 src/qml/SettingsDialog.qml:123
 msgid "Show hidden files"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:181 src/qml/SettingsDialog.qml:130
+#: src/qml/ContextMenu.qml:193 src/qml/SettingsDialog.qml:130
 msgid "Separate folders and files"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:192
+#: src/qml/ContextMenu.qml:204
 msgid "Sort by"
 msgstr ""
 
@@ -346,42 +350,46 @@ msgid "Moving to trash"
 msgstr ""
 
 #: src/qml/Main.qml:43
+msgid "Restoring"
+msgstr ""
+
+#: src/qml/Main.qml:44
 msgid "Deleting"
 msgstr ""
 
-#: src/qml/Main.qml:71
+#: src/qml/Main.qml:72
 msgid "Name conflict"
 msgstr ""
 
-#: src/qml/Main.qml:72
+#: src/qml/Main.qml:73
 msgid "%1 item already exists in this folder."
 msgid_plural "%1 items already exist in this folder."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/qml/Main.qml:74
+#: src/qml/Main.qml:75
 msgid "Keep both"
 msgstr ""
 
-#: src/qml/Main.qml:74
+#: src/qml/Main.qml:75
 msgid "Replace"
 msgstr ""
 
-#: src/qml/Main.qml:74
+#: src/qml/Main.qml:75
 msgid "Skip"
 msgstr ""
 
-#: src/qml/Main.qml:97
+#: src/qml/Main.qml:98
 msgid "Delete %1 item permanently? This cannot be undone."
 msgid_plural "Delete %1 items permanently? This cannot be undone."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/qml/Main.qml:99
+#: src/qml/Main.qml:100
 msgid "Delete"
 msgstr ""
 
-#: src/qml/Main.qml:275
+#: src/qml/Main.qml:277
 msgid "Create"
 msgstr ""
 
@@ -496,8 +504,4 @@ msgstr ""
 
 #: src/qml/WindowControls.qml:29
 msgid "Maximize"
-msgstr ""
-
-#: src/qml/WindowControls.qml:29
-msgid "Restore"
 msgstr ""
