@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sanar-filer 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 16:12+0500\n"
+"POT-Creation-Date: 2026-10-24 17:56+0500\n"
 "PO-Revision-Date: 2026-10-24 10:47+0500\n"
 "Last-Translator: AnmiTaliDev <anmitalidev@nuros.org>\n"
 "Language-Team: Russian\n"
@@ -17,12 +17,12 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/fs/FileDetails.cpp:66 src/places/PlacesModel.cpp:28
-#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:84
+#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:86
 msgid "Trash"
 msgstr "Корзина"
 
 #: src/fs/FileDetails.cpp:68 src/places/PlacesModel.cpp:15
-#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:83
+#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:85
 msgid "Home"
 msgstr "Домашняя"
 
@@ -37,6 +37,26 @@ msgid_plural "%1 items"
 msgstr[0] "%1 элемент"
 msgstr[1] "%1 элемента"
 msgstr[2] "%1 элементов"
+
+#: src/fs/FileOperations.cpp:67
+msgid "The name is not valid"
+msgstr "Недопустимое имя"
+
+#: src/fs/FileOperations.cpp:69
+msgid "The name cannot contain /"
+msgstr "Имя не может содержать /"
+
+#: src/fs/FileOperations.cpp:72
+msgid "An item with this name already exists"
+msgstr "Элемент с таким именем уже существует"
+
+#: src/fs/FileOperations.cpp:85
+msgid "Cannot rename %1"
+msgstr "Не удалось переименовать %1"
+
+#: src/fs/FileOperations.cpp:95 src/fs/TransferJob.cpp:196
+msgid "Cannot create folder %1"
+msgstr "Не удалось создать папку %1"
 
 #: src/fs/SizeFormat.cpp:10
 msgid "B"
@@ -83,10 +103,6 @@ msgstr "Не удалось переместить %1"
 #: src/fs/TransferJob.cpp:174
 msgid "Cannot copy %1"
 msgstr "Не удалось скопировать %1"
-
-#: src/fs/TransferJob.cpp:196
-msgid "Cannot create folder %1"
-msgstr "Не удалось создать папку %1"
 
 #: src/fs/TransferJob.cpp:216 src/fs/TransferJob.cpp:232
 msgid "Cannot read %1: %2"
@@ -156,32 +172,40 @@ msgstr "Индиго"
 msgid "Green"
 msgstr "Зелёный"
 
-#: src/qml/ContextMenu.qml:42 src/qml/DetailsPanel.qml:149
+#: src/qml/ContextMenu.qml:44 src/qml/DetailsPanel.qml:149
 #: src/qml/DetailsPanel.qml:178
 msgid "Open"
 msgstr "Открыть"
 
-#: src/qml/ContextMenu.qml:53 src/qml/DetailsPanel.qml:73
+#: src/qml/ContextMenu.qml:55 src/qml/DetailsPanel.qml:73
 msgid "Details"
 msgstr "Сведения"
 
-#: src/qml/ContextMenu.qml:67
+#: src/qml/ContextMenu.qml:66 src/qml/Main.qml:169
+msgid "Rename"
+msgstr "Переименовать"
+
+#: src/qml/ContextMenu.qml:81 src/qml/Main.qml:173
+msgid "New folder"
+msgstr "Новая папка"
+
+#: src/qml/ContextMenu.qml:91
 msgid "Select all"
 msgstr "Выбрать всё"
 
-#: src/qml/ContextMenu.qml:78
+#: src/qml/ContextMenu.qml:102
 msgid "Refresh"
 msgstr "Обновить"
 
-#: src/qml/ContextMenu.qml:92 src/qml/SettingsDialog.qml:123
+#: src/qml/ContextMenu.qml:116 src/qml/SettingsDialog.qml:123
 msgid "Show hidden files"
 msgstr "Показывать скрытые файлы"
 
-#: src/qml/ContextMenu.qml:102 src/qml/SettingsDialog.qml:130
+#: src/qml/ContextMenu.qml:126 src/qml/SettingsDialog.qml:130
 msgid "Separate folders and files"
 msgstr "Разделять папки и файлы"
 
-#: src/qml/ContextMenu.qml:113
+#: src/qml/ContextMenu.qml:137
 msgid "Sort by"
 msgstr "Сортировка"
 
@@ -283,6 +307,14 @@ msgid_plural "%1 items selected"
 msgstr[0] "Выбран %1 элемент"
 msgstr[1] "Выбрано %1 элемента"
 msgstr[2] "Выбрано %1 элементов"
+
+#: src/qml/Main.qml:173
+msgid "Create"
+msgstr "Создать"
+
+#: src/qml/NameDialog.qml:126
+msgid "Cancel"
+msgstr "Отмена"
 
 #: src/qml/NavigationButtons.qml:19 src/qml/SettingsDialog.qml:70
 msgid "Back"
