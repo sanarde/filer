@@ -38,3 +38,4 @@ tune e429
 usb e1e0
 view_column e8ec
 view_list e8ef
+movie e404

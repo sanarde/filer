@@ -38,3 +38,4 @@ tune
 usb
 view_column
 view_list
+movie
