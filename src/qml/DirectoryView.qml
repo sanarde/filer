@@ -58,6 +58,13 @@ Item {
         clip: true
         boundsBehavior: Flickable.StopAtBounds
         interactive: false
+        Behavior on contentY {
+            enabled: root.animateScroll
+            NumberAnimation {
+                duration: 160
+                easing.type: Easing.OutCubic
+            }
+        }
         cellWidth: root.cellWidth
         cellHeight: 170 + 12
         model: Settings.separateFolders ? files : root.directory
@@ -152,6 +159,13 @@ Item {
         clip: true
         boundsBehavior: Flickable.StopAtBounds
         interactive: false
+        Behavior on contentY {
+            enabled: root.animateScroll
+            NumberAnimation {
+                duration: 160
+                easing.type: Easing.OutCubic
+            }
+        }
         spacing: 2
         model: root.directory
 
@@ -178,10 +192,17 @@ Item {
     readonly property bool bandActive: band.active
     readonly property Flickable view: viewMode === "list" ? list : grid
 
-    function scrollBy(delta) {
+    property real scrollTarget: 0
+    property bool animateScroll: false
+
+    function scrollBy(delta, animated) {
         const top = view.originY
         const bottom = Math.max(top, top + view.contentHeight - view.height)
-        view.contentY = Math.max(top, Math.min(bottom, view.contentY - delta))
+        animateScroll = animated
+        if (!animated || Math.abs(view.contentY - scrollTarget) < 0.5)
+            scrollTarget = view.contentY
+        scrollTarget = Math.max(top, Math.min(bottom, scrollTarget - delta))
+        view.contentY = scrollTarget
     }
 
     function visibleEntries() {
@@ -204,8 +225,12 @@ Item {
 
     WheelHandler {
         acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-        onWheel: event => root.scrollBy(event.pixelDelta.y !== 0 ? event.pixelDelta.y
-                                                                  : event.angleDelta.y / 120 * 96)
+        onWheel: event => {
+            if (event.pixelDelta.y !== 0)
+                root.scrollBy(event.pixelDelta.y, false)
+            else
+                root.scrollBy(event.angleDelta.y / 120 * 180, true)
+        }
     }
 
     Item {
@@ -287,7 +312,7 @@ Item {
             repeat: true
             running: band.active && (band.currentY < 24 || band.currentY > band.height - 24)
             onTriggered: {
-                root.scrollBy(band.currentY < 24 ? 14 : -14)
+                root.scrollBy(band.currentY < 24 ? 14 : -14, false)
                 band.update()
             }
         }
