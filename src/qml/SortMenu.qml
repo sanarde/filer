@@ -1,5 +1,3 @@
-pragma ComponentBehavior: Bound
-
 import QtQuick
 import Sanar.Filer
 
@@ -15,110 +13,67 @@ Rectangle {
     border.width: 1
     border.color: Theme.outlineVariant
 
-    component MenuEntry: Item {
-        id: entry
-
-        property string label
-        property bool checked: false
-        property string icon: "check"
-
-        signal triggered
-
-        width: root.width
-        height: 44
-
-        Accessible.role: Accessible.MenuItem
-        Accessible.name: label
-        Accessible.checked: checked
-
-        Rectangle {
-            anchors.fill: parent
-            anchors.leftMargin: 8
-            anchors.rightMargin: 8
-            radius: 12
-            color: hover.hovered ? Qt.alpha(Theme.onSurface, 0.08) : "transparent"
-        }
-
-        Icon {
-            anchors.left: parent.left
-            anchors.leftMargin: 20
-            anchors.verticalCenter: parent.verticalCenter
-            name: entry.icon
-            visible: entry.checked
-            color: Theme.primary
-            font.pixelSize: 20
-        }
-
-        Text {
-            anchors.left: parent.left
-            anchors.leftMargin: 52
-            anchors.verticalCenter: parent.verticalCenter
-            text: entry.label
-            color: Theme.onSurface
-            font.pixelSize: 14
-            font.weight: entry.checked ? Font.DemiBold : Font.Medium
-        }
-
-        HoverHandler {
-            id: hover
-            cursorShape: Qt.PointingHandCursor
-        }
-
-        TapHandler {
-            onTapped: {
-                entry.triggered()
-                root.closed()
-            }
-        }
-    }
-
     Column {
         id: column
         y: 8
+        width: root.width
 
         MenuEntry {
             label: Tr.t("Name")
             checked: Settings.sortKey === DirectoryModel.SortByName
-            onTriggered: Settings.sortKey = DirectoryModel.SortByName
+            onTriggered: {
+                Settings.sortKey = DirectoryModel.SortByName
+                root.closed()
+            }
         }
 
         MenuEntry {
             label: Tr.t("Date modified")
             checked: Settings.sortKey === DirectoryModel.SortByModified
-            onTriggered: Settings.sortKey = DirectoryModel.SortByModified
+            onTriggered: {
+                Settings.sortKey = DirectoryModel.SortByModified
+                root.closed()
+            }
         }
 
         MenuEntry {
             label: Tr.t("Size")
             checked: Settings.sortKey === DirectoryModel.SortBySize
-            onTriggered: Settings.sortKey = DirectoryModel.SortBySize
+            onTriggered: {
+                Settings.sortKey = DirectoryModel.SortBySize
+                root.closed()
+            }
         }
 
         MenuEntry {
             label: Tr.t("Type")
             checked: Settings.sortKey === DirectoryModel.SortByType
-            onTriggered: Settings.sortKey = DirectoryModel.SortByType
+            onTriggered: {
+                Settings.sortKey = DirectoryModel.SortByType
+                root.closed()
+            }
         }
 
-        Rectangle {
-            x: 16
-            width: root.width - 32
-            height: 1
-            color: Theme.outlineVariant
-        }
+        MenuSeparator {}
 
         MenuEntry {
             label: Tr.t("Ascending")
             icon: "arrow_upward"
             checked: !Settings.sortDescending
-            onTriggered: Settings.sortDescending = false
+            onTriggered: {
+                Settings.sortDescending = false
+                root.closed()
+            }
         }
 
         MenuEntry {
             label: Tr.t("Descending")
             icon: "arrow_downward"
             checked: Settings.sortDescending
-            onTriggered: Settings.sortDescending = true
+            onTriggered: {
+                Settings.sortDescending = true
+                root.closed()
+            }
         }
     }
 }
