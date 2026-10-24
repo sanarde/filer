@@ -129,12 +129,13 @@ bool TransferJob::transfer(const QString &source, const QString &directory)
         return fail(message("Canceled"));
 
     const QFileInfo info(source);
-    const QString name = m_naming && directory == m_target ? m_naming(source) : info.fileName();
-    QString destination = directory + u'/' + name;
+    QString destination = m_destination && directory == m_target ? m_destination(source) : directory + u'/' + info.fileName();
+    const QString parent = QFileInfo(destination).path();
+    const QString name = QFileInfo(destination).fileName();
 
     if (isRealDir(source)) {
         const QString canonicalSource = info.canonicalFilePath();
-        const QString canonicalDirectory = QFileInfo(directory).canonicalFilePath();
+        const QString canonicalDirectory = QFileInfo(parent).canonicalFilePath();
         if (canonicalDirectory == canonicalSource || canonicalDirectory.startsWith(canonicalSource + u'/'))
             return fail(message("A folder cannot be copied into itself: %1").arg(name));
     }
@@ -143,12 +144,12 @@ bool TransferJob::transfer(const QString &source, const QString &directory)
         if (destination == source) {
             if (m_move)
                 return true;
-            destination = uniquePath(directory, name);
+            destination = uniquePath(parent, name);
         } else if (m_conflict == Skip) {
             advance(sizeOf(source), name);
             return true;
         } else if (m_conflict == KeepBoth) {
-            destination = uniquePath(directory, name);
+            destination = uniquePath(parent, name);
         } else if (!(isRealDir(source) && isRealDir(destination))) {
             if (!removeEntry(destination))
                 return fail(message("Cannot replace %1").arg(destination));
