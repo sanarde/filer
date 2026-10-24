@@ -44,3 +44,5 @@ arrow_downward
 settings
 info
 brightness_auto
+select_all
+refresh
