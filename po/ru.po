@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sanar-filer 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 17:58+0500\n"
+"POT-Creation-Date: 2026-10-24 18:03+0500\n"
 "PO-Revision-Date: 2026-10-24 10:47+0500\n"
 "Last-Translator: AnmiTaliDev <anmitalidev@nuros.org>\n"
 "Language-Team: Russian\n"
@@ -173,6 +173,7 @@ msgid "Green"
 msgstr "Зелёный"
 
 #: src/qml/ConfirmDialog.qml:99 src/qml/NameDialog.qml:126
+#: src/qml/OperationPanel.qml:69
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -185,7 +186,7 @@ msgstr "Открыть"
 msgid "Details"
 msgstr "Сведения"
 
-#: src/qml/ContextMenu.qml:72 src/qml/Main.qml:252
+#: src/qml/ContextMenu.qml:72 src/qml/Main.qml:265
 msgid "Rename"
 msgstr "Переименовать"
 
@@ -197,7 +198,7 @@ msgstr "Копировать"
 msgid "Cut"
 msgstr "Вырезать"
 
-#: src/qml/ContextMenu.qml:109 src/qml/Main.qml:83
+#: src/qml/ContextMenu.qml:109 src/qml/Main.qml:96
 msgid "Delete permanently"
 msgstr "Удалить навсегда"
 
@@ -209,7 +210,7 @@ msgstr "Переместить в корзину"
 msgid "Paste"
 msgstr "Вставить"
 
-#: src/qml/ContextMenu.qml:136 src/qml/Main.qml:262
+#: src/qml/ContextMenu.qml:136 src/qml/Main.qml:275
 msgid "New folder"
 msgstr "Новая папка"
 
@@ -332,41 +333,57 @@ msgstr[0] "Выбран %1 элемент"
 msgstr[1] "Выбрано %1 элемента"
 msgstr[2] "Выбрано %1 элементов"
 
-#: src/qml/Main.qml:58
+#: src/qml/Main.qml:40
+msgid "Copying"
+msgstr "Копирование"
+
+#: src/qml/Main.qml:41
+msgid "Moving"
+msgstr "Перемещение"
+
+#: src/qml/Main.qml:42
+msgid "Moving to trash"
+msgstr "Перемещение в корзину"
+
+#: src/qml/Main.qml:43
+msgid "Deleting"
+msgstr "Удаление"
+
+#: src/qml/Main.qml:71
 msgid "Name conflict"
 msgstr "Конфликт имён"
 
-#: src/qml/Main.qml:59
+#: src/qml/Main.qml:72
 msgid "%1 item already exists in this folder."
 msgid_plural "%1 items already exist in this folder."
 msgstr[0] "%1 элемент уже существует в этой папке."
 msgstr[1] "%1 элемента уже существуют в этой папке."
 msgstr[2] "%1 элементов уже существуют в этой папке."
 
-#: src/qml/Main.qml:61
+#: src/qml/Main.qml:74
 msgid "Keep both"
 msgstr "Оставить оба"
 
-#: src/qml/Main.qml:61
+#: src/qml/Main.qml:74
 msgid "Replace"
 msgstr "Заменить"
 
-#: src/qml/Main.qml:61
+#: src/qml/Main.qml:74
 msgid "Skip"
 msgstr "Пропустить"
 
-#: src/qml/Main.qml:84
+#: src/qml/Main.qml:97
 msgid "Delete %1 item permanently? This cannot be undone."
 msgid_plural "Delete %1 items permanently? This cannot be undone."
 msgstr[0] "Удалить %1 элемент навсегда? Это нельзя отменить."
 msgstr[1] "Удалить %1 элемента навсегда? Это нельзя отменить."
 msgstr[2] "Удалить %1 элементов навсегда? Это нельзя отменить."
 
-#: src/qml/Main.qml:86
+#: src/qml/Main.qml:99
 msgid "Delete"
 msgstr "Удалить"
 
-#: src/qml/Main.qml:262
+#: src/qml/Main.qml:275
 msgid "Create"
 msgstr "Создать"
 
@@ -381,6 +398,15 @@ msgstr "Вперёд"
 #: src/qml/NavigationButtons.qml:47
 msgid "Up"
 msgstr "Вверх"
+
+#: src/qml/OperationPanel.qml:40
+msgid "Operation failed"
+msgstr "Операция не выполнена"
+
+#: src/qml/OperationPanel.qml:69 src/qml/SettingsDialog.qml:84
+#: src/qml/WindowControls.qml:42
+msgid "Close"
+msgstr "Закрыть"
 
 #: src/qml/SearchField.qml:38
 msgid "Search files"
@@ -401,10 +427,6 @@ msgstr "О программе"
 #: src/qml/SettingsDialog.qml:76 src/qml/TopBar.qml:65
 msgid "Settings"
 msgstr "Настройки"
-
-#: src/qml/SettingsDialog.qml:84 src/qml/WindowControls.qml:42
-msgid "Close"
-msgstr "Закрыть"
 
 #: src/qml/SettingsDialog.qml:95
 msgid "Theme"
