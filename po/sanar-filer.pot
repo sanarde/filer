@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 18:08+0500\n"
+"POT-Creation-Date: 2026-10-24 18:14+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -187,7 +187,7 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:73 src/qml/Main.qml:266
+#: src/qml/ContextMenu.qml:73 src/qml/Main.qml:270
 msgid "Rename"
 msgstr ""
 
@@ -203,7 +203,7 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:121 src/qml/Main.qml:97
+#: src/qml/ContextMenu.qml:121 src/qml/Main.qml:99
 msgid "Delete permanently"
 msgstr ""
 
@@ -215,7 +215,7 @@ msgstr ""
 msgid "Paste"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:148 src/qml/Main.qml:277
+#: src/qml/ContextMenu.qml:148 src/qml/Main.qml:281
 msgid "New folder"
 msgstr ""
 
@@ -307,7 +307,11 @@ msgstr ""
 msgid "Access denied"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:333
+#: src/qml/DirectoryView.qml:335
+msgid "No matches"
+msgstr ""
+
+#: src/qml/DirectoryView.qml:335
 msgid "Nothing here"
 msgstr ""
 
@@ -337,59 +341,59 @@ msgid_plural "%1 items selected"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/qml/Main.qml:40
+#: src/qml/Main.qml:42
 msgid "Copying"
 msgstr ""
 
-#: src/qml/Main.qml:41
+#: src/qml/Main.qml:43
 msgid "Moving"
 msgstr ""
 
-#: src/qml/Main.qml:42
+#: src/qml/Main.qml:44
 msgid "Moving to trash"
 msgstr ""
 
-#: src/qml/Main.qml:43
+#: src/qml/Main.qml:45
 msgid "Restoring"
 msgstr ""
 
-#: src/qml/Main.qml:44
+#: src/qml/Main.qml:46
 msgid "Deleting"
 msgstr ""
 
-#: src/qml/Main.qml:72
+#: src/qml/Main.qml:74
 msgid "Name conflict"
 msgstr ""
 
-#: src/qml/Main.qml:73
+#: src/qml/Main.qml:75
 msgid "%1 item already exists in this folder."
 msgid_plural "%1 items already exist in this folder."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/qml/Main.qml:75
+#: src/qml/Main.qml:77
 msgid "Keep both"
 msgstr ""
 
-#: src/qml/Main.qml:75
+#: src/qml/Main.qml:77
 msgid "Replace"
 msgstr ""
 
-#: src/qml/Main.qml:75
+#: src/qml/Main.qml:77
 msgid "Skip"
 msgstr ""
 
-#: src/qml/Main.qml:98
+#: src/qml/Main.qml:100
 msgid "Delete %1 item permanently? This cannot be undone."
 msgid_plural "Delete %1 items permanently? This cannot be undone."
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/qml/Main.qml:100
+#: src/qml/Main.qml:102
 msgid "Delete"
 msgstr ""
 
-#: src/qml/Main.qml:277
+#: src/qml/Main.qml:281
 msgid "Create"
 msgstr ""
 
@@ -420,15 +424,15 @@ msgstr[1] ""
 msgid "Close"
 msgstr ""
 
-#: src/qml/SearchField.qml:38
+#: src/qml/SearchField.qml:39
 msgid "Search files"
 msgstr ""
 
-#: src/qml/SearchField.qml:43
+#: src/qml/SearchField.qml:49
 msgid "Search"
 msgstr ""
 
-#: src/qml/SearchField.qml:68
+#: src/qml/SearchField.qml:74
 msgid "Search filters"
 msgstr ""
 
