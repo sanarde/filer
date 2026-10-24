@@ -5,6 +5,8 @@
 
 #include <libintl.h>
 
+#include "ThumbnailProvider.h"
+
 #include <clocale>
 
 int main(int argc, char *argv[])
@@ -23,6 +25,7 @@ int main(int argc, char *argv[])
     app.setFont(QFont(QFontDatabase::applicationFontFamilies(textFont).value(0)));
 
     QQmlApplicationEngine engine;
+    engine.addImageProvider("thumb", new ThumbnailProvider);
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed,
                      &app, [] { QCoreApplication::exit(1); }, Qt::QueuedConnection);
     engine.loadFromModule("Sanar.Filer", "Main");
