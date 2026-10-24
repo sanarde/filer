@@ -330,7 +330,9 @@ Item {
             case DirectoryModel.AccessDenied:
                 return Tr.t("Access denied")
             }
-            return root.directory.folderCount + root.directory.fileCount === 0 ? Tr.t("Nothing here") : ""
+            if (root.directory.folderCount + root.directory.fileCount > 0)
+                return ""
+            return root.directory.nameFilter !== "" ? Tr.t("No matches") : Tr.t("Nothing here")
         }
     }
 }

@@ -16,11 +16,13 @@ Window {
 
     Navigator {
         id: pathNavigator
+        onChanged: topBar.search.text = ""
     }
 
     DirectoryModel {
         id: dirModel
         path: pathNavigator.path
+        nameFilter: topBar.search.text
         sortKey: Settings.sortKey
         sortDescending: Settings.sortDescending
         showHidden: Settings.showHidden
@@ -224,6 +226,7 @@ Window {
             enabled: !root.dialogOpen
 
             TopBar {
+                id: topBar
                 Layout.fillWidth: true
                 window: root
                 canGoBack: pathNavigator.canGoBack
@@ -233,6 +236,7 @@ Window {
                 onForwardRequested: pathNavigator.forward()
                 onUpRequested: pathNavigator.up()
                 onSettingsRequested: settingsDialog.open()
+                search.onFinished: page.forceActiveFocus()
             }
 
             RowLayout {

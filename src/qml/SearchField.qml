@@ -8,6 +8,7 @@ Rectangle {
     property alias text: input.text
 
     signal filtersRequested
+    signal finished
 
     implicitHeight: 56
     radius: 28
@@ -36,6 +37,11 @@ Rectangle {
             selectionColor: Theme.primaryContainer
             selectedTextColor: Theme.onPrimaryContainer
             Accessible.name: Tr.t("Search files")
+            Keys.onEscapePressed: {
+                text = ""
+                root.finished()
+            }
+            onAccepted: root.finished()
 
             Text {
                 anchors.fill: parent
