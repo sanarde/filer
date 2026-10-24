@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sanar-filer 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 11:08+0500\n"
+"POT-Creation-Date: 2026-10-24 11:18+0500\n"
 "PO-Revision-Date: 2026-10-24 10:47+0500\n"
 "Last-Translator: AnmiTaliDev <anmitalidev@nuros.org>\n"
 "Language-Team: Russian\n"
@@ -45,7 +45,7 @@ msgid "%1 of %2 used"
 msgstr "%1 из %2 занято"
 
 #: src/places/PlacesModel.cpp:15 src/qml/Breadcrumbs.qml:60
-#: src/qml/DirectoryPage.qml:34
+#: src/qml/DirectoryPage.qml:53
 msgid "Home"
 msgstr "Домашняя"
 
@@ -89,30 +89,30 @@ msgstr "По типу"
 msgid "By name"
 msgstr "По имени"
 
-#: src/qml/DirectoryHeader.qml:47 src/qml/DirectoryView.qml:31
+#: src/qml/DirectoryHeader.qml:47 src/qml/DirectoryView.qml:33
 msgid "%1 item"
 msgid_plural "%1 items"
 msgstr[0] "%1 элемент"
 msgstr[1] "%1 элемента"
 msgstr[2] "%1 элементов"
 
-#: src/qml/DirectoryView.qml:54 src/qml/FilterChips.qml:20
+#: src/qml/DirectoryView.qml:61 src/qml/FilterChips.qml:20
 msgid "Folders"
 msgstr "Папки"
 
-#: src/qml/DirectoryView.qml:82
+#: src/qml/DirectoryView.qml:91
 msgid "Files"
 msgstr "Файлы"
 
-#: src/qml/DirectoryView.qml:140
+#: src/qml/DirectoryView.qml:153
 msgid "Folder not found"
 msgstr "Папка не найдена"
 
-#: src/qml/DirectoryView.qml:142
+#: src/qml/DirectoryView.qml:155
 msgid "Access denied"
 msgstr "Доступ запрещён"
 
-#: src/qml/DirectoryView.qml:144
+#: src/qml/DirectoryView.qml:157
 msgid "Nothing here"
 msgstr "Здесь пусто"
 
@@ -155,6 +155,17 @@ msgstr "Поиск"
 #: src/qml/SearchField.qml:68
 msgid "Search filters"
 msgstr "Фильтры поиска"
+
+#: src/qml/SelectionBar.qml:27
+msgid "Clear selection"
+msgstr "Снять выделение"
+
+#: src/qml/SelectionBar.qml:37
+msgid "%1 item selected"
+msgid_plural "%1 items selected"
+msgstr[0] "Выбран %1 элемент"
+msgstr[1] "Выбрано %1 элемента"
+msgstr[2] "Выбрано %1 элементов"
 
 #: src/qml/Sidebar.qml:47
 msgid "Devices"

@@ -17,11 +17,13 @@ qt_add_qml_module(sanar-filer
         qml/DirectoryHeader.qml
         qml/DirectoryPage.qml
         qml/DirectoryView.qml
+        qml/EntryInput.qml
         qml/FileRow.qml
         qml/FileTile.qml
         qml/FilterChip.qml
         qml/FilterChips.qml
         qml/FolderTile.qml
+        qml/SelectionBar.qml
         qml/SortMenu.qml
         qml/ViewSwitcher.qml
         qml/NavItem.qml

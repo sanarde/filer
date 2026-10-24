@@ -10,6 +10,8 @@ Item {
     property string viewMode: "grid"
 
     signal openRequested(string path)
+    signal selectRequested(string path, int mode)
+    signal backgroundClicked
 
     readonly property int gap: 12
     readonly property int columns: Math.max(1, Math.floor((width + gap) / (200 + gap)))
@@ -33,6 +35,11 @@ Item {
 
     function fileSubtitle(typeLabel, sizeText) {
         return typeLabel ? typeLabel + " · " + sizeText : sizeText
+    }
+
+    TapHandler {
+        gesturePolicy: TapHandler.ReleaseWithinBounds
+        onTapped: root.backgroundClicked()
     }
 
     GridView {
@@ -72,6 +79,8 @@ Item {
                         name: model.name
                         subtitle: root.itemCountText(model.itemCount)
                         scheme: index
+                        selected: model.selected
+                        onSelectRequested: mode => root.selectRequested(model.path, mode)
                         onOpened: root.openRequested(model.path)
                     }
                 }
@@ -99,6 +108,8 @@ Item {
                 subtitle: root.fileSubtitle(cell.model.typeLabel, cell.model.sizeText)
                 icon: cell.model.icon
                 kind: cell.model.kind
+                selected: cell.model.selected
+                onSelectRequested: mode => root.selectRequested(cell.model.path, mode)
                 onOpened: root.openRequested(cell.model.path)
             }
         }
@@ -125,6 +136,8 @@ Item {
             typeText: model.typeLabel
             sizeText: model.isDirectory ? root.itemCountText(model.itemCount) : model.sizeText
             modified: model.modified
+            selected: model.selected
+            onSelectRequested: mode => root.selectRequested(model.path, mode)
             onOpened: root.openRequested(model.path)
         }
     }

@@ -7,6 +7,25 @@ Item {
     required property Navigator navigator
     required property DirectoryModel directory
 
+    focus: true
+    Component.onCompleted: forceActiveFocus()
+
+    Keys.onEscapePressed: directory.clearSelection()
+    Keys.onReturnPressed: openSelected()
+    Keys.onEnterPressed: openSelected()
+
+    function openSelected() {
+        const paths = directory.selectedPaths()
+        if (paths.length === 1)
+            navigator.open(paths[0])
+    }
+
+    Shortcut {
+        sequence: StandardKey.SelectAll
+        enabled: root.activeFocus
+        onActivated: root.directory.selectAll()
+    }
+
     readonly property var crumbs: navigator.crumbs
     readonly property var lastCrumb: crumbs[crumbs.length - 1]
 
@@ -56,6 +75,22 @@ Item {
         directory: root.directory
         viewMode: header.viewMode
         onOpenRequested: path => root.navigator.open(path)
+        onSelectRequested: (path, mode) => {
+            root.forceActiveFocus()
+            root.directory.select(path, mode)
+        }
+        onBackgroundClicked: {
+            root.forceActiveFocus()
+            root.directory.clearSelection()
+        }
+    }
+
+    SelectionBar {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 20
+        count: root.directory.selectedCount
+        onCleared: root.directory.clearSelection()
     }
 
     MouseArea {
