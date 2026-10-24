@@ -6,6 +6,7 @@ Rectangle {
     id: root
 
     property alias path: details.path
+    property bool detailed: false
 
     signal closeRequested
     signal openRequested(string path)
@@ -84,7 +85,7 @@ Rectangle {
 
         Rectangle {
             Layout.fillWidth: true
-            Layout.preferredHeight: 176
+            Layout.preferredHeight: root.detailed ? 128 : 176
             radius: 28
             color: Theme.surfaceHighest
             clip: true
@@ -218,6 +219,21 @@ Rectangle {
             DetailRow {
                 label: Tr.t("Location")
                 value: details.locationText
+            }
+
+            DetailRow {
+                label: Tr.t("Type")
+                value: root.detailed ? details.mimeText : ""
+            }
+
+            DetailRow {
+                label: Tr.t("Owner")
+                value: root.detailed ? details.ownerText : ""
+            }
+
+            DetailRow {
+                label: Tr.t("Full path")
+                value: root.detailed ? details.pathText : ""
             }
         }
 
