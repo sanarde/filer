@@ -4,7 +4,7 @@ File manager for SanarDE.
 
 ## Dependencies
 
-- Qt 6.8 or newer (Core, Gui, Quick)
+- Qt 6.8 or newer (Core, Gui, Quick, DBus)
 - CMake 3.21 or newer
 - A C++20 compiler
 - gettext tools (xgettext, msgmerge, msgfmt)
@@ -30,6 +30,10 @@ A palette file has an `id`, a `name` (a string or an object keyed by language co
 ## Thumbnails
 
 Thumbnails are cached in `$XDG_CACHE_HOME/thumbnails` following the freedesktop thumbnail specification. Images are decoded directly. Video and PDF thumbnails are produced by the thumbnailers installed on the system (`/usr/share/thumbnailers/*.thumbnailer`, for example `totem-video-thumbnailer` or `papers-thumbnailer`). Without a matching thumbnailer a generic icon is shown.
+
+## Devices
+
+Removable volumes are listed in the sidebar. Mounting, unmounting and powering off use the UDisks2 service on the system bus. Without the service only mounted volumes are shown and the eject button is not available.
 
 ## Acknowledgments
 
