@@ -58,25 +58,39 @@ Window {
                 onUpRequested: navigator.up()
             }
 
-            Rectangle {
+            RowLayout {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.leftMargin: 12
                 Layout.rightMargin: 12
                 Layout.bottomMargin: 12
-                color: Theme.surfaceLow
-                radius: 28
-                clip: true
+                spacing: 12
 
-                Breadcrumbs {
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.leftMargin: 18
-                    anchors.rightMargin: 28
-                    anchors.topMargin: 20
-                    crumbs: navigator.crumbs
-                    onCrumbClicked: path => navigator.goTo(path)
+                Sidebar {
+                    Layout.preferredWidth: 236
+                    Layout.leftMargin: 16
+                    Layout.topMargin: 4
+                    Layout.fillHeight: true
+                    currentPath: navigator.path
+                    onPathRequested: path => navigator.goTo(path)
+                }
+
+                Rectangle {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    color: Theme.surfaceLow
+                    radius: 28
+                    clip: true
+
+                    Breadcrumbs {
+                        anchors.left: parent.left
+                        anchors.right: parent.right
+                        anchors.top: parent.top
+                        anchors.leftMargin: 18
+                        anchors.rightMargin: 28
+                        anchors.topMargin: 20
+                        crumbs: navigator.crumbs
+                        onCrumbClicked: path => navigator.goTo(path)
+                    }
                 }
             }
         }

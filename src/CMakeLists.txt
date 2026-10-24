@@ -13,12 +13,20 @@ qt_add_qml_module(sanar-filer
         qml/Breadcrumbs.qml
         qml/Icon.qml
         qml/IconButton.qml
+        qml/DeviceCard.qml
+        qml/NavItem.qml
         qml/NavigationButtons.qml
         qml/ResizeHandles.qml
         qml/SearchField.qml
+        qml/Sidebar.qml
         qml/TopBar.qml
+        qml/WaveProgress.qml
         qml/WindowControls.qml
     SOURCES
+        places/DevicesModel.h
+        places/DevicesModel.cpp
+        places/PlacesModel.h
+        places/PlacesModel.cpp
         nav/Navigator.h
         nav/Navigator.cpp
         fs/DirectoryModel.h
@@ -46,7 +54,7 @@ qt_add_resources(sanar-filer resources
         ${PROJECT_SOURCE_DIR}/resources/fonts/MaterialSymbolsRounded.ttf
 )
 
-target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/theme ${CMAKE_CURRENT_SOURCE_DIR}/i18n ${CMAKE_CURRENT_SOURCE_DIR}/fs ${CMAKE_CURRENT_SOURCE_DIR}/nav)
+target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/theme ${CMAKE_CURRENT_SOURCE_DIR}/i18n ${CMAKE_CURRENT_SOURCE_DIR}/fs ${CMAKE_CURRENT_SOURCE_DIR}/nav ${CMAKE_CURRENT_SOURCE_DIR}/places)
 
 target_link_libraries(sanar-filer PRIVATE Qt6::Core Qt6::Gui Qt6::Quick)
 

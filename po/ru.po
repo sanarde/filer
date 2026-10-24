@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sanar-filer 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 10:55+0500\n"
+"POT-Creation-Date: 2026-10-24 10:59+0500\n"
 "PO-Revision-Date: 2026-10-24 10:47+0500\n"
 "Last-Translator: AnmiTaliDev <anmitalidev@nuros.org>\n"
 "Language-Team: Russian\n"
@@ -36,9 +36,41 @@ msgstr "ГБ"
 msgid "TB"
 msgstr "ТБ"
 
-#: src/qml/Breadcrumbs.qml:60
+#: src/places/DevicesModel.cpp:47
+msgid "System"
+msgstr "Система"
+
+#: src/places/DevicesModel.cpp:94
+msgid "%1 of %2 used"
+msgstr "%1 из %2 занято"
+
+#: src/places/PlacesModel.cpp:15 src/qml/Breadcrumbs.qml:60
 msgid "Home"
 msgstr "Домашняя"
+
+#: src/places/PlacesModel.cpp:18
+msgid "Documents"
+msgstr "Документы"
+
+#: src/places/PlacesModel.cpp:20
+msgid "Downloads"
+msgstr "Загрузки"
+
+#: src/places/PlacesModel.cpp:22
+msgid "Pictures"
+msgstr "Изображения"
+
+#: src/places/PlacesModel.cpp:24
+msgid "Music"
+msgstr "Музыка"
+
+#: src/places/PlacesModel.cpp:26
+msgid "Videos"
+msgstr "Видео"
+
+#: src/places/PlacesModel.cpp:28
+msgid "Trash"
+msgstr "Корзина"
 
 #: src/qml/NavigationButtons.qml:19
 msgid "Back"
@@ -63,6 +95,10 @@ msgstr "Поиск"
 #: src/qml/SearchField.qml:68
 msgid "Search filters"
 msgstr "Фильтры поиска"
+
+#: src/qml/Sidebar.qml:47
+msgid "Devices"
+msgstr "Устройства"
 
 #: src/qml/WindowControls.qml:15
 msgid "Minimize"
