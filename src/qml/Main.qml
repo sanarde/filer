@@ -328,6 +328,7 @@ Window {
             title: root.operationTitle
             detail: fileOps.currentName
             error: root.operationError
+            queued: fileOps.queued
             onCancelRequested: fileOps.cancel()
             onDismissed: root.operationError = ""
         }

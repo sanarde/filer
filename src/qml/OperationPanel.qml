@@ -9,6 +9,7 @@ Rectangle {
     property string title
     property string detail
     property string error
+    property int queued: 0
 
     signal cancelRequested
     signal dismissed
@@ -51,6 +52,14 @@ Rectangle {
             font.pixelSize: 14
             elide: root.busy ? Text.ElideMiddle : Text.ElideNone
             wrapMode: root.busy ? Text.NoWrap : Text.WordWrap
+        }
+
+        Text {
+            visible: root.busy && root.queued > 0
+            width: parent.width
+            text: Tr.n("%1 more queued", "%1 more queued", root.queued).replace("%1", root.queued)
+            color: Theme.onSurfaceVariant
+            font.pixelSize: 13
         }
 
         WaveProgress {
