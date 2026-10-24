@@ -16,7 +16,7 @@ Row {
         width: 52
         icon: "arrow_back"
         iconSize: 20
-        label: "Back"
+        label: Tr.t("Back")
         enabled: parent.canGoBack
         color: Theme.surfaceHigh
         hoverColor: Theme.surfaceHighest
@@ -31,7 +31,7 @@ Row {
         width: 52
         icon: "arrow_forward"
         iconSize: 20
-        label: "Forward"
+        label: Tr.t("Forward")
         enabled: parent.canGoForward
         color: Theme.surfaceHigh
         hoverColor: Theme.surfaceHighest
@@ -44,7 +44,7 @@ Row {
         width: 52
         icon: "arrow_upward"
         iconSize: 20
-        label: "Up"
+        label: Tr.t("Up")
         enabled: parent.canGoUp
         color: Theme.surfaceHigh
         hoverColor: Theme.surfaceHighest

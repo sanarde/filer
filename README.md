@@ -7,6 +7,7 @@ File manager for SanarDE.
 - Qt 6.8 or newer (Core, Gui, Quick)
 - CMake 3.21 or newer
 - A C++20 compiler
+- gettext tools (xgettext, msgmerge, msgfmt)
 
 ## Build
 
@@ -15,6 +16,10 @@ cmake -S . -B build -G Ninja
 cmake --build build
 ./build/src/sanar-filer
 ```
+
+## Translations
+
+Message catalogs are in `po`. After changing strings in QML, run `cmake --build build --target update-po`. To run from the build tree, configure with `-DSANAR_FILER_LOCALEDIR=$PWD/build/locale`.
 
 ## Acknowledgments
 

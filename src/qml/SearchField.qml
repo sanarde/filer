@@ -35,12 +35,12 @@ Rectangle {
             selectByMouse: true
             selectionColor: Theme.primaryContainer
             selectedTextColor: Theme.onPrimaryContainer
-            Accessible.name: "Search files"
+            Accessible.name: Tr.t("Search files")
 
             Text {
                 anchors.fill: parent
                 visible: !input.text && !input.activeFocus
-                text: "Search"
+                text: Tr.t("Search")
                 color: Theme.onSurfaceVariant
                 font: input.font
                 verticalAlignment: Text.AlignVCenter
@@ -65,7 +65,7 @@ Rectangle {
 
         IconButton {
             icon: "tune"
-            label: "Search filters"
+            label: Tr.t("Search filters")
             onClicked: root.filtersRequested()
         }
     }
