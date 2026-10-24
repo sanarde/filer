@@ -16,5 +16,5 @@ while read -r name; do
     echo "$name $code" >> "$root/resources/icons.txt"
     unicodes="$unicodes,U+$code"
 done < "$root/tools/icon-names.txt"
-pyftsubset "$1" --unicodes="${unicodes#,}" --layout-features= \
+pyftsubset "$1" --unicodes="${unicodes#,}" --layout-features= --no-hinting \
     --output-file="$root/resources/fonts/MaterialSymbolsRounded.ttf"
