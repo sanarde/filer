@@ -8,4 +8,8 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt6 6.8 REQUIRED COMPONENTS Core Gui Quick)
 qt_standard_project_setup(REQUIRES 6.8)
 
+include(GNUInstallDirs)
+set(SANAR_FILER_LOCALEDIR "${CMAKE_INSTALL_FULL_LOCALEDIR}" CACHE PATH "Directory searched for message catalogs")
+
 add_subdirectory(src)
+add_subdirectory(po)
