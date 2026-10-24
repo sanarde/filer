@@ -2,9 +2,11 @@
 
 #include <QGuiApplication>
 #include <QStyleHints>
+#include <QVariantMap>
 
 Theme::Theme(QObject *parent)
     : QObject(parent)
+    , m_palettes(loadPalettes())
 {
     connect(QGuiApplication::styleHints(), &QStyleHints::colorSchemeChanged, this, [this] {
         if (m_mode == System)
@@ -19,16 +21,37 @@ bool Theme::dark() const
     return m_mode == Dark;
 }
 
-QColor Theme::swatch(Palette palette) const
+const ColorSet &Theme::set() const
 {
-    return QColor(colorSets[palette][dark() ? 1 : 0].primary);
+    for (const PaletteData &palette : m_palettes) {
+        if (palette.id == m_palette)
+            return dark() ? palette.dark : palette.light;
+    }
+    return dark() ? m_palettes.first().dark : m_palettes.first().light;
 }
 
-void Theme::setPalette(Palette palette)
+QVariantList Theme::palettes() const
 {
-    if (m_palette == palette)
+    QVariantList result;
+    for (const PaletteData &palette : m_palettes)
+        result.append(QVariantMap{{"id", palette.id}, {"name", palette.name}});
+    return result;
+}
+
+QColor Theme::swatch(const QString &id, bool dark) const
+{
+    for (const PaletteData &palette : m_palettes) {
+        if (palette.id == id)
+            return QColor(dark ? palette.dark.primary : palette.light.primary);
+    }
+    return QColor();
+}
+
+void Theme::setPalette(const QString &id)
+{
+    if (m_palette == id)
         return;
-    m_palette = palette;
+    m_palette = id;
     emit changed();
 }
 

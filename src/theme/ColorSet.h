@@ -27,4 +27,4 @@ struct ColorSet {
     QRgb onErrorContainer;
 };
 
-extern const ColorSet colorSets[4][2];
+

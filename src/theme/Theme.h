@@ -2,16 +2,19 @@
 
 #include <QColor>
 #include <QObject>
+#include <QVariantList>
 #include <QtQml/qqmlregistration.h>
 
 #include "ColorSet.h"
+#include "Palettes.h"
 
 class Theme : public QObject
 {
     Q_OBJECT
     QML_ELEMENT
     QML_SINGLETON
-    Q_PROPERTY(Palette palette READ palette WRITE setPalette NOTIFY changed FINAL)
+    Q_PROPERTY(QString palette READ palette WRITE setPalette NOTIFY changed FINAL)
+    Q_PROPERTY(QVariantList palettes READ palettes CONSTANT FINAL)
     Q_PROPERTY(Mode mode READ mode WRITE setMode NOTIFY changed FINAL)
     Q_PROPERTY(bool dark READ dark NOTIFY changed FINAL)
     Q_PROPERTY(QColor desk READ desk NOTIFY changed FINAL)
@@ -38,14 +41,6 @@ class Theme : public QObject
     Q_PROPERTY(QColor onErrorContainer READ onErrorContainer NOTIFY changed FINAL)
 
 public:
-    enum Palette {
-        Teal,
-        Coral,
-        Indigo,
-        Green,
-    };
-    Q_ENUM(Palette)
-
     enum Mode {
         System,
         Light,
@@ -55,13 +50,14 @@ public:
 
     explicit Theme(QObject *parent = nullptr);
 
-    Palette palette() const { return m_palette; }
+    QString palette() const { return m_palette; }
+    QVariantList palettes() const;
     Mode mode() const { return m_mode; }
     bool dark() const;
-    void setPalette(Palette palette);
+    void setPalette(const QString &id);
     void setMode(Mode mode);
 
-    Q_INVOKABLE QColor swatch(Palette palette) const;
+    Q_INVOKABLE QColor swatch(const QString &id, bool dark) const;
 
     QColor desk() const { return QColor(set().desk); }
     QColor background() const { return QColor(set().background); }
@@ -90,8 +86,9 @@ signals:
     void changed();
 
 private:
-    const ColorSet &set() const { return colorSets[m_palette][dark() ? 1 : 0]; }
+    const ColorSet &set() const;
 
-    Palette m_palette = Teal;
+    QList<PaletteData> m_palettes;
+    QString m_palette;
     Mode m_mode = System;
 };
