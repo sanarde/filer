@@ -1,10 +1,16 @@
 #include "ThumbnailProvider.h"
 
+#include "ThumbnailCache.h"
+#include "Thumbnailers.h"
+
+#include <QFileInfo>
 #include <QImage>
 #include <QImageReader>
 #include <QQuickTextureFactory>
 #include <QRunnable>
 #include <QThreadPool>
+#include <QMutex>
+#include <QSet>
 #include <QUrl>
 
 class ThumbnailTask : public QObject, public QRunnable
@@ -20,24 +26,62 @@ public:
 
     void run() override
     {
-        QImageReader reader(m_path);
-        reader.setAutoTransform(true);
+        const int edge = m_requestedSize.isValid() ? qMax(m_requestedSize.width(), m_requestedSize.height()) : 256;
+        const int size = ThumbnailCache::sizeClass(edge);
 
-        const QSize original = reader.size();
-        if (original.isValid() && m_requestedSize.isValid()
-            && (original.width() > m_requestedSize.width()
-                || original.height() > m_requestedSize.height())) {
-            reader.setScaledSize(original.scaled(m_requestedSize, Qt::KeepAspectRatioByExpanding));
-        }
-
-        QImage image = reader.read();
-        emit done(image, image.isNull() ? reader.errorString() : QString());
+        QImage image = ThumbnailCache::load(m_path, size);
+        QString error;
+        if (image.isNull())
+            image = render(size, error);
+        emit done(image, image.isNull() ? error : QString());
     }
 
 signals:
     void done(const QImage &image, const QString &error);
 
 private:
+    QImage render(int size, QString &error)
+    {
+        QImageReader reader(m_path);
+        reader.setAutoTransform(true);
+        if (reader.canRead()) {
+            const QSize original = reader.size();
+            const bool large = original.width() > size || original.height() > size;
+            if (large)
+                reader.setScaledSize(original.scaled(size, size, Qt::KeepAspectRatio));
+            const QImage image = reader.read();
+            if (image.isNull())
+                error = reader.errorString();
+            else if (large)
+                ThumbnailCache::store(m_path, size, image);
+            return image;
+        }
+
+        const QString key = m_path + u'|' + QString::number(QFileInfo(m_path).lastModified().toSecsSinceEpoch());
+        {
+            QMutexLocker locker(&failedMutex);
+            if (failed.contains(key)) {
+                error = "no thumbnail";
+                return QImage();
+            }
+        }
+
+        QImage image = Thumbnailers::generate(m_path, size);
+        if (image.isNull()) {
+            QMutexLocker locker(&failedMutex);
+            failed.insert(key);
+            error = "no thumbnail";
+            return image;
+        }
+        if (image.width() > size || image.height() > size)
+            image = image.scaled(size, size, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        ThumbnailCache::store(m_path, size, image);
+        return image;
+    }
+
+    static inline QMutex failedMutex;
+    static inline QSet<QString> failed;
+
     QString m_path;
     QSize m_requestedSize;
 };

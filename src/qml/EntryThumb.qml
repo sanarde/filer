@@ -10,7 +10,9 @@ Item {
     property string path
     property real radius: 0
 
-    readonly property bool hasImage: kind === FileKind.Image && path !== "" && picture.status === Image.Ready
+    readonly property bool thumbnail: path !== "" && (kind === FileKind.Image || kind === FileKind.Video
+                                                      || (kind === FileKind.Document && path.toLowerCase().endsWith(".pdf")))
+    readonly property bool hasImage: thumbnail && picture.status === Image.Ready
 
     Rectangle {
         visible: !root.hasImage && root.kind === FileKind.Document
@@ -73,7 +75,7 @@ Item {
         asynchronous: true
         cache: true
         fillMode: Image.PreserveAspectCrop
-        source: root.kind === FileKind.Image && root.path !== "" && root.width > 0
+        source: root.thumbnail && root.width > 0
                 ? "image://thumb/" + encodeURIComponent(root.path) : ""
         sourceSize: Qt.size(Math.ceil(root.width * Screen.devicePixelRatio),
                             Math.ceil(root.height * Screen.devicePixelRatio))
