@@ -41,3 +41,6 @@ view_list
 movie
 draft
 arrow_downward
+settings
+info
+brightness_auto

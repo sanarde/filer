@@ -41,3 +41,6 @@ view_list e8ef
 movie e404
 draft e66d
 arrow_downward e5db
+settings e8b8
+info e88e
+brightness_auto e1ab
