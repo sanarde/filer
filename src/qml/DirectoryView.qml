@@ -107,6 +107,7 @@ Item {
                 name: cell.model.name
                 subtitle: root.fileSubtitle(cell.model.typeLabel, cell.model.sizeText)
                 icon: cell.model.icon
+                path: cell.model.path
                 kind: cell.model.kind
                 selected: cell.model.selected
                 onSelectRequested: mode => root.selectRequested(cell.model.path, mode)

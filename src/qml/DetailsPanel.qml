@@ -93,6 +93,8 @@ Rectangle {
                 anchors.fill: parent
                 icon: details.icon
                 kind: details.kind
+                path: details.path
+                radius: 28
             }
 
             Rectangle {

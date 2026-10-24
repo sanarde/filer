@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Effects
 import Sanar.Filer
 
 Item {
@@ -6,9 +7,13 @@ Item {
 
     property string icon
     property int kind: FileKind.Other
+    property string path
+    property real radius: 0
+
+    readonly property bool hasImage: kind === FileKind.Image && path !== "" && picture.status === Image.Ready
 
     Rectangle {
-        visible: root.kind === FileKind.Document
+        visible: !root.hasImage && root.kind === FileKind.Document
         anchors.centerIn: parent
         width: 76
         height: 88
@@ -37,7 +42,7 @@ Item {
     }
 
     Rectangle {
-        visible: root.kind !== FileKind.Document
+        visible: !root.hasImage && root.kind !== FileKind.Document
         anchors.centerIn: parent
         width: 72
         height: 72
@@ -59,5 +64,38 @@ Item {
                     Theme.onSurface][root.kind]
             font.pixelSize: 36
         }
+    }
+
+    Image {
+        id: picture
+        anchors.fill: parent
+        visible: false
+        asynchronous: true
+        cache: true
+        fillMode: Image.PreserveAspectCrop
+        source: root.kind === FileKind.Image && root.path !== "" && root.width > 0
+                ? "image://thumb/" + encodeURIComponent(root.path) : ""
+        sourceSize: Qt.size(Math.ceil(root.width * Screen.devicePixelRatio),
+                            Math.ceil(root.height * Screen.devicePixelRatio))
+    }
+
+    Item {
+        id: mask
+        anchors.fill: parent
+        visible: false
+        layer.enabled: true
+
+        Rectangle {
+            anchors.fill: parent
+            radius: root.radius
+        }
+    }
+
+    MultiEffect {
+        anchors.fill: parent
+        visible: root.hasImage
+        source: picture
+        maskEnabled: true
+        maskSource: mask
     }
 }

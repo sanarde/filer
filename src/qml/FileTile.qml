@@ -7,6 +7,7 @@ Item {
     property string name
     property string subtitle
     property string icon
+    property string path
     property int kind: FileKind.Other
 
     property bool selected: false
@@ -40,6 +41,8 @@ Item {
             anchors.fill: parent
             icon: root.icon
             kind: root.kind
+            path: root.path
+            radius: thumb.radius
         }
 
         Rectangle {
