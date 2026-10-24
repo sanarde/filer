@@ -4,6 +4,8 @@
 #include <QDirListing>
 #include <QFileInfo>
 #include <QMimeDatabase>
+#include <QPromise>
+#include <QThreadPool>
 
 #include <algorithm>
 
@@ -18,6 +20,7 @@ DirectoryModel::DirectoryModel(QObject *parent)
     m_reloadTimer.setSingleShot(true);
     m_reloadTimer.setInterval(100);
     connect(&m_reloadTimer, &QTimer::timeout, this, &DirectoryModel::load);
+    connect(&m_scan, &QFutureWatcherBase::finished, this, &DirectoryModel::apply);
     connect(&m_watcher, &QFileSystemWatcher::directoryChanged, &m_reloadTimer,
             qOverload<>(&QTimer::start));
 }
@@ -89,7 +92,10 @@ void DirectoryModel::setPath(const QString &path)
     if (!m_watcher.directories().isEmpty())
         m_watcher.removePaths(m_watcher.directories());
     m_path = clean;
+    m_all.clear();
+    setError(NoError);
     setSelection({});
+    rebuild();
     emit pathChanged();
     load();
 }
@@ -153,46 +159,70 @@ QString DirectoryModel::totalSizeText() const
     return formatSize(m_totalSize);
 }
 
-void DirectoryModel::load()
+DirectoryModel::ScanResult DirectoryModel::scan(const QString &path, bool showHidden)
 {
-    m_all.clear();
-    m_itemCounts.clear();
-
-    const QFileInfo dir(m_path);
-    if (m_path.isEmpty()) {
-        setError(NoError);
-    } else if (!dir.isDir()) {
-        setError(NotFound);
-    } else if (!dir.isReadable()) {
-        setError(AccessDenied);
-    } else {
-        setError(NoError);
-        if (!m_watcher.directories().contains(m_path))
-            m_watcher.addPath(m_path);
-
-        QDirListing::IteratorFlags flags;
-        if (m_showHidden)
-            flags |= QDirListing::IteratorFlag::IncludeHidden;
-
-        QMimeDatabase mimeDb;
-        for (const auto &item : QDirListing(m_path, flags)) {
-            const QFileInfo info = item.fileInfo();
-            Entry entry;
-            entry.name = info.fileName();
-            entry.path = info.filePath();
-            entry.modified = info.lastModified();
-            if (info.isDir()) {
-                entry.kind = FileKinds::Folder;
-            } else {
-                entry.size = info.size();
-                entry.suffix = info.suffix();
-                entry.kind = FileKinds::kindOf(
-                    mimeDb.mimeTypeForFile(info, QMimeDatabase::MatchExtension));
-            }
-            m_all.append(entry);
-        }
+    ScanResult result;
+    const QFileInfo dir(path);
+    if (path.isEmpty())
+        return result;
+    if (!dir.isDir()) {
+        result.error = NotFound;
+        return result;
+    }
+    if (!dir.isReadable()) {
+        result.error = AccessDenied;
+        return result;
     }
 
+    QDirListing::IteratorFlags flags;
+    if (showHidden)
+        flags |= QDirListing::IteratorFlag::IncludeHidden;
+
+    QMimeDatabase mimeDb;
+    for (const auto &item : QDirListing(path, flags)) {
+        const QFileInfo info = item.fileInfo();
+        Entry entry;
+        entry.name = info.fileName();
+        entry.path = info.filePath();
+        entry.modified = info.lastModified();
+        if (info.isDir()) {
+            entry.kind = FileKinds::Folder;
+        } else {
+            entry.size = info.size();
+            entry.suffix = info.suffix();
+            entry.kind = FileKinds::kindOf(
+                mimeDb.mimeTypeForFile(info, QMimeDatabase::MatchExtension));
+        }
+        result.entries.append(entry);
+    }
+    return result;
+}
+
+void DirectoryModel::load()
+{
+    auto promise = std::make_shared<QPromise<ScanResult>>();
+    m_scan.setFuture(promise->future());
+    if (!m_loading) {
+        m_loading = true;
+        emit loadingChanged();
+    }
+    QThreadPool::globalInstance()->start([promise, path = m_path, showHidden = m_showHidden] {
+        promise->start();
+        promise->addResult(scan(path, showHidden));
+        promise->finish();
+    });
+}
+
+void DirectoryModel::apply()
+{
+    const ScanResult result = m_scan.result();
+    m_all = result.entries;
+    m_itemCounts.clear();
+    setError(result.error);
+    if (result.error == NoError && !m_path.isEmpty() && !m_watcher.directories().contains(m_path))
+        m_watcher.addPath(m_path);
+    m_loading = false;
+    emit loadingChanged();
     rebuild();
 }
 
@@ -309,6 +339,7 @@ void DirectoryModel::select(const QString &path, SelectMode mode)
     if (row < 0)
         return;
 
+    m_cursor = path;
     QSet<QString> selection = m_selected;
     const int anchorRow = mode == SelectRange ? rowOf(m_anchor) : -1;
     if (anchorRow >= 0) {
@@ -341,6 +372,42 @@ qint64 DirectoryModel::selectedSize() const
 QString DirectoryModel::selectedSizeText() const
 {
     return formatSize(selectedSize());
+}
+
+int DirectoryModel::move(int dx, int dy, int columns, bool sectioned, bool extend)
+{
+    const int count = m_rows.size();
+    if (count == 0)
+        return -1;
+
+    const int current = rowOf(m_cursor);
+    int target = dx + dy > 0 ? 0 : count - 1;
+    if (current >= 0) {
+        target = current;
+        if (dx != 0) {
+            target = std::clamp(current + dx, 0, count - 1);
+        } else {
+            const int split = sectioned && m_folderCount > 0 && m_folderCount < count ? m_folderCount : count;
+            const bool second = current >= split;
+            const int start = second ? split : 0;
+            const int size = second ? count - split : split;
+            const int line = (current - start) / columns;
+            const int column = (current - start) % columns;
+            if (dy > 0) {
+                if ((line + 1) * columns < size)
+                    target = start + std::min((line + 1) * columns + column, size - 1);
+                else if (!second && split < count)
+                    target = split + std::min(column, count - split - 1);
+            } else if (line > 0) {
+                target = start + (line - 1) * columns + column;
+            } else if (second) {
+                target = std::min(((split - 1) / columns) * columns + column, split - 1);
+            }
+        }
+    }
+
+    select(m_rows.at(target).path, extend ? SelectRange : SelectReplace);
+    return target;
 }
 
 void DirectoryModel::reload()
@@ -386,8 +453,10 @@ void DirectoryModel::setSelection(const QSet<QString> &selection)
     if (m_selected == selection)
         return;
     m_selected = selection;
-    if (m_selected.isEmpty())
+    if (m_selected.isEmpty()) {
         m_anchor.clear();
+        m_cursor.clear();
+    }
     if (!m_rows.isEmpty())
         emit dataChanged(index(0), index(m_rows.size() - 1), {SelectedRole});
     emit selectionChanged();

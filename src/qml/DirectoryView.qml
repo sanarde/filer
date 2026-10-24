@@ -205,6 +205,30 @@ Item {
         view.contentY = scrollTarget
     }
 
+    readonly property int navColumns: viewMode === "list" ? 1 : columns
+    readonly property bool navSectioned: viewMode === "grid" && Settings.separateFolders
+
+    function reveal(row) {
+        animateScroll = false
+        if (viewMode === "list") {
+            list.positionViewAtIndex(row, ListView.Contain)
+            return
+        }
+        const folders = Settings.separateFolders ? directory.folderCount : 0
+        if (row >= folders) {
+            grid.positionViewAtIndex(row - folders, GridView.Contain)
+            return
+        }
+        const tile = grid.headerItem.folderTiles()[row]
+        const top = tile.mapToItem(grid.contentItem, 0, 0).y
+        if (row < columns)
+            grid.contentY = Math.min(grid.contentY, grid.originY)
+        else if (top < grid.contentY)
+            grid.contentY = top
+        else if (top + tile.height > grid.contentY + grid.height)
+            grid.contentY = top + tile.height - grid.height
+    }
+
     function visibleEntries() {
         const items = []
         if (viewMode === "list") {
@@ -330,7 +354,7 @@ Item {
             case DirectoryModel.AccessDenied:
                 return Tr.t("Access denied")
             }
-            if (root.directory.folderCount + root.directory.fileCount > 0)
+            if (root.directory.loading || root.directory.folderCount + root.directory.fileCount > 0)
                 return ""
             return root.directory.nameFilter !== "" ? Tr.t("No matches") : Tr.t("Nothing here")
         }

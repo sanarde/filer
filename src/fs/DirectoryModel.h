@@ -4,6 +4,7 @@
 #include <QCollator>
 #include <QDateTime>
 #include <QFileSystemWatcher>
+#include <QFutureWatcher>
 #include <QHash>
 #include <QSet>
 #include <QTimer>
@@ -17,6 +18,7 @@ class DirectoryModel : public QAbstractListModel
     QML_ELEMENT
     Q_PROPERTY(QString path READ path WRITE setPath NOTIFY pathChanged FINAL)
     Q_PROPERTY(Error error READ error NOTIFY errorChanged FINAL)
+    Q_PROPERTY(bool loading READ loading NOTIFY loadingChanged FINAL)
     Q_PROPERTY(SortKey sortKey READ sortKey WRITE setSortKey NOTIFY sortChanged FINAL)
     Q_PROPERTY(bool sortDescending READ sortDescending WRITE setSortDescending NOTIFY sortChanged FINAL)
     Q_PROPERTY(QString nameFilter READ nameFilter WRITE setNameFilter NOTIFY nameFilterChanged FINAL)
@@ -97,6 +99,7 @@ public:
     void setFilter(Filter filter);
     QString nameFilter() const { return m_nameFilter; }
     void setNameFilter(const QString &text);
+    bool loading() const { return m_loading; }
     bool foldersFirst() const { return m_foldersFirst; }
     void setFoldersFirst(bool first);
     bool showHidden() const { return m_showHidden; }
@@ -111,6 +114,7 @@ public:
     QString selectedPath() const { return m_selected.size() == 1 ? *m_selected.constBegin() : QString(); }
 
     Q_INVOKABLE void select(const QString &path, SelectMode mode);
+    Q_INVOKABLE int move(int dx, int dy, int columns, bool sectioned, bool extend);
     Q_INVOKABLE void reload();
     Q_INVOKABLE void selectPaths(const QStringList &paths);
     Q_INVOKABLE void selectAll();
@@ -120,6 +124,7 @@ public:
 signals:
     void pathChanged();
     void errorChanged();
+    void loadingChanged();
     void sortChanged();
     void filterChanged();
     void nameFilterChanged();
@@ -138,7 +143,14 @@ private:
         FileKinds::Kind kind = FileKinds::Other;
     };
 
+    struct ScanResult {
+        Error error = NoError;
+        QList<Entry> entries;
+    };
+
+    static ScanResult scan(const QString &path, bool showHidden);
     void load();
+    void apply();
     void rebuild();
     bool accepts(const Entry &entry) const;
     bool lessThan(const Entry &a, const Entry &b) const;
@@ -155,14 +167,17 @@ private:
     QString m_nameFilter;
     bool m_foldersFirst = true;
     bool m_showHidden = false;
+    bool m_loading = false;
     QList<Entry> m_all;
     QList<Entry> m_rows;
     QSet<QString> m_selected;
     QString m_anchor;
+    QString m_cursor;
     int m_folderCount = 0;
     qint64 m_totalSize = 0;
     mutable QHash<QString, int> m_itemCounts;
     QCollator m_collator;
+    QFutureWatcher<ScanResult> m_scan;
     QFileSystemWatcher m_watcher;
     QTimer m_reloadTimer;
 };
