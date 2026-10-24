@@ -16,6 +16,10 @@ Item {
         else
             directory.clearSelection()
     }
+    Keys.onLeftPressed: event => moveCursor(-1, 0, event)
+    Keys.onRightPressed: event => moveCursor(1, 0, event)
+    Keys.onUpPressed: event => moveCursor(0, -1, event)
+    Keys.onDownPressed: event => moveCursor(0, 1, event)
     Keys.onReturnPressed: openSelected()
     Keys.onEnterPressed: openSelected()
 
@@ -51,6 +55,12 @@ Item {
         contextMenu.y = Math.max(8, Math.min(local.y, root.height - contextMenu.height - 8))
         contextMenu.visible = true
         root.forceActiveFocus()
+    }
+
+    function moveCursor(dx, dy, event) {
+        const row = directory.move(dx, dy, view.navColumns, view.navSectioned, (event.modifiers & Qt.ShiftModifier) !== 0)
+        if (row >= 0)
+            view.reveal(row)
     }
 
     function openSelected() {
