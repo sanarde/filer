@@ -26,6 +26,7 @@ class DirectoryModel : public QAbstractListModel
     Q_PROPERTY(qint64 totalSize READ totalSize NOTIFY totalsChanged FINAL)
     Q_PROPERTY(QString totalSizeText READ totalSizeText NOTIFY totalsChanged FINAL)
     Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectionChanged FINAL)
+    Q_PROPERTY(QString selectedPath READ selectedPath NOTIFY selectionChanged FINAL)
 
 public:
     enum Role {
@@ -96,6 +97,7 @@ public:
     qint64 totalSize() const { return m_totalSize; }
     QString totalSizeText() const;
     int selectedCount() const { return m_selected.size(); }
+    QString selectedPath() const { return m_selected.size() == 1 ? *m_selected.constBegin() : QString(); }
 
     Q_INVOKABLE void select(const QString &path, SelectMode mode);
     Q_INVOKABLE void selectAll();

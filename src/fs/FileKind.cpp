@@ -51,4 +51,27 @@ Kind kindOf(const QMimeType &mime)
     return Other;
 }
 
+QString iconName(Kind kind)
+{
+    switch (kind) {
+    case Folder:
+        return "folder";
+    case Image:
+        return "image";
+    case Document:
+        return "description";
+    case Code:
+        return "data_object";
+    case Archive:
+        return "folder_zip";
+    case Audio:
+        return "music_note";
+    case Video:
+        return "movie";
+    case Other:
+        break;
+    }
+    return "draft";
+}
+
 }

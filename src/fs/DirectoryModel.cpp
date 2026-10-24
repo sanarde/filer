@@ -9,29 +9,6 @@
 
 #include "SizeFormat.h"
 
-static QString iconName(FileKinds::Kind kind)
-{
-    switch (kind) {
-    case FileKinds::Folder:
-        return "folder";
-    case FileKinds::Image:
-        return "image";
-    case FileKinds::Document:
-        return "description";
-    case FileKinds::Code:
-        return "data_object";
-    case FileKinds::Archive:
-        return "folder_zip";
-    case FileKinds::Audio:
-        return "music_note";
-    case FileKinds::Video:
-        return "movie";
-    case FileKinds::Other:
-        break;
-    }
-    return "draft";
-}
-
 DirectoryModel::DirectoryModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -79,7 +56,7 @@ QVariant DirectoryModel::data(const QModelIndex &index, int role) const
     case ItemCountRole:
         return isDir ? countItems(entry.path) : -1;
     case IconRole:
-        return iconName(entry.kind);
+        return FileKinds::iconName(entry.kind);
     case SelectedRole:
         return m_selected.contains(entry.path);
     }

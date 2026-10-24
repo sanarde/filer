@@ -21,4 +21,5 @@ enum Kind {
 Q_ENUM_NS(Kind)
 
 Kind kindOf(const QMimeType &mime);
+QString iconName(Kind kind);
 }
