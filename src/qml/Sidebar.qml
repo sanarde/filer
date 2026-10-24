@@ -8,6 +8,7 @@ Flickable {
     property string currentPath
 
     signal pathRequested(string path)
+    signal failed(string error)
 
     contentHeight: column.implicitHeight
     clip: true
@@ -19,6 +20,8 @@ Flickable {
 
     DevicesModel {
         id: devices
+        onMountReady: path => root.pathRequested(path)
+        onFailed: error => root.failed(error)
     }
 
     Column {
@@ -57,6 +60,7 @@ Flickable {
                 id: loader
 
                 required property var model
+                required property int index
 
                 width: column.width
                 sourceComponent: model.primary ? card : row
@@ -79,8 +83,16 @@ Flickable {
                     NavItem {
                         icon: loader.model.icon
                         label: loader.model.label
-                        selected: loader.model.path === root.currentPath
-                        onClicked: root.pathRequested(loader.model.path)
+                        selected: loader.model.mounted && loader.model.path === root.currentPath
+                        ejectable: loader.model.ejectable
+                        onClicked: loader.model.mounted ? root.pathRequested(loader.model.path)
+                                                         : devices.mount(loader.index)
+                        onEjectRequested: {
+                            const path = loader.model.path
+                            if (root.currentPath === path || root.currentPath.startsWith(path + "/"))
+                                root.pathRequested(path.substring(0, path.lastIndexOf("/")) || "/")
+                            devices.eject(loader.index)
+                        }
                     }
                 }
             }

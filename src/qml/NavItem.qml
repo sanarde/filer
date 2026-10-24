@@ -7,8 +7,10 @@ Item {
     property string icon
     property string label
     property bool selected: false
+    property bool ejectable: false
 
     signal clicked
+    signal ejectRequested
 
     implicitHeight: 52
 
@@ -36,8 +38,8 @@ Item {
     Text {
         anchors.left: glyph.right
         anchors.leftMargin: 14
-        anchors.right: parent.right
-        anchors.rightMargin: 20
+        anchors.right: eject.visible ? eject.left : parent.right
+        anchors.rightMargin: eject.visible ? 4 : 20
         anchors.verticalCenter: parent.verticalCenter
         text: root.label
         elide: Text.ElideRight
@@ -46,12 +48,29 @@ Item {
         font.weight: root.selected ? Font.Bold : Font.Medium
     }
 
+    IconButton {
+        id: eject
+        visible: root.ejectable
+        anchors.right: parent.right
+        anchors.rightMargin: 8
+        anchors.verticalCenter: parent.verticalCenter
+        width: 36
+        height: 36
+        icon: "eject"
+        iconSize: 20
+        label: Tr.t("Eject")
+        onClicked: root.ejectRequested()
+    }
+
     HoverHandler {
         id: hover
         cursorShape: Qt.PointingHandCursor
     }
 
     TapHandler {
-        onTapped: root.clicked()
+        onTapped: point => {
+            if (!eject.visible || !eject.contains(eject.mapFromItem(root, point.position)))
+                root.clicked()
+        }
     }
 }

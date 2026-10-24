@@ -253,6 +253,7 @@ Window {
                     Layout.fillHeight: true
                     currentPath: pathNavigator.path
                     onPathRequested: path => pathNavigator.goTo(path)
+                    onFailed: error => root.operationError = error
                 }
 
                 Rectangle {
