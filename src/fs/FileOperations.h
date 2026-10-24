@@ -41,6 +41,7 @@ public:
     Q_INVOKABLE void trash(const QStringList &sources);
     Q_INVOKABLE void restore(const QStringList &sources);
     Q_INVOKABLE void remove(const QStringList &sources);
+    Q_INVOKABLE void emptyTrash();
     Q_INVOKABLE QString rename(const QString &path, const QString &name);
     Q_INVOKABLE QString createFolder(const QString &directory, const QString &name);
     Q_INVOKABLE void cancel();

@@ -68,6 +68,18 @@ void FileOperations::remove(const QStringList &sources)
     start(std::make_unique<TransferJob>(sources, QString(), TransferJob::Remove, TransferJob::Replace), Remove);
 }
 
+void FileOperations::emptyTrash()
+{
+    const QDir directory(Trash::filesDirectory());
+    QStringList sources;
+    const QStringList names = directory.entryList(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::Hidden
+                                                  | QDir::System);
+    for (const QString &name : names)
+        sources.append(directory.filePath(name));
+    if (!sources.isEmpty())
+        remove(sources);
+}
+
 static QString message(const char *msgid)
 {
     return QString::fromUtf8(dgettext("sanar-filer", msgid));
