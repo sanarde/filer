@@ -58,6 +58,8 @@ qt_add_qml_module(sanar-filer
         fs/DirectoryModel.h
         fs/DirectoryModel.cpp
         fs/EntrySectionModel.h
+        fs/FileOperations.h
+        fs/FileOperations.cpp
         fs/EntrySectionModel.cpp
         fs/FileDetails.h
         fs/FileDetails.cpp
@@ -65,6 +67,10 @@ qt_add_qml_module(sanar-filer
         fs/FileKind.cpp
         fs/SizeFormat.h
         fs/SizeFormat.cpp
+        fs/Trash.h
+        fs/Trash.cpp
+        fs/TransferJob.h
+        fs/TransferJob.cpp
         i18n/Translator.h
         i18n/Translator.cpp
         theme/ColorSet.h

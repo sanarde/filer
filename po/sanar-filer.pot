@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 14:15+0500\n"
+"POT-Creation-Date: 2026-10-24 16:12+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: src/fs/FileDetails.cpp:66 src/places/PlacesModel.cpp:28
-#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:81
+#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:84
 msgid "Trash"
 msgstr ""
 
 #: src/fs/FileDetails.cpp:68 src/places/PlacesModel.cpp:15
-#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:80
+#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:83
 msgid "Home"
 msgstr ""
 
@@ -57,6 +57,44 @@ msgstr ""
 
 #: src/fs/SizeFormat.cpp:14
 msgid "TB"
+msgstr ""
+
+#: src/fs/TransferJob.cpp:105 src/fs/TransferJob.cpp:129
+#: src/fs/TransferJob.cpp:228
+msgid "Canceled"
+msgstr ""
+
+#: src/fs/TransferJob.cpp:115 src/fs/TransferJob.cpp:121
+#: src/fs/TransferJob.cpp:180 src/fs/TransferJob.cpp:208
+msgid "Cannot remove %1"
+msgstr ""
+
+#: src/fs/TransferJob.cpp:139
+msgid "A folder cannot be copied into itself: %1"
+msgstr ""
+
+#: src/fs/TransferJob.cpp:154
+msgid "Cannot replace %1"
+msgstr ""
+
+#: src/fs/TransferJob.cpp:167 src/fs/TransferJob.cpp:192
+msgid "Cannot move %1"
+msgstr ""
+
+#: src/fs/TransferJob.cpp:174
+msgid "Cannot copy %1"
+msgstr ""
+
+#: src/fs/TransferJob.cpp:196
+msgid "Cannot create folder %1"
+msgstr ""
+
+#: src/fs/TransferJob.cpp:216 src/fs/TransferJob.cpp:232
+msgid "Cannot read %1: %2"
+msgstr ""
+
+#: src/fs/TransferJob.cpp:220 src/fs/TransferJob.cpp:236
+msgid "Cannot write %1: %2"
 msgstr ""
 
 #: src/places/DevicesModel.cpp:49 src/qml/ThemeModeSelector.qml:71
@@ -119,32 +157,32 @@ msgstr ""
 msgid "Green"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:35 src/qml/DetailsPanel.qml:149
+#: src/qml/ContextMenu.qml:42 src/qml/DetailsPanel.qml:149
 #: src/qml/DetailsPanel.qml:178
 msgid "Open"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:46 src/qml/DetailsPanel.qml:73
+#: src/qml/ContextMenu.qml:53 src/qml/DetailsPanel.qml:73
 msgid "Details"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:60
+#: src/qml/ContextMenu.qml:67
 msgid "Select all"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:71
+#: src/qml/ContextMenu.qml:78
 msgid "Refresh"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:85 src/qml/SettingsDialog.qml:123
+#: src/qml/ContextMenu.qml:92 src/qml/SettingsDialog.qml:123
 msgid "Show hidden files"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:95 src/qml/SettingsDialog.qml:130
+#: src/qml/ContextMenu.qml:102 src/qml/SettingsDialog.qml:130
 msgid "Separate folders and files"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:106
+#: src/qml/ContextMenu.qml:113
 msgid "Sort by"
 msgstr ""
 
@@ -152,7 +190,7 @@ msgstr ""
 msgid "Close panel"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:200 src/qml/SortMenu.qml:40
+#: src/qml/DetailsPanel.qml:200 src/qml/SortMenu.qml:47
 msgid "Size"
 msgstr ""
 
@@ -172,7 +210,7 @@ msgstr ""
 msgid "Location"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:225 src/qml/SortMenu.qml:49
+#: src/qml/DetailsPanel.qml:225 src/qml/SortMenu.qml:56
 msgid "Type"
 msgstr ""
 
@@ -200,23 +238,23 @@ msgstr ""
 msgid "By name"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:109 src/qml/FilterChips.qml:20
+#: src/qml/DirectoryView.qml:116 src/qml/FilterChips.qml:20
 msgid "Folders"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:142 src/qml/SettingsDialog.qml:115
+#: src/qml/DirectoryView.qml:149 src/qml/SettingsDialog.qml:115
 msgid "Files"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:304
+#: src/qml/DirectoryView.qml:329
 msgid "Folder not found"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:306
+#: src/qml/DirectoryView.qml:331
 msgid "Access denied"
 msgstr ""
 
-#: src/qml/DirectoryView.qml:308
+#: src/qml/DirectoryView.qml:333
 msgid "Nothing here"
 msgstr ""
 
@@ -314,19 +352,19 @@ msgstr ""
 msgid "Devices"
 msgstr ""
 
-#: src/qml/SortMenu.qml:22
+#: src/qml/SortMenu.qml:29
 msgid "Name"
 msgstr ""
 
-#: src/qml/SortMenu.qml:31
+#: src/qml/SortMenu.qml:38
 msgid "Date modified"
 msgstr ""
 
-#: src/qml/SortMenu.qml:60
+#: src/qml/SortMenu.qml:67
 msgid "Ascending"
 msgstr ""
 
-#: src/qml/SortMenu.qml:70
+#: src/qml/SortMenu.qml:77
 msgid "Descending"
 msgstr ""
 
