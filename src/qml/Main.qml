@@ -144,7 +144,7 @@ Window {
 
                     DirectoryPage {
                         id: page
-                        onDetailsRequested: detailsDialog.open(dirModel.selectedPath)
+                        onDetailsRequested: path => detailsDialog.open(path)
                         anchors.fill: parent
                         navigator: pathNavigator
                         directory: dirModel

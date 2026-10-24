@@ -21,7 +21,9 @@ Item {
 
     property point sortMenuPosition: Qt.point(-1, -1)
 
-    signal detailsRequested
+    property string contextPath
+
+    signal detailsRequested(string path)
 
     function closeMenus() {
         sortMenu.visible = false
@@ -32,6 +34,7 @@ Item {
         const local = root.mapFromItem(null, position.x, position.y)
         sortMenu.visible = false
         contextMenu.onEntry = path !== ""
+        contextPath = path
         if (path !== "" && directory.selectedPaths().indexOf(path) < 0)
             directory.select(path, DirectoryModel.SelectReplace)
         contextMenu.x = Math.max(8, Math.min(local.x, root.width - contextMenu.width - 8))
@@ -142,8 +145,8 @@ Item {
         id: contextMenu
         visible: false
         selectedCount: root.directory.selectedCount
-        onOpenRequested: root.openSelected()
-        onDetailsRequested: root.detailsRequested()
+        onOpenRequested: root.navigator.open(root.contextPath)
+        onDetailsRequested: root.detailsRequested(root.contextPath)
         onSelectAllRequested: root.directory.selectAll()
         onRefreshRequested: root.directory.reload()
         onSortRequested: {
