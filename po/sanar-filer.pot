@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 10:59+0500\n"
+"POT-Creation-Date: 2026-10-24 11:08+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #: src/fs/SizeFormat.cpp:10
 msgid "B"
@@ -37,19 +38,20 @@ msgstr ""
 msgid "TB"
 msgstr ""
 
-#: src/places/DevicesModel.cpp:47
+#: src/places/DevicesModel.cpp:49
 msgid "System"
 msgstr ""
 
-#: src/places/DevicesModel.cpp:94
+#: src/places/DevicesModel.cpp:96
 msgid "%1 of %2 used"
 msgstr ""
 
 #: src/places/PlacesModel.cpp:15 src/qml/Breadcrumbs.qml:60
+#: src/qml/DirectoryPage.qml:34
 msgid "Home"
 msgstr ""
 
-#: src/places/PlacesModel.cpp:18
+#: src/places/PlacesModel.cpp:18 src/qml/FilterChips.qml:34
 msgid "Documents"
 msgstr ""
 
@@ -71,6 +73,64 @@ msgstr ""
 
 #: src/places/PlacesModel.cpp:28
 msgid "Trash"
+msgstr ""
+
+#: src/qml/DirectoryHeader.qml:16
+msgid "By date"
+msgstr ""
+
+#: src/qml/DirectoryHeader.qml:18
+msgid "By size"
+msgstr ""
+
+#: src/qml/DirectoryHeader.qml:20
+msgid "By type"
+msgstr ""
+
+#: src/qml/DirectoryHeader.qml:22
+msgid "By name"
+msgstr ""
+
+#: src/qml/DirectoryHeader.qml:47 src/qml/DirectoryView.qml:31
+msgid "%1 item"
+msgid_plural "%1 items"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/qml/DirectoryView.qml:54 src/qml/FilterChips.qml:20
+msgid "Folders"
+msgstr ""
+
+#: src/qml/DirectoryView.qml:82
+msgid "Files"
+msgstr ""
+
+#: src/qml/DirectoryView.qml:140
+msgid "Folder not found"
+msgstr ""
+
+#: src/qml/DirectoryView.qml:142
+msgid "Access denied"
+msgstr ""
+
+#: src/qml/DirectoryView.qml:144
+msgid "Nothing here"
+msgstr ""
+
+#: src/qml/FilterChips.qml:13
+msgid "All"
+msgstr ""
+
+#: src/qml/FilterChips.qml:27
+msgid "Images"
+msgstr ""
+
+#: src/qml/FilterChips.qml:41
+msgid "Code"
+msgstr ""
+
+#: src/qml/FilterChips.qml:48
+msgid "Archives"
 msgstr ""
 
 #: src/qml/NavigationButtons.qml:19
@@ -99,6 +159,38 @@ msgstr ""
 
 #: src/qml/Sidebar.qml:47
 msgid "Devices"
+msgstr ""
+
+#: src/qml/SortMenu.qml:82
+msgid "Name"
+msgstr ""
+
+#: src/qml/SortMenu.qml:88
+msgid "Date modified"
+msgstr ""
+
+#: src/qml/SortMenu.qml:94
+msgid "Size"
+msgstr ""
+
+#: src/qml/SortMenu.qml:100
+msgid "Type"
+msgstr ""
+
+#: src/qml/SortMenu.qml:113
+msgid "Ascending"
+msgstr ""
+
+#: src/qml/SortMenu.qml:120
+msgid "Descending"
+msgstr ""
+
+#: src/qml/ViewSwitcher.qml:16
+msgid "List"
+msgstr ""
+
+#: src/qml/ViewSwitcher.qml:30
+msgid "Grid"
 msgstr ""
 
 #: src/qml/WindowControls.qml:15

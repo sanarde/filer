@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sanar-filer 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 10:59+0500\n"
+"POT-Creation-Date: 2026-10-24 11:08+0500\n"
 "PO-Revision-Date: 2026-10-24 10:47+0500\n"
 "Last-Translator: AnmiTaliDev <anmitalidev@nuros.org>\n"
 "Language-Team: Russian\n"
@@ -36,19 +36,20 @@ msgstr "ГБ"
 msgid "TB"
 msgstr "ТБ"
 
-#: src/places/DevicesModel.cpp:47
+#: src/places/DevicesModel.cpp:49
 msgid "System"
 msgstr "Система"
 
-#: src/places/DevicesModel.cpp:94
+#: src/places/DevicesModel.cpp:96
 msgid "%1 of %2 used"
 msgstr "%1 из %2 занято"
 
 #: src/places/PlacesModel.cpp:15 src/qml/Breadcrumbs.qml:60
+#: src/qml/DirectoryPage.qml:34
 msgid "Home"
 msgstr "Домашняя"
 
-#: src/places/PlacesModel.cpp:18
+#: src/places/PlacesModel.cpp:18 src/qml/FilterChips.qml:34
 msgid "Documents"
 msgstr "Документы"
 
@@ -71,6 +72,65 @@ msgstr "Видео"
 #: src/places/PlacesModel.cpp:28
 msgid "Trash"
 msgstr "Корзина"
+
+#: src/qml/DirectoryHeader.qml:16
+msgid "By date"
+msgstr "По дате"
+
+#: src/qml/DirectoryHeader.qml:18
+msgid "By size"
+msgstr "По размеру"
+
+#: src/qml/DirectoryHeader.qml:20
+msgid "By type"
+msgstr "По типу"
+
+#: src/qml/DirectoryHeader.qml:22
+msgid "By name"
+msgstr "По имени"
+
+#: src/qml/DirectoryHeader.qml:47 src/qml/DirectoryView.qml:31
+msgid "%1 item"
+msgid_plural "%1 items"
+msgstr[0] "%1 элемент"
+msgstr[1] "%1 элемента"
+msgstr[2] "%1 элементов"
+
+#: src/qml/DirectoryView.qml:54 src/qml/FilterChips.qml:20
+msgid "Folders"
+msgstr "Папки"
+
+#: src/qml/DirectoryView.qml:82
+msgid "Files"
+msgstr "Файлы"
+
+#: src/qml/DirectoryView.qml:140
+msgid "Folder not found"
+msgstr "Папка не найдена"
+
+#: src/qml/DirectoryView.qml:142
+msgid "Access denied"
+msgstr "Доступ запрещён"
+
+#: src/qml/DirectoryView.qml:144
+msgid "Nothing here"
+msgstr "Здесь пусто"
+
+#: src/qml/FilterChips.qml:13
+msgid "All"
+msgstr "Все"
+
+#: src/qml/FilterChips.qml:27
+msgid "Images"
+msgstr "Изображения"
+
+#: src/qml/FilterChips.qml:41
+msgid "Code"
+msgstr "Код"
+
+#: src/qml/FilterChips.qml:48
+msgid "Archives"
+msgstr "Архивы"
 
 #: src/qml/NavigationButtons.qml:19
 msgid "Back"
@@ -99,6 +159,38 @@ msgstr "Фильтры поиска"
 #: src/qml/Sidebar.qml:47
 msgid "Devices"
 msgstr "Устройства"
+
+#: src/qml/SortMenu.qml:82
+msgid "Name"
+msgstr "Имя"
+
+#: src/qml/SortMenu.qml:88
+msgid "Date modified"
+msgstr "Дата изменения"
+
+#: src/qml/SortMenu.qml:94
+msgid "Size"
+msgstr "Размер"
+
+#: src/qml/SortMenu.qml:100
+msgid "Type"
+msgstr "Тип"
+
+#: src/qml/SortMenu.qml:113
+msgid "Ascending"
+msgstr "По возрастанию"
+
+#: src/qml/SortMenu.qml:120
+msgid "Descending"
+msgstr "По убыванию"
+
+#: src/qml/ViewSwitcher.qml:16
+msgid "List"
+msgstr "Список"
+
+#: src/qml/ViewSwitcher.qml:30
+msgid "Grid"
+msgstr "Сетка"
 
 #: src/qml/WindowControls.qml:15
 msgid "Minimize"

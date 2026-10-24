@@ -14,10 +14,21 @@ qt_add_qml_module(sanar-filer
         qml/Icon.qml
         qml/IconButton.qml
         qml/DeviceCard.qml
+        qml/DirectoryHeader.qml
+        qml/DirectoryPage.qml
+        qml/DirectoryView.qml
+        qml/FileRow.qml
+        qml/FileTile.qml
+        qml/FilterChip.qml
+        qml/FilterChips.qml
+        qml/FolderTile.qml
+        qml/SortMenu.qml
+        qml/ViewSwitcher.qml
         qml/NavItem.qml
         qml/NavigationButtons.qml
         qml/ResizeHandles.qml
         qml/SearchField.qml
+        qml/SectionTitle.qml
         qml/Sidebar.qml
         qml/TopBar.qml
         qml/WaveProgress.qml
@@ -31,6 +42,8 @@ qt_add_qml_module(sanar-filer
         nav/Navigator.cpp
         fs/DirectoryModel.h
         fs/DirectoryModel.cpp
+        fs/EntrySectionModel.h
+        fs/EntrySectionModel.cpp
         fs/FileKind.h
         fs/FileKind.cpp
         fs/SizeFormat.h

@@ -15,27 +15,27 @@ Window {
     flags: Qt.Window | Qt.FramelessWindowHint
 
     Navigator {
-        id: navigator
+        id: pathNavigator
     }
 
     DirectoryModel {
-        id: directory
-        path: navigator.path
+        id: dirModel
+        path: pathNavigator.path
     }
 
     Shortcut {
         sequence: "Alt+Left"
-        onActivated: navigator.back()
+        onActivated: pathNavigator.back()
     }
 
     Shortcut {
         sequence: "Alt+Right"
-        onActivated: navigator.forward()
+        onActivated: pathNavigator.forward()
     }
 
     Shortcut {
         sequence: "Alt+Up"
-        onActivated: navigator.up()
+        onActivated: pathNavigator.up()
     }
 
     Rectangle {
@@ -50,12 +50,12 @@ Window {
             TopBar {
                 Layout.fillWidth: true
                 window: root
-                canGoBack: navigator.canGoBack
-                canGoForward: navigator.canGoForward
-                canGoUp: navigator.canGoUp
-                onBackRequested: navigator.back()
-                onForwardRequested: navigator.forward()
-                onUpRequested: navigator.up()
+                canGoBack: pathNavigator.canGoBack
+                canGoForward: pathNavigator.canGoForward
+                canGoUp: pathNavigator.canGoUp
+                onBackRequested: pathNavigator.back()
+                onForwardRequested: pathNavigator.forward()
+                onUpRequested: pathNavigator.up()
             }
 
             RowLayout {
@@ -70,8 +70,8 @@ Window {
                     Layout.leftMargin: 16
                     Layout.topMargin: 4
                     Layout.fillHeight: true
-                    currentPath: navigator.path
-                    onPathRequested: path => navigator.goTo(path)
+                    currentPath: pathNavigator.path
+                    onPathRequested: path => pathNavigator.goTo(path)
                 }
 
                 Rectangle {
@@ -81,15 +81,10 @@ Window {
                     radius: 28
                     clip: true
 
-                    Breadcrumbs {
-                        anchors.left: parent.left
-                        anchors.right: parent.right
-                        anchors.top: parent.top
-                        anchors.leftMargin: 18
-                        anchors.rightMargin: 28
-                        anchors.topMargin: 20
-                        crumbs: navigator.crumbs
-                        onCrumbClicked: path => navigator.goTo(path)
+                    DirectoryPage {
+                        anchors.fill: parent
+                        navigator: pathNavigator
+                        directory: dirModel
                     }
                 }
             }
