@@ -100,7 +100,8 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: chips.bottom
-        anchors.bottom: parent.bottom
+        anchors.bottom: infoStrip.visible ? infoStrip.top : parent.bottom
+        anchors.bottomMargin: infoStrip.visible ? 8 : 0
         anchors.leftMargin: 28
         anchors.rightMargin: 28
         directory: root.directory
@@ -118,11 +119,15 @@ Item {
         }
     }
 
-    SelectionBar {
-        anchors.horizontalCenter: parent.horizontalCenter
+    InfoStrip {
+        id: infoStrip
+        anchors.left: parent.left
+        anchors.right: parent.right
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 20
-        count: root.directory.selectedCount
+        anchors.leftMargin: 20
+        anchors.rightMargin: 20
+        anchors.bottomMargin: 12
+        directory: root.directory
         onCleared: root.directory.clearSelection()
     }
 
