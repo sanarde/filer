@@ -26,6 +26,13 @@ Item {
     signal detailsRequested(string path)
     signal renameRequested(string path)
     signal newFolderRequested
+    signal copyRequested
+    signal cutRequested
+    signal pasteRequested
+    signal deleteRequested
+
+    property bool canPaste: false
+    property bool inTrash: false
 
     function closeMenus() {
         sortMenu.visible = false
@@ -147,10 +154,16 @@ Item {
         id: contextMenu
         visible: false
         selectedCount: root.directory.selectedCount
+        canPaste: root.canPaste
+        inTrash: root.inTrash
         onOpenRequested: root.navigator.open(root.contextPath)
         onDetailsRequested: root.detailsRequested(root.contextPath)
         onRenameRequested: root.renameRequested(root.contextPath)
         onNewFolderRequested: root.newFolderRequested()
+        onCopyRequested: root.copyRequested()
+        onCutRequested: root.cutRequested()
+        onPasteRequested: root.pasteRequested()
+        onDeleteRequested: root.deleteRequested()
         onSelectAllRequested: root.directory.selectAll()
         onRefreshRequested: root.directory.reload()
         onSortRequested: {

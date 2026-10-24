@@ -6,10 +6,16 @@ Rectangle {
 
     property bool onEntry: false
     property int selectedCount: 0
+    property bool canPaste: false
+    property bool inTrash: false
 
     signal openRequested
     signal detailsRequested
     signal renameRequested
+    signal copyRequested
+    signal cutRequested
+    signal pasteRequested
+    signal deleteRequested
     signal newFolderRequested
     signal selectAllRequested
     signal refreshRequested
@@ -71,11 +77,60 @@ Rectangle {
         }
 
         MenuSeparator {
-            visible: root.single
+            visible: root.onEntry
         }
 
         MenuEntry {
-            visible: !root.onEntry
+            visible: root.onEntry && !root.inTrash
+            icon: "content_copy"
+            showIcon: true
+            label: Tr.t("Copy")
+            onTriggered: {
+                root.copyRequested()
+                root.closed()
+            }
+        }
+
+        MenuEntry {
+            visible: root.onEntry && !root.inTrash
+            icon: "content_cut"
+            showIcon: true
+            label: Tr.t("Cut")
+            onTriggered: {
+                root.cutRequested()
+                root.closed()
+            }
+        }
+
+        MenuEntry {
+            visible: root.onEntry
+            icon: root.inTrash ? "delete_forever" : "delete"
+            showIcon: true
+            label: root.inTrash ? Tr.t("Delete permanently") : Tr.t("Move to trash")
+            onTriggered: {
+                root.deleteRequested()
+                root.closed()
+            }
+        }
+
+        MenuSeparator {
+            visible: root.onEntry
+        }
+
+        MenuEntry {
+            visible: !root.onEntry && !root.inTrash
+            enabled: root.canPaste
+            icon: "content_paste"
+            showIcon: true
+            label: Tr.t("Paste")
+            onTriggered: {
+                root.pasteRequested()
+                root.closed()
+            }
+        }
+
+        MenuEntry {
+            visible: !root.onEntry && !root.inTrash
             icon: "create_new_folder"
             showIcon: true
             label: Tr.t("New folder")
