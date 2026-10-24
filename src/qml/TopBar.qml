@@ -7,8 +7,14 @@ Item {
 
     required property Window window
 
-    property alias navigation: navigation
     property alias search: search
+    property bool canGoBack: false
+    property bool canGoForward: false
+    property bool canGoUp: false
+
+    signal backRequested
+    signal forwardRequested
+    signal upRequested
 
     implicitHeight: 72
 
@@ -35,8 +41,13 @@ Item {
             Layout.fillHeight: true
 
             NavigationButtons {
-                id: navigation
                 anchors.verticalCenter: parent.verticalCenter
+                canGoBack: root.canGoBack
+                canGoForward: root.canGoForward
+                canGoUp: root.canGoUp
+                onBackRequested: root.backRequested()
+                onForwardRequested: root.forwardRequested()
+                onUpRequested: root.upRequested()
             }
         }
 
