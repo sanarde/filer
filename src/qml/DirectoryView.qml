@@ -31,6 +31,28 @@ Item {
         directories: false
     }
 
+    property bool pendingTop: true
+
+    Connections {
+        target: root.directory
+
+        function onPathChanged() {
+            root.pendingTop = true
+        }
+
+        function onLoadingChanged() {
+            if (!root.directory.loading)
+                Qt.callLater(root.scrollToStart)
+        }
+    }
+
+    function scrollToStart() {
+        if (!pendingTop)
+            return
+        animateScroll = false
+        view.positionViewAtBeginning()
+    }
+
     function itemCountText(count) {
         return Tr.n("%1 item", "%1 items", count).replace("%1", count)
     }
@@ -103,6 +125,8 @@ Item {
 
         Column {
             width: grid.width
+
+            onHeightChanged: root.scrollToStart()
 
             function folderTiles() {
                 const tiles = []
@@ -196,6 +220,7 @@ Item {
     property bool animateScroll: false
 
     function scrollBy(delta, animated) {
+        pendingTop = false
         const top = view.originY
         const bottom = Math.max(top, top + view.contentHeight - view.height)
         animateScroll = animated
@@ -209,6 +234,7 @@ Item {
     readonly property bool navSectioned: viewMode === "grid" && Settings.separateFolders
 
     function reveal(row) {
+        pendingTop = false
         animateScroll = false
         if (viewMode === "list") {
             list.positionViewAtIndex(row, ListView.Contain)
