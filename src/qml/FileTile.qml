@@ -36,58 +36,10 @@ Item {
         radius: root.selected ? 28 : 18
         color: Theme.surfaceHighest
 
-        Rectangle {
-            visible: root.kind === FileKind.Document
-            anchors.centerIn: parent
-            width: 76
-            height: 88
-            radius: 10
-            color: Theme.surfaceLowest
-
-            Column {
-                x: 10
-                y: 12
-                spacing: 6
-
-                Repeater {
-                    model: [0.6, 1, 1, 0.8, 0.5]
-
-                    Rectangle {
-                        required property real modelData
-                        required property int index
-
-                        width: (76 - 20) * modelData
-                        height: index === 0 ? 6 : 4
-                        radius: 2
-                        color: index === 0 ? Theme.primary : Theme.outlineVariant
-                    }
-                }
-            }
-        }
-
-        Rectangle {
-            visible: root.kind !== FileKind.Document
-            anchors.centerIn: parent
-            width: 72
-            height: 72
-            color: [Theme.primaryContainer, Theme.primaryContainer, Theme.surfaceHigh,
-                    Theme.secondaryContainer, Theme.tertiaryContainer, Theme.primaryContainer,
-                    Theme.tertiaryContainer, Theme.surfaceHigh][root.kind]
-            topLeftRadius: root.kind === FileKind.Code ? 36 : (root.kind === FileKind.Archive ? 26 : 8)
-            topRightRadius: root.kind === FileKind.Code ? 36 : (root.kind === FileKind.Archive ? 8 : 26)
-            bottomLeftRadius: root.kind === FileKind.Code ? 36 : (root.kind === FileKind.Archive ? 8 : 26)
-            bottomRightRadius: root.kind === FileKind.Code ? 36 : (root.kind === FileKind.Archive ? 26 : 8)
-
-            Icon {
-                anchors.centerIn: parent
-                name: root.icon
-                filled: true
-                color: [Theme.onPrimaryContainer, Theme.onPrimaryContainer, Theme.onSurface,
-                        Theme.onSecondaryContainer, Theme.onTertiaryContainer,
-                        Theme.onPrimaryContainer, Theme.onTertiaryContainer,
-                        Theme.onSurface][root.kind]
-                font.pixelSize: 36
-            }
+        EntryThumb {
+            anchors.fill: parent
+            icon: root.icon
+            kind: root.kind
         }
 
         Rectangle {
