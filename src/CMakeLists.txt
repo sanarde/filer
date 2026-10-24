@@ -66,6 +66,8 @@ qt_add_qml_module(sanar-filer
         fs/DirectoryModel.h
         fs/DirectoryModel.cpp
         fs/EntrySectionModel.h
+        fs/FileClipboard.h
+        fs/FileClipboard.cpp
         fs/FileOperations.h
         fs/FileOperations.cpp
         fs/EntrySectionModel.cpp
@@ -73,6 +75,8 @@ qt_add_qml_module(sanar-filer
         fs/FileDetails.cpp
         fs/FileKind.h
         fs/FileKind.cpp
+        fs/RecentFiles.h
+        fs/RecentFiles.cpp
         fs/SizeFormat.h
         fs/SizeFormat.cpp
         fs/Trash.h
