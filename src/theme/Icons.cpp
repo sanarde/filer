@@ -20,6 +20,9 @@ Icons::Icons(QObject *parent)
 
 QString Icons::glyph(const QString &name) const
 {
+    if (name.isEmpty())
+        return {};
+
     const auto it = m_glyphs.constFind(name);
     if (it == m_glyphs.constEnd()) {
         qWarning("Unknown icon: %s", qPrintable(name));
