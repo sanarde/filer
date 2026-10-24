@@ -1,6 +1,9 @@
 #include "Navigator.h"
 
+#include <QDesktopServices>
 #include <QDir>
+#include <QFileInfo>
+#include <QUrl>
 #include <QVariantMap>
 
 Navigator::Navigator(QObject *parent)
@@ -80,4 +83,12 @@ void Navigator::up()
     QDir dir(m_path);
     dir.cdUp();
     goTo(dir.path());
+}
+
+void Navigator::open(const QString &path)
+{
+    if (QFileInfo(path).isDir())
+        goTo(path);
+    else
+        QDesktopServices::openUrl(QUrl::fromLocalFile(path));
 }

@@ -28,6 +28,7 @@ public:
     Q_INVOKABLE void back();
     Q_INVOKABLE void forward();
     Q_INVOKABLE void up();
+    Q_INVOKABLE void open(const QString &path);
 
 signals:
     void changed();
