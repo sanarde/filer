@@ -5,8 +5,23 @@
 
 Theme::Theme(QObject *parent)
     : QObject(parent)
-    , m_dark(QGuiApplication::styleHints()->colorScheme() != Qt::ColorScheme::Light)
 {
+    connect(QGuiApplication::styleHints(), &QStyleHints::colorSchemeChanged, this, [this] {
+        if (m_mode == System)
+            emit changed();
+    });
+}
+
+bool Theme::dark() const
+{
+    if (m_mode == System)
+        return QGuiApplication::styleHints()->colorScheme() != Qt::ColorScheme::Light;
+    return m_mode == Dark;
+}
+
+QColor Theme::swatch(Palette palette) const
+{
+    return QColor(colorSets[palette][dark() ? 1 : 0].primary);
 }
 
 void Theme::setPalette(Palette palette)
@@ -17,10 +32,10 @@ void Theme::setPalette(Palette palette)
     emit changed();
 }
 
-void Theme::setDark(bool dark)
+void Theme::setMode(Mode mode)
 {
-    if (m_dark == dark)
+    if (m_mode == mode)
         return;
-    m_dark = dark;
+    m_mode = mode;
     emit changed();
 }

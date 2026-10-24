@@ -12,7 +12,8 @@ class Theme : public QObject
     QML_ELEMENT
     QML_SINGLETON
     Q_PROPERTY(Palette palette READ palette WRITE setPalette NOTIFY changed FINAL)
-    Q_PROPERTY(bool dark READ dark WRITE setDark NOTIFY changed FINAL)
+    Q_PROPERTY(Mode mode READ mode WRITE setMode NOTIFY changed FINAL)
+    Q_PROPERTY(bool dark READ dark NOTIFY changed FINAL)
     Q_PROPERTY(QColor desk READ desk NOTIFY changed FINAL)
     Q_PROPERTY(QColor background READ background NOTIFY changed FINAL)
     Q_PROPERTY(QColor surfaceLowest READ surfaceLowest NOTIFY changed FINAL)
@@ -45,12 +46,22 @@ public:
     };
     Q_ENUM(Palette)
 
+    enum Mode {
+        System,
+        Light,
+        Dark,
+    };
+    Q_ENUM(Mode)
+
     explicit Theme(QObject *parent = nullptr);
 
     Palette palette() const { return m_palette; }
-    bool dark() const { return m_dark; }
+    Mode mode() const { return m_mode; }
+    bool dark() const;
     void setPalette(Palette palette);
-    void setDark(bool dark);
+    void setMode(Mode mode);
+
+    Q_INVOKABLE QColor swatch(Palette palette) const;
 
     QColor desk() const { return QColor(set().desk); }
     QColor background() const { return QColor(set().background); }
@@ -79,8 +90,8 @@ signals:
     void changed();
 
 private:
-    const ColorSet &set() const { return colorSets[m_palette][m_dark ? 1 : 0]; }
+    const ColorSet &set() const { return colorSets[m_palette][dark() ? 1 : 0]; }
 
     Palette m_palette = Teal;
-    bool m_dark = true;
+    Mode m_mode = System;
 };
