@@ -18,6 +18,12 @@ qt_add_qml_module(sanar-filer
         qml/TopBar.qml
         qml/WindowControls.qml
     SOURCES
+        fs/DirectoryModel.h
+        fs/DirectoryModel.cpp
+        fs/FileKind.h
+        fs/FileKind.cpp
+        fs/SizeFormat.h
+        fs/SizeFormat.cpp
         i18n/Translator.h
         i18n/Translator.cpp
         theme/ColorSet.h
@@ -37,7 +43,7 @@ qt_add_resources(sanar-filer resources
         ${PROJECT_SOURCE_DIR}/resources/fonts/MaterialSymbolsRounded.ttf
 )
 
-target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/theme ${CMAKE_CURRENT_SOURCE_DIR}/i18n)
+target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/theme ${CMAKE_CURRENT_SOURCE_DIR}/i18n ${CMAKE_CURRENT_SOURCE_DIR}/fs)
 
 target_link_libraries(sanar-filer PRIVATE Qt6::Core Qt6::Gui Qt6::Quick)
 

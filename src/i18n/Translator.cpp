@@ -2,14 +2,9 @@
 
 #include <libintl.h>
 
-#include <clocale>
-
 Translator::Translator(QObject *parent)
     : QObject(parent)
 {
-    setlocale(LC_MESSAGES, "");
-    bindtextdomain("sanar-filer", LOCALEDIR);
-    bind_textdomain_codeset("sanar-filer", "UTF-8");
 }
 
 QString Translator::t(const QString &msgid) const

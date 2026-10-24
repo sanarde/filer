@@ -6,6 +6,7 @@ set(LANGUAGES ru)
 set(POT_FILE ${CMAKE_CURRENT_SOURCE_DIR}/sanar-filer.pot)
 
 file(GLOB_RECURSE QML_SOURCES RELATIVE ${PROJECT_SOURCE_DIR} CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/src/qml/*.qml)
+file(GLOB_RECURSE CPP_SOURCES RELATIVE ${PROJECT_SOURCE_DIR} CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 add_custom_target(update-po
     COMMAND ${XGETTEXT_EXECUTABLE} --language=JavaScript --from-code=UTF-8
@@ -13,6 +14,9 @@ add_custom_target(update-po
             --package-name=sanar-filer --package-version=${PROJECT_VERSION}
             --add-comments --sort-by-file
             -o ${POT_FILE} ${QML_SOURCES}
+    COMMAND ${XGETTEXT_EXECUTABLE} --language=C++ --from-code=UTF-8
+            --keyword=dgettext:2 --add-comments --sort-by-file --join-existing
+            -o ${POT_FILE} ${CPP_SOURCES}
     WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
     VERBATIM
 )
