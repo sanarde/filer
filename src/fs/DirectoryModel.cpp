@@ -80,6 +80,8 @@ QVariant DirectoryModel::data(const QModelIndex &index, int role) const
         return isDir ? countItems(entry.path) : -1;
     case IconRole:
         return iconName(entry.kind);
+    case SelectedRole:
+        return m_selected.contains(entry.path);
     }
     return {};
 }
@@ -97,6 +99,7 @@ QHash<int, QByteArray> DirectoryModel::roleNames() const
         {TypeLabelRole, "typeLabel"},
         {ItemCountRole, "itemCount"},
         {IconRole, "icon"},
+        {SelectedRole, "selected"},
     };
 }
 
@@ -109,6 +112,7 @@ void DirectoryModel::setPath(const QString &path)
     if (!m_watcher.directories().isEmpty())
         m_watcher.removePaths(m_watcher.directories());
     m_path = clean;
+    setSelection({});
     emit pathChanged();
     load();
 }
@@ -209,7 +213,10 @@ void DirectoryModel::rebuild()
 
     int folders = 0;
     qint64 total = 0;
+    QSet<QString> remaining;
     for (const Entry &entry : std::as_const(rows)) {
+        if (m_selected.contains(entry.path))
+            remaining.insert(entry.path);
         if (entry.kind == FileKinds::Folder)
             ++folders;
         else
@@ -221,6 +228,7 @@ void DirectoryModel::rebuild()
     m_folderCount = folders;
     m_totalSize = total;
     endResetModel();
+    setSelection(remaining);
     emit totalsChanged();
 }
 
@@ -295,4 +303,71 @@ void DirectoryModel::setError(Error error)
         return;
     m_error = error;
     emit errorChanged();
+}
+
+void DirectoryModel::select(const QString &path, SelectMode mode)
+{
+    const int row = rowOf(path);
+    if (row < 0)
+        return;
+
+    QSet<QString> selection = m_selected;
+    const int anchorRow = mode == SelectRange ? rowOf(m_anchor) : -1;
+    if (anchorRow >= 0) {
+        selection.clear();
+        for (int i = std::min(anchorRow, row); i <= std::max(anchorRow, row); ++i)
+            selection.insert(m_rows.at(i).path);
+    } else if (mode == SelectToggle) {
+        if (!selection.remove(path))
+            selection.insert(path);
+        m_anchor = path;
+    } else {
+        selection = {path};
+        m_anchor = path;
+    }
+    setSelection(selection);
+}
+
+void DirectoryModel::selectAll()
+{
+    QSet<QString> selection;
+    for (const Entry &entry : std::as_const(m_rows))
+        selection.insert(entry.path);
+    setSelection(selection);
+}
+
+void DirectoryModel::clearSelection()
+{
+    setSelection({});
+}
+
+QStringList DirectoryModel::selectedPaths() const
+{
+    QStringList paths;
+    for (const Entry &entry : m_rows) {
+        if (m_selected.contains(entry.path))
+            paths.append(entry.path);
+    }
+    return paths;
+}
+
+void DirectoryModel::setSelection(const QSet<QString> &selection)
+{
+    if (m_selected == selection)
+        return;
+    m_selected = selection;
+    if (m_selected.isEmpty())
+        m_anchor.clear();
+    if (!m_rows.isEmpty())
+        emit dataChanged(index(0), index(m_rows.size() - 1), {SelectedRole});
+    emit selectionChanged();
+}
+
+int DirectoryModel::rowOf(const QString &path) const
+{
+    for (int i = 0; i < m_rows.size(); ++i) {
+        if (m_rows.at(i).path == path)
+            return i;
+    }
+    return -1;
 }

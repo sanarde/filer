@@ -5,6 +5,7 @@
 #include <QDateTime>
 #include <QFileSystemWatcher>
 #include <QHash>
+#include <QSet>
 #include <QTimer>
 #include <QtQml/qqmlregistration.h>
 
@@ -24,6 +25,7 @@ class DirectoryModel : public QAbstractListModel
     Q_PROPERTY(int fileCount READ fileCount NOTIFY totalsChanged FINAL)
     Q_PROPERTY(qint64 totalSize READ totalSize NOTIFY totalsChanged FINAL)
     Q_PROPERTY(QString totalSizeText READ totalSizeText NOTIFY totalsChanged FINAL)
+    Q_PROPERTY(int selectedCount READ selectedCount NOTIFY selectionChanged FINAL)
 
 public:
     enum Role {
@@ -37,6 +39,7 @@ public:
         TypeLabelRole,
         ItemCountRole,
         IconRole,
+        SelectedRole,
     };
 
     enum SortKey {
@@ -56,6 +59,13 @@ public:
         ShowArchives,
     };
     Q_ENUM(Filter)
+
+    enum SelectMode {
+        SelectReplace,
+        SelectToggle,
+        SelectRange,
+    };
+    Q_ENUM(SelectMode)
 
     enum Error {
         NoError,
@@ -85,6 +95,12 @@ public:
     int fileCount() const { return m_rows.size() - m_folderCount; }
     qint64 totalSize() const { return m_totalSize; }
     QString totalSizeText() const;
+    int selectedCount() const { return m_selected.size(); }
+
+    Q_INVOKABLE void select(const QString &path, SelectMode mode);
+    Q_INVOKABLE void selectAll();
+    Q_INVOKABLE void clearSelection();
+    Q_INVOKABLE QStringList selectedPaths() const;
 
 signals:
     void pathChanged();
@@ -93,6 +109,7 @@ signals:
     void filterChanged();
     void showHiddenChanged();
     void totalsChanged();
+    void selectionChanged();
 
 private:
     struct Entry {
@@ -110,6 +127,8 @@ private:
     bool lessThan(const Entry &a, const Entry &b) const;
     int countItems(const QString &dirPath) const;
     void setError(Error error);
+    void setSelection(const QSet<QString> &selection);
+    int rowOf(const QString &path) const;
 
     QString m_path;
     Error m_error = NoError;
@@ -119,6 +138,8 @@ private:
     bool m_showHidden = false;
     QList<Entry> m_all;
     QList<Entry> m_rows;
+    QSet<QString> m_selected;
+    QString m_anchor;
     int m_folderCount = 0;
     qint64 m_totalSize = 0;
     mutable QHash<QString, int> m_itemCounts;
