@@ -9,6 +9,8 @@ Rectangle {
 
     signal openRequested
     signal detailsRequested
+    signal renameRequested
+    signal newFolderRequested
     signal selectAllRequested
     signal refreshRequested
     signal sortRequested
@@ -57,8 +59,30 @@ Rectangle {
             }
         }
 
+        MenuEntry {
+            visible: root.single
+            icon: "edit"
+            showIcon: true
+            label: Tr.t("Rename")
+            onTriggered: {
+                root.renameRequested()
+                root.closed()
+            }
+        }
+
         MenuSeparator {
             visible: root.single
+        }
+
+        MenuEntry {
+            visible: !root.onEntry
+            icon: "create_new_folder"
+            showIcon: true
+            label: Tr.t("New folder")
+            onTriggered: {
+                root.newFolderRequested()
+                root.closed()
+            }
         }
 
         MenuEntry {

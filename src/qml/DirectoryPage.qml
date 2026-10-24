@@ -24,6 +24,8 @@ Item {
     property string contextPath
 
     signal detailsRequested(string path)
+    signal renameRequested(string path)
+    signal newFolderRequested
 
     function closeMenus() {
         sortMenu.visible = false
@@ -147,6 +149,8 @@ Item {
         selectedCount: root.directory.selectedCount
         onOpenRequested: root.navigator.open(root.contextPath)
         onDetailsRequested: root.detailsRequested(root.contextPath)
+        onRenameRequested: root.renameRequested(root.contextPath)
+        onNewFolderRequested: root.newFolderRequested()
         onSelectAllRequested: root.directory.selectAll()
         onRefreshRequested: root.directory.reload()
         onSortRequested: {
