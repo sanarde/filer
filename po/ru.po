@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sanar-filer 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 19:26+0500\n"
+"POT-Creation-Date: 2026-10-24 20:43+0500\n"
 "PO-Revision-Date: 2026-10-24 10:47+0500\n"
 "Last-Translator: AnmiTaliDev <anmitalidev@nuros.org>\n"
 "Language-Team: Russian\n"
@@ -112,11 +112,11 @@ msgstr "Не удалось прочитать %1: %2"
 msgid "Cannot write %1: %2"
 msgstr "Не удалось записать %1: %2"
 
-#: src/places/DevicesModel.cpp:49 src/qml/ThemeModeSelector.qml:71
+#: src/places/DevicesModel.cpp:55 src/qml/ThemeModeSelector.qml:71
 msgid "System"
 msgstr "Система"
 
-#: src/places/DevicesModel.cpp:96
+#: src/places/DevicesModel.cpp:126
 msgid "%1 of %2 used"
 msgstr "%1 из %2 занято"
 
@@ -170,7 +170,7 @@ msgstr "Открыть"
 msgid "Details"
 msgstr "Сведения"
 
-#: src/qml/ContextMenu.qml:73 src/qml/Main.qml:270
+#: src/qml/ContextMenu.qml:73 src/qml/Main.qml:271
 msgid "Rename"
 msgstr "Переименовать"
 
@@ -198,7 +198,7 @@ msgstr "Переместить в корзину"
 msgid "Paste"
 msgstr "Вставить"
 
-#: src/qml/ContextMenu.qml:148 src/qml/Main.qml:281
+#: src/qml/ContextMenu.qml:148 src/qml/Main.qml:282
 msgid "New folder"
 msgstr "Новая папка"
 
@@ -379,9 +379,13 @@ msgstr[2] "Удалить %1 элементов навсегда? Это нел�
 msgid "Delete"
 msgstr "Удалить"
 
-#: src/qml/Main.qml:281
+#: src/qml/Main.qml:282
 msgid "Create"
 msgstr "Создать"
+
+#: src/qml/NavItem.qml:61
+msgid "Eject"
+msgstr "Извлечь"
 
 #: src/qml/NavigationButtons.qml:19 src/qml/SettingsDialog.qml:70
 msgid "Back"
@@ -459,7 +463,7 @@ msgstr "Не закончено. Показывает сведения о выб
 msgid "About Sanar Filer"
 msgstr "О Sanar Filer"
 
-#: src/qml/Sidebar.qml:47
+#: src/qml/Sidebar.qml:50
 msgid "Devices"
 msgstr "Устройства"
 

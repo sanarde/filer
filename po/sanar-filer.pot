@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 19:26+0500\n"
+"POT-Creation-Date: 2026-10-24 20:46+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -113,11 +113,11 @@ msgstr ""
 msgid "Cannot write %1: %2"
 msgstr ""
 
-#: src/places/DevicesModel.cpp:49 src/qml/ThemeModeSelector.qml:71
+#: src/places/DevicesModel.cpp:55 src/qml/ThemeModeSelector.qml:71
 msgid "System"
 msgstr ""
 
-#: src/places/DevicesModel.cpp:96
+#: src/places/DevicesModel.cpp:126
 msgid "%1 of %2 used"
 msgstr ""
 
@@ -171,7 +171,7 @@ msgstr ""
 msgid "Details"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:73 src/qml/Main.qml:270
+#: src/qml/ContextMenu.qml:73 src/qml/Main.qml:271
 msgid "Rename"
 msgstr ""
 
@@ -199,7 +199,7 @@ msgstr ""
 msgid "Paste"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:148 src/qml/Main.qml:281
+#: src/qml/ContextMenu.qml:148 src/qml/Main.qml:282
 msgid "New folder"
 msgstr ""
 
@@ -377,8 +377,12 @@ msgstr[1] ""
 msgid "Delete"
 msgstr ""
 
-#: src/qml/Main.qml:281
+#: src/qml/Main.qml:282
 msgid "Create"
+msgstr ""
+
+#: src/qml/NavItem.qml:61
+msgid "Eject"
 msgstr ""
 
 #: src/qml/NavigationButtons.qml:19 src/qml/SettingsDialog.qml:70
@@ -456,7 +460,7 @@ msgstr ""
 msgid "About Sanar Filer"
 msgstr ""
 
-#: src/qml/Sidebar.qml:47
+#: src/qml/Sidebar.qml:50
 msgid "Devices"
 msgstr ""
 
