@@ -36,6 +36,7 @@ public:
         ModifiedRole,
         TypeLabelRole,
         ItemCountRole,
+        IconRole,
     };
 
     enum SortKey {
