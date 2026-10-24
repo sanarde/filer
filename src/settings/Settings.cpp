@@ -14,11 +14,20 @@ static Enum readEnum(const QSettings &file, const QString &key, Enum fallback, i
     return value >= 0 && value <= last ? Enum(value) : fallback;
 }
 
+static QString readPalette(const QSettings &file)
+{
+    const QString id = file.value("appearance/paletteId").toString();
+    if (!id.isEmpty())
+        return id;
+    const QStringList legacy = {"teal", "coral", "indigo", "green"};
+    return legacy.value(file.value("appearance/palette", 0).toInt(), "teal");
+}
+
 Settings::Settings(QObject *parent)
     : QObject(parent)
     , m_file(settingsFile(), QSettings::IniFormat)
     , m_themeMode(readEnum(m_file, "appearance/mode", Theme::System, Theme::Dark))
-    , m_palette(readEnum(m_file, "appearance/palette", Theme::Teal, Theme::Green))
+    , m_palette(readPalette(m_file))
     , m_showHidden(m_file.value("files/showHidden", false).toBool())
     , m_separateFolders(m_file.value("files/separateFolders", true).toBool())
     , m_detailsPanel(m_file.value("experimental/detailsPanel", false).toBool())
@@ -40,12 +49,12 @@ void Settings::setThemeMode(Theme::Mode mode)
     emit themeModeChanged();
 }
 
-void Settings::setPalette(Theme::Palette palette)
+void Settings::setPalette(const QString &palette)
 {
     if (m_palette == palette)
         return;
     m_palette = palette;
-    m_file.setValue("appearance/palette", int(palette));
+    m_file.setValue("appearance/paletteId", palette);
     emit paletteChanged();
 }
 

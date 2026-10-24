@@ -7,18 +7,13 @@ Row {
     spacing: 8
 
     Repeater {
-        model: [
-            { palette: Theme.Teal, name: Tr.t("Teal") },
-            { palette: Theme.Coral, name: Tr.t("Coral") },
-            { palette: Theme.Indigo, name: Tr.t("Indigo") },
-            { palette: Theme.Green, name: Tr.t("Green") }
-        ]
+        model: Theme.palettes
 
         Item {
             id: swatch
 
             required property var modelData
-            readonly property bool selected: Settings.palette === modelData.palette
+            readonly property bool selected: Settings.palette === modelData.id
 
             width: 88
             height: 72
@@ -26,7 +21,7 @@ Row {
             Accessible.role: Accessible.RadioButton
             Accessible.name: modelData.name
             Accessible.checked: selected
-            Accessible.onPressAction: Settings.palette = swatch.modelData.palette
+            Accessible.onPressAction: Settings.palette = swatch.modelData.id
 
             Rectangle {
                 id: circle
@@ -34,7 +29,7 @@ Row {
                 width: 48
                 height: 48
                 radius: 24
-                color: Theme.swatch(swatch.modelData.palette)
+                color: Theme.swatch(swatch.modelData.id, Theme.dark)
                 border.width: swatch.selected ? 3 : 0
                 border.color: Theme.onSurface
 
@@ -63,7 +58,7 @@ Row {
             }
 
             TapHandler {
-                onTapped: Settings.palette = swatch.modelData.palette
+                onTapped: Settings.palette = swatch.modelData.id
             }
         }
     }

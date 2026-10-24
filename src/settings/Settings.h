@@ -13,7 +13,7 @@ class Settings : public QObject
     QML_ELEMENT
     QML_SINGLETON
     Q_PROPERTY(Theme::Mode themeMode READ themeMode WRITE setThemeMode NOTIFY themeModeChanged FINAL)
-    Q_PROPERTY(Theme::Palette palette READ palette WRITE setPalette NOTIFY paletteChanged FINAL)
+    Q_PROPERTY(QString palette READ palette WRITE setPalette NOTIFY paletteChanged FINAL)
     Q_PROPERTY(bool showHidden READ showHidden WRITE setShowHidden NOTIFY showHiddenChanged FINAL)
     Q_PROPERTY(bool separateFolders READ separateFolders WRITE setSeparateFolders NOTIFY separateFoldersChanged FINAL)
     Q_PROPERTY(bool detailsPanel READ detailsPanel WRITE setDetailsPanel NOTIFY detailsPanelChanged FINAL)
@@ -29,8 +29,8 @@ public:
 
     Theme::Mode themeMode() const { return m_themeMode; }
     void setThemeMode(Theme::Mode mode);
-    Theme::Palette palette() const { return m_palette; }
-    void setPalette(Theme::Palette palette);
+    QString palette() const { return m_palette; }
+    void setPalette(const QString &palette);
     bool showHidden() const { return m_showHidden; }
     void setShowHidden(bool show);
     bool separateFolders() const { return m_separateFolders; }
@@ -65,7 +65,7 @@ signals:
 private:
     QSettings m_file;
     Theme::Mode m_themeMode;
-    Theme::Palette m_palette;
+    QString m_palette;
     bool m_showHidden;
     bool m_separateFolders;
     bool m_detailsPanel;
