@@ -116,9 +116,16 @@ void FileOperations::cancel()
 
 void FileOperations::start(std::unique_ptr<TransferJob> job, Kind kind)
 {
-    if (m_busy)
+    if (m_busy) {
+        m_queue.push_back({std::move(job), kind});
+        emit queuedChanged();
         return;
+    }
+    launch(std::move(job), kind);
+}
 
+void FileOperations::launch(std::unique_ptr<TransferJob> job, Kind kind)
+{
     m_job = std::move(job);
     m_job->setProgress([this](qint64 done, qint64 total, const QString &name) {
         QMetaObject::invokeMethod(this, [this, done, total, name] {
@@ -145,6 +152,17 @@ void FileOperations::start(std::unique_ptr<TransferJob> job, Kind kind)
             m_thread = nullptr;
             m_job.reset();
             Trash::pruneOrphans();
+            if (success && !m_queue.empty()) {
+                Pending next = std::move(m_queue.front());
+                m_queue.pop_front();
+                emit queuedChanged();
+                launch(std::move(next.job), next.kind);
+                return;
+            }
+            if (!m_queue.empty()) {
+                m_queue.clear();
+                emit queuedChanged();
+            }
             m_busy = false;
             emit busyChanged();
             emit finished(success, error);
