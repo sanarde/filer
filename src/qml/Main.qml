@@ -27,6 +27,12 @@ Window {
         foldersFirst: Settings.separateFolders
     }
 
+    FileOperations {
+        id: fileOps
+    }
+
+    property string renamePath
+
     Binding {
         target: Theme
         property: "mode"
@@ -54,6 +60,7 @@ Window {
 
     property string dismissedDetails
     property bool detailsVisible: false
+    readonly property bool dialogOpen: settingsDialog.visible || detailsDialog.visible || nameDialog.visible
 
     Binding {
         target: root
@@ -69,31 +76,43 @@ Window {
 
     Shortcut {
         sequence: "Alt+Return"
-        enabled: dirModel.selectedPath !== "" && !settingsDialog.visible && !detailsDialog.visible
+        enabled: dirModel.selectedPath !== "" && !root.dialogOpen
         onActivated: detailsDialog.open(dirModel.selectedPath)
     }
 
     Shortcut {
+        sequence: "F2"
+        enabled: dirModel.selectedCount === 1 && !root.dialogOpen
+        onActivated: page.renameRequested(dirModel.selectedPath)
+    }
+
+    Shortcut {
+        sequence: "Ctrl+Shift+N"
+        enabled: !root.dialogOpen
+        onActivated: page.newFolderRequested()
+    }
+
+    Shortcut {
         sequence: "Ctrl+H"
-        enabled: !settingsDialog.visible && !detailsDialog.visible
+        enabled: !root.dialogOpen
         onActivated: Settings.showHidden = !Settings.showHidden
     }
 
     Shortcut {
         sequence: "Alt+Left"
-        enabled: !settingsDialog.visible && !detailsDialog.visible
+        enabled: !root.dialogOpen
         onActivated: pathNavigator.back()
     }
 
     Shortcut {
         sequence: "Alt+Right"
-        enabled: !settingsDialog.visible && !detailsDialog.visible
+        enabled: !root.dialogOpen
         onActivated: pathNavigator.forward()
     }
 
     Shortcut {
         sequence: "Alt+Up"
-        enabled: !settingsDialog.visible && !detailsDialog.visible
+        enabled: !root.dialogOpen
         onActivated: pathNavigator.up()
     }
 
@@ -105,7 +124,7 @@ Window {
         ColumnLayout {
             anchors.fill: parent
             spacing: 0
-            enabled: !settingsDialog.visible && !detailsDialog.visible
+            enabled: !root.dialogOpen
 
             TopBar {
                 Layout.fillWidth: true
@@ -145,6 +164,14 @@ Window {
                     DirectoryPage {
                         id: page
                         onDetailsRequested: path => detailsDialog.open(path)
+                        onRenameRequested: path => {
+                            root.renamePath = path
+                            nameDialog.open(Tr.t("Rename"), Tr.t("Rename"), path.substring(path.lastIndexOf("/") + 1))
+                        }
+                        onNewFolderRequested: {
+                            root.renamePath = ""
+                            nameDialog.open(Tr.t("New folder"), Tr.t("Create"), "")
+                        }
                         anchors.fill: parent
                         navigator: pathNavigator
                         directory: dirModel
@@ -168,6 +195,23 @@ Window {
             radius: parent.radius
             onCloseRequested: visible = false
             onOpenRequested: path => pathNavigator.open(path)
+            onVisibleChanged: if (!visible) page.forceActiveFocus()
+        }
+
+        NameDialog {
+            id: nameDialog
+            anchors.fill: parent
+            radius: parent.radius
+            onCloseRequested: visible = false
+            onAccepted: name => {
+                const error = root.renamePath !== ""
+                    ? fileOps.rename(root.renamePath, name)
+                    : fileOps.createFolder(pathNavigator.path, name)
+                if (error === "")
+                    visible = false
+                else
+                    nameDialog.error = error
+            }
             onVisibleChanged: if (!visible) page.forceActiveFocus()
         }
 

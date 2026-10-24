@@ -37,6 +37,7 @@ qt_add_qml_module(sanar-filer
         qml/ViewSwitcher.qml
         qml/MenuEntry.qml
         qml/MenuSeparator.qml
+        qml/NameDialog.qml
         qml/NavItem.qml
         qml/NavigationButtons.qml
         qml/ResizeHandles.qml
