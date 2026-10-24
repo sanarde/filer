@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 14:07+0500\n"
+"POT-Creation-Date: 2026-10-24 14:15+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,11 +28,11 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
-#: src/fs/FileDetails.cpp:101
+#: src/fs/FileDetails.cpp:107
 msgid "Folder"
 msgstr ""
 
-#: src/fs/FileDetails.cpp:107 src/qml/DirectoryHeader.qml:46
+#: src/fs/FileDetails.cpp:113 src/qml/DirectoryHeader.qml:46
 #: src/qml/DirectoryView.qml:35
 msgid "%1 item"
 msgid_plural "%1 items"
@@ -119,12 +119,12 @@ msgstr ""
 msgid "Green"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:35 src/qml/DetailsPanel.qml:148
-#: src/qml/DetailsPanel.qml:177
+#: src/qml/ContextMenu.qml:35 src/qml/DetailsPanel.qml:149
+#: src/qml/DetailsPanel.qml:178
 msgid "Open"
 msgstr ""
 
-#: src/qml/ContextMenu.qml:46 src/qml/DetailsPanel.qml:72
+#: src/qml/ContextMenu.qml:46 src/qml/DetailsPanel.qml:73
 msgid "Details"
 msgstr ""
 
@@ -148,28 +148,40 @@ msgstr ""
 msgid "Sort by"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:80
+#: src/qml/DetailsPanel.qml:81
 msgid "Close panel"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:199 src/qml/SortMenu.qml:40
+#: src/qml/DetailsPanel.qml:200 src/qml/SortMenu.qml:40
 msgid "Size"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:204
+#: src/qml/DetailsPanel.qml:205
 msgid "Modified"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:209
+#: src/qml/DetailsPanel.qml:210
 msgid "Created"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:214
+#: src/qml/DetailsPanel.qml:215
 msgid "Permissions"
 msgstr ""
 
-#: src/qml/DetailsPanel.qml:219
+#: src/qml/DetailsPanel.qml:220
 msgid "Location"
+msgstr ""
+
+#: src/qml/DetailsPanel.qml:225 src/qml/SortMenu.qml:49
+msgid "Type"
+msgstr ""
+
+#: src/qml/DetailsPanel.qml:230
+msgid "Owner"
+msgstr ""
+
+#: src/qml/DetailsPanel.qml:235
+msgid "Full path"
 msgstr ""
 
 #: src/qml/DirectoryHeader.qml:15
@@ -224,6 +236,16 @@ msgstr ""
 msgid "Archives"
 msgstr ""
 
+#: src/qml/InfoStrip.qml:32
+msgid "Clear selection"
+msgstr ""
+
+#: src/qml/InfoStrip.qml:48
+msgid "%1 item selected"
+msgid_plural "%1 items selected"
+msgstr[0] ""
+msgstr[1] ""
+
 #: src/qml/NavigationButtons.qml:19 src/qml/SettingsDialog.qml:70
 msgid "Back"
 msgstr ""
@@ -247,16 +269,6 @@ msgstr ""
 #: src/qml/SearchField.qml:68
 msgid "Search filters"
 msgstr ""
-
-#: src/qml/SelectionBar.qml:27
-msgid "Clear selection"
-msgstr ""
-
-#: src/qml/SelectionBar.qml:37
-msgid "%1 item selected"
-msgid_plural "%1 items selected"
-msgstr[0] ""
-msgstr[1] ""
 
 #: src/qml/SettingsDialog.qml:76
 msgid "About"
@@ -282,7 +294,19 @@ msgstr ""
 msgid "Show folders first, in their own section"
 msgstr ""
 
-#: src/qml/SettingsDialog.qml:140
+#: src/qml/SettingsDialog.qml:138
+msgid "Experimental"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:146
+msgid "Details side panel"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:147
+msgid "Unfinished. Shows details of the selected item in a panel on the right"
+msgstr ""
+
+#: src/qml/SettingsDialog.qml:156
 msgid "About Sanar Filer"
 msgstr ""
 
@@ -296,10 +320,6 @@ msgstr ""
 
 #: src/qml/SortMenu.qml:31
 msgid "Date modified"
-msgstr ""
-
-#: src/qml/SortMenu.qml:49
-msgid "Type"
 msgstr ""
 
 #: src/qml/SortMenu.qml:60

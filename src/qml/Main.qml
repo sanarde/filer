@@ -68,26 +68,32 @@ Window {
     }
 
     Shortcut {
+        sequence: "Alt+Return"
+        enabled: dirModel.selectedPath !== "" && !settingsDialog.visible && !detailsDialog.visible
+        onActivated: detailsDialog.open(dirModel.selectedPath)
+    }
+
+    Shortcut {
         sequence: "Ctrl+H"
-        enabled: !settingsDialog.visible
+        enabled: !settingsDialog.visible && !detailsDialog.visible
         onActivated: Settings.showHidden = !Settings.showHidden
     }
 
     Shortcut {
         sequence: "Alt+Left"
-        enabled: !settingsDialog.visible
+        enabled: !settingsDialog.visible && !detailsDialog.visible
         onActivated: pathNavigator.back()
     }
 
     Shortcut {
         sequence: "Alt+Right"
-        enabled: !settingsDialog.visible
+        enabled: !settingsDialog.visible && !detailsDialog.visible
         onActivated: pathNavigator.forward()
     }
 
     Shortcut {
         sequence: "Alt+Up"
-        enabled: !settingsDialog.visible
+        enabled: !settingsDialog.visible && !detailsDialog.visible
         onActivated: pathNavigator.up()
     }
 
@@ -99,7 +105,7 @@ Window {
         ColumnLayout {
             anchors.fill: parent
             spacing: 0
-            enabled: !settingsDialog.visible
+            enabled: !settingsDialog.visible && !detailsDialog.visible
 
             TopBar {
                 Layout.fillWidth: true
@@ -138,7 +144,7 @@ Window {
 
                     DirectoryPage {
                         id: page
-                        onDetailsRequested: root.dismissedDetails = ""
+                        onDetailsRequested: detailsDialog.open(dirModel.selectedPath)
                         anchors.fill: parent
                         navigator: pathNavigator
                         directory: dirModel
@@ -148,12 +154,21 @@ Window {
                 DetailsPanel {
                     Layout.preferredWidth: 332
                     Layout.fillHeight: true
-                    visible: root.detailsVisible
+                    visible: Settings.detailsPanel && root.detailsVisible
                     path: dirModel.selectedPath
                     onCloseRequested: root.dismissedDetails = dirModel.selectedPath
                     onOpenRequested: path => pathNavigator.open(path)
                 }
             }
+        }
+
+        DetailsDialog {
+            id: detailsDialog
+            anchors.fill: parent
+            radius: parent.radius
+            onCloseRequested: visible = false
+            onOpenRequested: path => pathNavigator.open(path)
+            onVisibleChanged: if (!visible) page.forceActiveFocus()
         }
 
         SettingsDialog {

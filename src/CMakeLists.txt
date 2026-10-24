@@ -18,7 +18,9 @@ qt_add_qml_module(sanar-filer
         qml/Breadcrumbs.qml
         qml/Icon.qml
         qml/IconButton.qml
+        qml/InfoStrip.qml
         qml/ContextMenu.qml
+        qml/DetailsDialog.qml
         qml/DetailsPanel.qml
         qml/DeviceCard.qml
         qml/DirectoryHeader.qml
@@ -31,7 +33,6 @@ qt_add_qml_module(sanar-filer
         qml/FilterChip.qml
         qml/FilterChips.qml
         qml/FolderTile.qml
-        qml/SelectionBar.qml
         qml/SortMenu.qml
         qml/ViewSwitcher.qml
         qml/MenuEntry.qml

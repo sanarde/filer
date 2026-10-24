@@ -133,6 +133,22 @@ Item {
                     onToggled: value => Settings.separateFolders = value
                 }
 
+                Text {
+                    Layout.topMargin: 12
+                    text: Tr.t("Experimental")
+                    color: Theme.onSurfaceVariant
+                    font.pixelSize: 13
+                    font.weight: Font.DemiBold
+                }
+
+                SettingsSwitch {
+                    Layout.fillWidth: true
+                    label: Tr.t("Details side panel")
+                    description: Tr.t("Unfinished. Shows details of the selected item in a panel on the right")
+                    checked: Settings.detailsPanel
+                    onToggled: value => Settings.detailsPanel = value
+                }
+
                 NavItem {
                     Layout.fillWidth: true
                     Layout.topMargin: 8

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sanar-filer 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 14:07+0500\n"
+"POT-Creation-Date: 2026-10-24 14:15+0500\n"
 "PO-Revision-Date: 2026-10-24 10:47+0500\n"
 "Last-Translator: AnmiTaliDev <anmitalidev@nuros.org>\n"
 "Language-Team: Russian\n"
@@ -26,11 +26,11 @@ msgstr "Корзина"
 msgid "Home"
 msgstr "Домашняя"
 
-#: src/fs/FileDetails.cpp:101
+#: src/fs/FileDetails.cpp:107
 msgid "Folder"
 msgstr "Папка"
 
-#: src/fs/FileDetails.cpp:107 src/qml/DirectoryHeader.qml:46
+#: src/fs/FileDetails.cpp:113 src/qml/DirectoryHeader.qml:46
 #: src/qml/DirectoryView.qml:35
 msgid "%1 item"
 msgid_plural "%1 items"
@@ -118,12 +118,12 @@ msgstr "Индиго"
 msgid "Green"
 msgstr "Зелёный"
 
-#: src/qml/ContextMenu.qml:35 src/qml/DetailsPanel.qml:148
-#: src/qml/DetailsPanel.qml:177
+#: src/qml/ContextMenu.qml:35 src/qml/DetailsPanel.qml:149
+#: src/qml/DetailsPanel.qml:178
 msgid "Open"
 msgstr "Открыть"
 
-#: src/qml/ContextMenu.qml:46 src/qml/DetailsPanel.qml:72
+#: src/qml/ContextMenu.qml:46 src/qml/DetailsPanel.qml:73
 msgid "Details"
 msgstr "Сведения"
 
@@ -147,29 +147,41 @@ msgstr "Разделять папки и файлы"
 msgid "Sort by"
 msgstr "Сортировка"
 
-#: src/qml/DetailsPanel.qml:80
+#: src/qml/DetailsPanel.qml:81
 msgid "Close panel"
 msgstr "Закрыть панель"
 
-#: src/qml/DetailsPanel.qml:199 src/qml/SortMenu.qml:40
+#: src/qml/DetailsPanel.qml:200 src/qml/SortMenu.qml:40
 msgid "Size"
 msgstr "Размер"
 
-#: src/qml/DetailsPanel.qml:204
+#: src/qml/DetailsPanel.qml:205
 msgid "Modified"
 msgstr "Изменён"
 
-#: src/qml/DetailsPanel.qml:209
+#: src/qml/DetailsPanel.qml:210
 msgid "Created"
 msgstr "Создан"
 
-#: src/qml/DetailsPanel.qml:214
+#: src/qml/DetailsPanel.qml:215
 msgid "Permissions"
 msgstr "Права"
 
-#: src/qml/DetailsPanel.qml:219
+#: src/qml/DetailsPanel.qml:220
 msgid "Location"
 msgstr "Папка"
+
+#: src/qml/DetailsPanel.qml:225 src/qml/SortMenu.qml:49
+msgid "Type"
+msgstr "Тип"
+
+#: src/qml/DetailsPanel.qml:230
+msgid "Owner"
+msgstr "Владелец"
+
+#: src/qml/DetailsPanel.qml:235
+msgid "Full path"
+msgstr "Полный путь"
 
 #: src/qml/DirectoryHeader.qml:15
 msgid "By date"
@@ -223,6 +235,17 @@ msgstr "Код"
 msgid "Archives"
 msgstr "Архивы"
 
+#: src/qml/InfoStrip.qml:32
+msgid "Clear selection"
+msgstr "Снять выделение"
+
+#: src/qml/InfoStrip.qml:48
+msgid "%1 item selected"
+msgid_plural "%1 items selected"
+msgstr[0] "Выбран %1 элемент"
+msgstr[1] "Выбрано %1 элемента"
+msgstr[2] "Выбрано %1 элементов"
+
 #: src/qml/NavigationButtons.qml:19 src/qml/SettingsDialog.qml:70
 msgid "Back"
 msgstr "Назад"
@@ -246,17 +269,6 @@ msgstr "Поиск"
 #: src/qml/SearchField.qml:68
 msgid "Search filters"
 msgstr "Фильтры поиска"
-
-#: src/qml/SelectionBar.qml:27
-msgid "Clear selection"
-msgstr "Снять выделение"
-
-#: src/qml/SelectionBar.qml:37
-msgid "%1 item selected"
-msgid_plural "%1 items selected"
-msgstr[0] "Выбран %1 элемент"
-msgstr[1] "Выбрано %1 элемента"
-msgstr[2] "Выбрано %1 элементов"
 
 #: src/qml/SettingsDialog.qml:76
 msgid "About"
@@ -282,7 +294,19 @@ msgstr "Акцентный цвет"
 msgid "Show folders first, in their own section"
 msgstr "Папки идут первыми в отдельной секции"
 
-#: src/qml/SettingsDialog.qml:140
+#: src/qml/SettingsDialog.qml:138
+msgid "Experimental"
+msgstr "Экспериментальное"
+
+#: src/qml/SettingsDialog.qml:146
+msgid "Details side panel"
+msgstr "Боковая панель сведений"
+
+#: src/qml/SettingsDialog.qml:147
+msgid "Unfinished. Shows details of the selected item in a panel on the right"
+msgstr "Не закончено. Показывает сведения о выбранном элементе в панели справа"
+
+#: src/qml/SettingsDialog.qml:156
 msgid "About Sanar Filer"
 msgstr "О Sanar Filer"
 
@@ -297,10 +321,6 @@ msgstr "Имя"
 #: src/qml/SortMenu.qml:31
 msgid "Date modified"
 msgstr "Дата изменения"
-
-#: src/qml/SortMenu.qml:49
-msgid "Type"
-msgstr "Тип"
 
 #: src/qml/SortMenu.qml:60
 msgid "Ascending"
