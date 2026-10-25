@@ -99,7 +99,19 @@ Item {
                     font.weight: Font.DemiBold
                 }
 
-                ThemeModeSelector {}
+                Text {
+                    Layout.fillWidth: true
+                    visible: Theme.seurat
+                    text: Tr.t("Colors are set by Seurat while it is running")
+                    color: Theme.onSurfaceVariant
+                    font.pixelSize: 13
+                    wrapMode: Text.WordWrap
+                }
+
+                ThemeModeSelector {
+                    enabled: !Theme.seurat
+                    opacity: enabled ? 1 : 0.38
+                }
 
                 Text {
                     Layout.topMargin: 12
@@ -109,7 +121,10 @@ Item {
                     font.weight: Font.DemiBold
                 }
 
-                AccentPicker {}
+                AccentPicker {
+                    enabled: !Theme.seurat
+                    opacity: enabled ? 1 : 0.38
+                }
 
                 Text {
                     Layout.topMargin: 12
