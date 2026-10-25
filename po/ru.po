@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sanar-filer 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-24 20:51+0500\n"
+"POT-Creation-Date: 2026-10-25 20:36+0500\n"
 "PO-Revision-Date: 2026-10-24 10:47+0500\n"
 "Last-Translator: AnmiTaliDev <anmitalidev@nuros.org>\n"
 "Language-Team: Russian\n"
@@ -17,12 +17,12 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: src/fs/FileDetails.cpp:66 src/places/PlacesModel.cpp:31
-#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:106
+#: src/qml/Breadcrumbs.qml:62 src/qml/DirectoryPage.qml:106
 msgid "Trash"
 msgstr "Корзина"
 
 #: src/fs/FileDetails.cpp:68 src/places/PlacesModel.cpp:17
-#: src/qml/Breadcrumbs.qml:60 src/qml/DirectoryPage.qml:105
+#: src/qml/Breadcrumbs.qml:61 src/qml/DirectoryPage.qml:105
 msgid "Home"
 msgstr "Домашняя"
 
@@ -30,8 +30,8 @@ msgstr "Домашняя"
 msgid "Folder"
 msgstr "Папка"
 
-#: src/fs/FileDetails.cpp:113 src/qml/DirectoryHeader.qml:46
-#: src/qml/DirectoryView.qml:35
+#: src/fs/FileDetails.cpp:113 src/qml/DirectoryHeader.qml:47
+#: src/qml/DirectoryView.qml:58
 msgid "%1 item"
 msgid_plural "%1 items"
 msgstr[0] "%1 элемент"
@@ -112,7 +112,7 @@ msgstr "Не удалось прочитать %1: %2"
 msgid "Cannot write %1: %2"
 msgstr "Не удалось записать %1: %2"
 
-#: src/places/DevicesModel.cpp:55 src/qml/ThemeModeSelector.qml:71
+#: src/places/DevicesModel.cpp:55 src/qml/ThemeModeSelector.qml:72
 msgid "System"
 msgstr "Система"
 
@@ -120,7 +120,7 @@ msgstr "Система"
 msgid "%1 of %2 used"
 msgstr "%1 из %2 занято"
 
-#: src/places/PlacesModel.cpp:18 src/qml/Breadcrumbs.qml:62
+#: src/places/PlacesModel.cpp:18 src/qml/Breadcrumbs.qml:63
 #: src/qml/DirectoryPage.qml:107
 msgid "Recent"
 msgstr "Недавние"
@@ -145,169 +145,169 @@ msgstr "Музыка"
 msgid "Videos"
 msgstr "Видео"
 
-#: src/qml/AboutPage.qml:38
+#: src/qml/AboutPage.qml:39
 msgid "Version"
 msgstr "Версия"
 
-#: src/qml/AboutPage.qml:48
+#: src/qml/AboutPage.qml:49
 msgid "File manager for SanarDE, part of NurOS."
 msgstr "Файловый менеджер для SanarDE, часть NurOS."
 
-#: src/qml/AboutPage.qml:58
+#: src/qml/AboutPage.qml:59
 msgid "License"
 msgstr "Лицензия"
 
-#: src/qml/AboutPage.qml:59
+#: src/qml/AboutPage.qml:60
 msgid "Toolkit"
 msgstr "Библиотека интерфейса"
 
-#: src/qml/ConfirmDialog.qml:99 src/qml/NameDialog.qml:126
-#: src/qml/OperationPanel.qml:78
+#: src/qml/ConfirmDialog.qml:100 src/qml/NameDialog.qml:127
+#: src/qml/OperationPanel.qml:79
 msgid "Cancel"
 msgstr "Отмена"
 
-#: src/qml/ContextMenu.qml:54 src/qml/DetailsPanel.qml:149
-#: src/qml/DetailsPanel.qml:178
+#: src/qml/ContextMenu.qml:55 src/qml/DetailsPanel.qml:150
+#: src/qml/DetailsPanel.qml:179
 msgid "Open"
 msgstr "Открыть"
 
-#: src/qml/ContextMenu.qml:65
+#: src/qml/ContextMenu.qml:66
 msgid "Show in folder"
 msgstr "Показать в папке"
 
-#: src/qml/ContextMenu.qml:76 src/qml/DetailsPanel.qml:73
+#: src/qml/ContextMenu.qml:77 src/qml/DetailsPanel.qml:74
 msgid "Details"
 msgstr "Сведения"
 
-#: src/qml/ContextMenu.qml:87 src/qml/Main.qml:280
+#: src/qml/ContextMenu.qml:88 src/qml/Main.qml:281
 msgid "Rename"
 msgstr "Переименовать"
 
-#: src/qml/ContextMenu.qml:102
+#: src/qml/ContextMenu.qml:103
 msgid "Copy"
 msgstr "Копировать"
 
-#: src/qml/ContextMenu.qml:113
+#: src/qml/ContextMenu.qml:114
 msgid "Cut"
 msgstr "Вырезать"
 
-#: src/qml/ContextMenu.qml:124 src/qml/WindowControls.qml:29
+#: src/qml/ContextMenu.qml:125 src/qml/WindowControls.qml:30
 msgid "Restore"
 msgstr "Восстановить"
 
-#: src/qml/ContextMenu.qml:135 src/qml/Main.qml:101
+#: src/qml/ContextMenu.qml:136 src/qml/Main.qml:102
 msgid "Delete permanently"
 msgstr "Удалить навсегда"
 
-#: src/qml/ContextMenu.qml:135
+#: src/qml/ContextMenu.qml:136
 msgid "Move to trash"
 msgstr "Переместить в корзину"
 
-#: src/qml/ContextMenu.qml:151
+#: src/qml/ContextMenu.qml:152
 msgid "Paste"
 msgstr "Вставить"
 
-#: src/qml/ContextMenu.qml:162 src/qml/Main.qml:293
+#: src/qml/ContextMenu.qml:163 src/qml/Main.qml:294
 msgid "New folder"
 msgstr "Новая папка"
 
-#: src/qml/ContextMenu.qml:173 src/qml/Main.qml:109 src/qml/Main.qml:111
+#: src/qml/ContextMenu.qml:174 src/qml/Main.qml:110 src/qml/Main.qml:112
 msgid "Empty trash"
 msgstr "Очистить корзину"
 
-#: src/qml/ContextMenu.qml:183
+#: src/qml/ContextMenu.qml:184
 msgid "Select all"
 msgstr "Выбрать всё"
 
-#: src/qml/ContextMenu.qml:194
+#: src/qml/ContextMenu.qml:195
 msgid "Refresh"
 msgstr "Обновить"
 
-#: src/qml/ContextMenu.qml:208 src/qml/SettingsDialog.qml:123
+#: src/qml/ContextMenu.qml:209 src/qml/SettingsDialog.qml:139
 msgid "Show hidden files"
 msgstr "Показывать скрытые файлы"
 
-#: src/qml/ContextMenu.qml:218 src/qml/SettingsDialog.qml:130
+#: src/qml/ContextMenu.qml:219 src/qml/SettingsDialog.qml:146
 msgid "Separate folders and files"
 msgstr "Разделять папки и файлы"
 
-#: src/qml/ContextMenu.qml:229
+#: src/qml/ContextMenu.qml:230
 msgid "Sort by"
 msgstr "Сортировка"
 
-#: src/qml/DetailsPanel.qml:81
+#: src/qml/DetailsPanel.qml:82
 msgid "Close panel"
 msgstr "Закрыть панель"
 
-#: src/qml/DetailsPanel.qml:200 src/qml/SortMenu.qml:47
+#: src/qml/DetailsPanel.qml:201 src/qml/SortMenu.qml:48
 msgid "Size"
 msgstr "Размер"
 
-#: src/qml/DetailsPanel.qml:205
+#: src/qml/DetailsPanel.qml:206
 msgid "Modified"
 msgstr "Изменён"
 
-#: src/qml/DetailsPanel.qml:210
+#: src/qml/DetailsPanel.qml:211
 msgid "Created"
 msgstr "Создан"
 
-#: src/qml/DetailsPanel.qml:215
+#: src/qml/DetailsPanel.qml:216
 msgid "Permissions"
 msgstr "Права"
 
-#: src/qml/DetailsPanel.qml:220
+#: src/qml/DetailsPanel.qml:221
 msgid "Location"
 msgstr "Папка"
 
-#: src/qml/DetailsPanel.qml:225 src/qml/SortMenu.qml:56
+#: src/qml/DetailsPanel.qml:226 src/qml/SortMenu.qml:57
 msgid "Type"
 msgstr "Тип"
 
-#: src/qml/DetailsPanel.qml:230
+#: src/qml/DetailsPanel.qml:231
 msgid "Owner"
 msgstr "Владелец"
 
-#: src/qml/DetailsPanel.qml:235
+#: src/qml/DetailsPanel.qml:236
 msgid "Full path"
 msgstr "Полный путь"
 
-#: src/qml/DirectoryHeader.qml:15
+#: src/qml/DirectoryHeader.qml:16
 msgid "By date"
 msgstr "По дате"
 
-#: src/qml/DirectoryHeader.qml:17
+#: src/qml/DirectoryHeader.qml:18
 msgid "By size"
 msgstr "По размеру"
 
-#: src/qml/DirectoryHeader.qml:19
+#: src/qml/DirectoryHeader.qml:20
 msgid "By type"
 msgstr "По типу"
 
-#: src/qml/DirectoryHeader.qml:21
+#: src/qml/DirectoryHeader.qml:22
 msgid "By name"
 msgstr "По имени"
 
-#: src/qml/DirectoryView.qml:116 src/qml/FilterChips.qml:20
+#: src/qml/DirectoryView.qml:141 src/qml/FilterChips.qml:20
 msgid "Folders"
 msgstr "Папки"
 
-#: src/qml/DirectoryView.qml:149 src/qml/SettingsDialog.qml:115
+#: src/qml/DirectoryView.qml:174 src/qml/SettingsDialog.qml:131
 msgid "Files"
 msgstr "Файлы"
 
-#: src/qml/DirectoryView.qml:353
+#: src/qml/DirectoryView.qml:380
 msgid "Folder not found"
 msgstr "Папка не найдена"
 
-#: src/qml/DirectoryView.qml:355
+#: src/qml/DirectoryView.qml:382
 msgid "Access denied"
 msgstr "Доступ запрещён"
 
-#: src/qml/DirectoryView.qml:359
+#: src/qml/DirectoryView.qml:386
 msgid "No matches"
 msgstr "Ничего не найдено"
 
-#: src/qml/DirectoryView.qml:359
+#: src/qml/DirectoryView.qml:386
 msgid "Nothing here"
 msgstr "Здесь пусто"
 
@@ -327,199 +327,203 @@ msgstr "Код"
 msgid "Archives"
 msgstr "Архивы"
 
-#: src/qml/InfoStrip.qml:32
+#: src/qml/InfoStrip.qml:33
 msgid "Clear selection"
 msgstr "Снять выделение"
 
-#: src/qml/InfoStrip.qml:48
+#: src/qml/InfoStrip.qml:49
 msgid "%1 item selected"
 msgid_plural "%1 items selected"
 msgstr[0] "Выбран %1 элемент"
 msgstr[1] "Выбрано %1 элемента"
 msgstr[2] "Выбрано %1 элементов"
 
-#: src/qml/Main.qml:46
+#: src/qml/Main.qml:47
 msgid "Copying"
 msgstr "Копирование"
 
-#: src/qml/Main.qml:47
+#: src/qml/Main.qml:48
 msgid "Moving"
 msgstr "Перемещение"
 
-#: src/qml/Main.qml:48
+#: src/qml/Main.qml:49
 msgid "Moving to trash"
 msgstr "Перемещение в корзину"
 
-#: src/qml/Main.qml:49
+#: src/qml/Main.qml:50
 msgid "Restoring"
 msgstr "Восстановление"
 
-#: src/qml/Main.qml:50
+#: src/qml/Main.qml:51
 msgid "Deleting"
 msgstr "Удаление"
 
-#: src/qml/Main.qml:76
+#: src/qml/Main.qml:77
 msgid "Name conflict"
 msgstr "Конфликт имён"
 
-#: src/qml/Main.qml:77
+#: src/qml/Main.qml:78
 msgid "%1 item already exists in this folder."
 msgid_plural "%1 items already exist in this folder."
 msgstr[0] "%1 элемент уже существует в этой папке."
 msgstr[1] "%1 элемента уже существуют в этой папке."
 msgstr[2] "%1 элементов уже существуют в этой папке."
 
-#: src/qml/Main.qml:79
+#: src/qml/Main.qml:80
 msgid "Keep both"
 msgstr "Оставить оба"
 
-#: src/qml/Main.qml:79
+#: src/qml/Main.qml:80
 msgid "Replace"
 msgstr "Заменить"
 
-#: src/qml/Main.qml:79
+#: src/qml/Main.qml:80
 msgid "Skip"
 msgstr "Пропустить"
 
-#: src/qml/Main.qml:102
+#: src/qml/Main.qml:103
 msgid "Delete %1 item permanently? This cannot be undone."
 msgid_plural "Delete %1 items permanently? This cannot be undone."
 msgstr[0] "Удалить %1 элемент навсегда? Это нельзя отменить."
 msgstr[1] "Удалить %1 элемента навсегда? Это нельзя отменить."
 msgstr[2] "Удалить %1 элементов навсегда? Это нельзя отменить."
 
-#: src/qml/Main.qml:104
+#: src/qml/Main.qml:105
 msgid "Delete"
 msgstr "Удалить"
 
-#: src/qml/Main.qml:110
+#: src/qml/Main.qml:111
 msgid "Delete all items in the trash permanently? This cannot be undone."
 msgstr "Удалить все элементы корзины навсегда? Это нельзя отменить."
 
-#: src/qml/Main.qml:293
+#: src/qml/Main.qml:294
 msgid "Create"
 msgstr "Создать"
 
-#: src/qml/NavItem.qml:61
+#: src/qml/NavItem.qml:62
 msgid "Eject"
 msgstr "Извлечь"
 
-#: src/qml/NavigationButtons.qml:19 src/qml/SettingsDialog.qml:70
+#: src/qml/NavigationButtons.qml:20 src/qml/SettingsDialog.qml:71
 msgid "Back"
 msgstr "Назад"
 
-#: src/qml/NavigationButtons.qml:34
+#: src/qml/NavigationButtons.qml:35
 msgid "Forward"
 msgstr "Вперёд"
 
-#: src/qml/NavigationButtons.qml:47
+#: src/qml/NavigationButtons.qml:48
 msgid "Up"
 msgstr "Вверх"
 
-#: src/qml/OperationPanel.qml:41
+#: src/qml/OperationPanel.qml:42
 msgid "Operation failed"
 msgstr "Операция не выполнена"
 
-#: src/qml/OperationPanel.qml:60
+#: src/qml/OperationPanel.qml:61
 msgid "%1 more queued"
 msgid_plural "%1 more queued"
 msgstr[0] "Ещё %1 в очереди"
 msgstr[1] "Ещё %1 в очереди"
 msgstr[2] "Ещё %1 в очереди"
 
-#: src/qml/OperationPanel.qml:78 src/qml/SettingsDialog.qml:84
-#: src/qml/WindowControls.qml:42
+#: src/qml/OperationPanel.qml:79 src/qml/SettingsDialog.qml:85
+#: src/qml/WindowControls.qml:43
 msgid "Close"
 msgstr "Закрыть"
 
-#: src/qml/SearchField.qml:39
+#: src/qml/SearchField.qml:40
 msgid "Search files"
 msgstr "Поиск по файлам"
 
-#: src/qml/SearchField.qml:49
+#: src/qml/SearchField.qml:50
 msgid "Search"
 msgstr "Поиск"
 
-#: src/qml/SearchField.qml:74
+#: src/qml/SearchField.qml:75
 msgid "Search filters"
 msgstr "Фильтры поиска"
 
-#: src/qml/SettingsDialog.qml:76
+#: src/qml/SettingsDialog.qml:77
 msgid "About"
 msgstr "О программе"
 
-#: src/qml/SettingsDialog.qml:76 src/qml/TopBar.qml:65
+#: src/qml/SettingsDialog.qml:77 src/qml/TopBar.qml:66
 msgid "Settings"
 msgstr "Настройки"
 
-#: src/qml/SettingsDialog.qml:95
+#: src/qml/SettingsDialog.qml:96
 msgid "Theme"
 msgstr "Тема"
 
 #: src/qml/SettingsDialog.qml:105
+msgid "Colors are set by Seurat while it is running"
+msgstr "Цвета задаёт Seurat, пока он запущен"
+
+#: src/qml/SettingsDialog.qml:118
 msgid "Accent color"
 msgstr "Акцентный цвет"
 
-#: src/qml/SettingsDialog.qml:131
+#: src/qml/SettingsDialog.qml:147
 msgid "Show folders first, in their own section"
 msgstr "Папки идут первыми в отдельной секции"
 
-#: src/qml/SettingsDialog.qml:138
+#: src/qml/SettingsDialog.qml:154
 msgid "Experimental"
 msgstr "Экспериментальное"
 
-#: src/qml/SettingsDialog.qml:146
+#: src/qml/SettingsDialog.qml:162
 msgid "Details side panel"
 msgstr "Боковая панель сведений"
 
-#: src/qml/SettingsDialog.qml:147
+#: src/qml/SettingsDialog.qml:163
 msgid "Unfinished. Shows details of the selected item in a panel on the right"
 msgstr "Не закончено. Показывает сведения о выбранном элементе в панели справа"
 
-#: src/qml/SettingsDialog.qml:156
+#: src/qml/SettingsDialog.qml:172
 msgid "About Sanar Filer"
 msgstr "О Sanar Filer"
 
-#: src/qml/Sidebar.qml:50
+#: src/qml/Sidebar.qml:51
 msgid "Devices"
 msgstr "Устройства"
 
-#: src/qml/SortMenu.qml:29
+#: src/qml/SortMenu.qml:30
 msgid "Name"
 msgstr "Имя"
 
-#: src/qml/SortMenu.qml:38
+#: src/qml/SortMenu.qml:39
 msgid "Date modified"
 msgstr "Дата изменения"
 
-#: src/qml/SortMenu.qml:67
+#: src/qml/SortMenu.qml:68
 msgid "Ascending"
 msgstr "По возрастанию"
 
-#: src/qml/SortMenu.qml:77
+#: src/qml/SortMenu.qml:78
 msgid "Descending"
 msgstr "По убыванию"
 
-#: src/qml/ThemeModeSelector.qml:78
+#: src/qml/ThemeModeSelector.qml:79
 msgid "Light"
 msgstr "Светлая"
 
-#: src/qml/ThemeModeSelector.qml:84
+#: src/qml/ThemeModeSelector.qml:85
 msgid "Dark"
 msgstr "Тёмная"
 
-#: src/qml/ViewSwitcher.qml:15
+#: src/qml/ViewSwitcher.qml:16
 msgid "List"
 msgstr "Список"
 
-#: src/qml/ViewSwitcher.qml:28
+#: src/qml/ViewSwitcher.qml:29
 msgid "Grid"
 msgstr "Сетка"
 
-#: src/qml/WindowControls.qml:15
+#: src/qml/WindowControls.qml:16
 msgid "Minimize"
 msgstr "Свернуть"
 
-#: src/qml/WindowControls.qml:29
+#: src/qml/WindowControls.qml:30
 msgid "Maximize"
 msgstr "Развернуть"
