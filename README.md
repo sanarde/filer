@@ -21,6 +21,7 @@ The application id is `org.nuros.sanar.filer`.
 ## Dependencies
 
 - Qt 6.8 or newer (Core, Gui, Quick, DBus)
+- Sanar Style
 - CMake 3.21 or newer
 - A C++20 compiler
 - gettext tools (xgettext, msgmerge, msgfmt)
@@ -38,6 +39,8 @@ cmake --build build
 ./build/src/sanar-filer
 ```
 
+If Sanar Style is installed outside the system prefix, pass its prefix with `-DCMAKE_PREFIX_PATH=<prefix>` when configuring and set `QML_IMPORT_PATH=<prefix>/lib/qt6/qml` when running.
+
 To install, run `cmake --install build --prefix <prefix>`. This installs the executable, the icons, the desktop file and the AppStream metadata.
 
 ## Translations
@@ -46,9 +49,7 @@ Message catalogs are in `po`. After changing strings in QML, run `cmake --build 
 
 ## Palettes
 
-Built-in palettes are in `resources/palettes`. Additional palettes are read from `$XDG_DATA_HOME/sanar-filer/palettes/*.json` (usually `~/.local/share/sanar-filer/palettes`). A file with the id of a built-in palette replaces it. Files with a missing or invalid color are ignored.
-
-A palette file has an `id`, a `name` (a string or an object keyed by language code with an `en` fallback) and two color tables, `light` and `dark`. Each table must contain all keys listed in `resources/palettes/10-teal.json`, with colors written as `#RRGGBB`.
+Colors, palettes and fonts come from Sanar Style. See its documentation for the palette format and the location of custom palettes.
 
 ## Thumbnails
 
@@ -65,13 +66,6 @@ The Recent location lists existing files from `$XDG_DATA_HOME/recently-used.xbel
 ## Clipboard
 
 Copy and cut place the selected files on the system clipboard as `text/uri-list` and `x-special/gnome-copied-files`, so files can be pasted between applications.
-
-## Acknowledgments
-
-- [Roboto Flex](https://github.com/TypeNetwork/Roboto-Flex), SIL Open Font License 1.1
-- [Material Symbols](https://github.com/google/material-design-icons), Apache License 2.0
-
-Font files and license texts are in `resources/fonts`. The icon font is a subset; to change the icon set, edit `tools/icon-names.txt` and run `tools/subset-icons.sh` with the full font and codepoints file.
 
 ## Links
 
