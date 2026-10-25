@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Sanar.Filer
+import Sanar.Style
 
 Window {
     id: root

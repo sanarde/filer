@@ -1,6 +1,7 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import Sanar.Filer
+import Sanar.Style
 
 Flickable {
     id: root

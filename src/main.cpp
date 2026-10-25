@@ -1,5 +1,3 @@
-#include <QFont>
-#include <QFontDatabase>
 #include <QGuiApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
@@ -7,6 +5,8 @@
 #include <libintl.h>
 
 #include "ThumbnailProvider.h"
+
+#include <Style.h>
 
 #include <clocale>
 
@@ -22,10 +22,7 @@ int main(int argc, char *argv[])
     bindtextdomain("sanar-filer", LOCALEDIR);
     bind_textdomain_codeset("sanar-filer", "UTF-8");
 
-    QFontDatabase::addApplicationFont(":/fonts/MaterialSymbolsRounded.ttf");
-    QFontDatabase::addApplicationFont(":/fonts/MaterialSymbolsRoundedFilled.ttf");
-    const int textFont = QFontDatabase::addApplicationFont(":/fonts/RobotoFlex.ttf");
-    app.setFont(QFont(QFontDatabase::applicationFontFamilies(textFont).value(0)));
+    SanarStyle::init();
 
     QQmlApplicationEngine engine;
     engine.addImageProvider("thumb", new ThumbnailProvider);

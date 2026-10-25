@@ -1,5 +1,6 @@
 import QtQuick
 import Sanar.Filer
+import Sanar.Style
 
 Row {
     spacing: 2

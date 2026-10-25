@@ -19,8 +19,6 @@ qt_add_qml_module(sanar-filer
         qml/AccentPicker.qml
         qml/AboutPage.qml
         qml/Breadcrumbs.qml
-        qml/Icon.qml
-        qml/IconButton.qml
         qml/InfoStrip.qml
         qml/ConfirmDialog.qml
         qml/ContextMenu.qml
@@ -85,33 +83,18 @@ qt_add_qml_module(sanar-filer
         fs/TransferJob.cpp
         i18n/Translator.h
         i18n/Translator.cpp
-        theme/ColorSet.h
-        theme/Palettes.h
-        theme/Palettes.cpp
-        theme/Theme.h
-        theme/Theme.cpp
-        theme/Icons.h
-        theme/Icons.cpp
 )
 
 qt_add_resources(sanar-filer resources
     PREFIX /
     BASE ${PROJECT_SOURCE_DIR}/resources
     FILES
-        ${PROJECT_SOURCE_DIR}/resources/icons.txt
         ${PROJECT_SOURCE_DIR}/resources/icons/org.nuros.sanar.filer.svg
-        ${PROJECT_SOURCE_DIR}/resources/fonts/RobotoFlex.ttf
-        ${PROJECT_SOURCE_DIR}/resources/palettes/10-teal.json
-        ${PROJECT_SOURCE_DIR}/resources/palettes/20-coral.json
-        ${PROJECT_SOURCE_DIR}/resources/palettes/30-indigo.json
-        ${PROJECT_SOURCE_DIR}/resources/palettes/40-green.json
-        ${PROJECT_SOURCE_DIR}/resources/fonts/MaterialSymbolsRounded.ttf
-        ${PROJECT_SOURCE_DIR}/resources/fonts/MaterialSymbolsRoundedFilled.ttf
 )
 
-target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/theme ${CMAKE_CURRENT_SOURCE_DIR}/i18n ${CMAKE_CURRENT_SOURCE_DIR}/fs ${CMAKE_CURRENT_SOURCE_DIR}/nav ${CMAKE_CURRENT_SOURCE_DIR}/settings ${CMAKE_CURRENT_SOURCE_DIR}/places ${CMAKE_CURRENT_SOURCE_DIR}/thumbs)
+target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/i18n ${CMAKE_CURRENT_SOURCE_DIR}/fs ${CMAKE_CURRENT_SOURCE_DIR}/nav ${CMAKE_CURRENT_SOURCE_DIR}/settings ${CMAKE_CURRENT_SOURCE_DIR}/places ${CMAKE_CURRENT_SOURCE_DIR}/thumbs)
 
-target_link_libraries(sanar-filer PRIVATE Qt6::Core Qt6::Gui Qt6::Quick Qt6::DBus)
+target_link_libraries(sanar-filer PRIVATE Qt6::Core Qt6::Gui Qt6::Quick Qt6::DBus SanarStyle::sanar-style)
 
 install(TARGETS sanar-filer RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(FILES

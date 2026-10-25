@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Effects
 import Sanar.Filer
+import Sanar.Style
 
 Item {
     id: root

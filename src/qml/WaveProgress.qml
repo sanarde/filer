@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Shapes
 import Sanar.Filer
+import Sanar.Style
 
 Item {
     id: root

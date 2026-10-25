@@ -2,6 +2,7 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 import Sanar.Filer
+import Sanar.Style
 
 Item {
     id: root

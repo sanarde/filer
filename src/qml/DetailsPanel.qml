@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 import Sanar.Filer
+import Sanar.Style
 
 Rectangle {
     id: root
