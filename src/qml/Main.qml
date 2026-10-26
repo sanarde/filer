@@ -6,8 +6,8 @@ import Sanar.Style
 Window {
     id: root
 
-    width: Settings.windowWidth
-    height: Settings.windowHeight
+    width: 1400
+    height: 860
     minimumWidth: 640
     minimumHeight: 420
     visible: true
@@ -122,19 +122,6 @@ Window {
         target: Theme
         property: "palette"
         value: Settings.palette
-    }
-
-    Component.onCompleted: {
-        if (Settings.windowMaximized)
-            showMaximized()
-    }
-
-    onClosing: {
-        Settings.windowMaximized = visibility === Window.Maximized
-        if (visibility === Window.Windowed) {
-            Settings.windowWidth = width
-            Settings.windowHeight = height
-        }
     }
 
     property string dismissedDetails

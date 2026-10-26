@@ -20,9 +20,6 @@ class Settings : public QObject
     Q_PROPERTY(DirectoryModel::SortKey sortKey READ sortKey WRITE setSortKey NOTIFY sortKeyChanged FINAL)
     Q_PROPERTY(bool sortDescending READ sortDescending WRITE setSortDescending NOTIFY sortDescendingChanged FINAL)
     Q_PROPERTY(QString viewMode READ viewMode WRITE setViewMode NOTIFY viewModeChanged FINAL)
-    Q_PROPERTY(int windowWidth READ windowWidth WRITE setWindowWidth NOTIFY windowSizeChanged FINAL)
-    Q_PROPERTY(int windowHeight READ windowHeight WRITE setWindowHeight NOTIFY windowSizeChanged FINAL)
-    Q_PROPERTY(bool windowMaximized READ windowMaximized WRITE setWindowMaximized NOTIFY windowMaximizedChanged FINAL)
 
 public:
     explicit Settings(QObject *parent = nullptr);
@@ -43,12 +40,6 @@ public:
     void setSortDescending(bool descending);
     QString viewMode() const { return m_viewMode; }
     void setViewMode(const QString &mode);
-    int windowWidth() const { return m_windowWidth; }
-    void setWindowWidth(int width);
-    int windowHeight() const { return m_windowHeight; }
-    void setWindowHeight(int height);
-    bool windowMaximized() const { return m_windowMaximized; }
-    void setWindowMaximized(bool maximized);
 
 signals:
     void themeModeChanged();
@@ -59,8 +50,6 @@ signals:
     void sortKeyChanged();
     void sortDescendingChanged();
     void viewModeChanged();
-    void windowSizeChanged();
-    void windowMaximizedChanged();
 
 private:
     QSettings m_file;
@@ -72,7 +61,4 @@ private:
     DirectoryModel::SortKey m_sortKey;
     bool m_sortDescending;
     QString m_viewMode;
-    int m_windowWidth;
-    int m_windowHeight;
-    bool m_windowMaximized;
 };

@@ -34,9 +34,6 @@ Settings::Settings(QObject *parent)
     , m_sortKey(readEnum(m_file, "view/sortKey", DirectoryModel::SortByName, DirectoryModel::SortByType))
     , m_sortDescending(m_file.value("view/sortDescending", false).toBool())
     , m_viewMode(m_file.value("view/mode", "grid").toString() == "list" ? "list" : "grid")
-    , m_windowWidth(qMax(640, m_file.value("window/width", 1400).toInt()))
-    , m_windowHeight(qMax(420, m_file.value("window/height", 860).toInt()))
-    , m_windowMaximized(m_file.value("window/maximized", false).toBool())
 {
 }
 
@@ -110,31 +107,4 @@ void Settings::setViewMode(const QString &mode)
     m_viewMode = mode;
     m_file.setValue("view/mode", mode);
     emit viewModeChanged();
-}
-
-void Settings::setWindowWidth(int width)
-{
-    if (m_windowWidth == width)
-        return;
-    m_windowWidth = width;
-    m_file.setValue("window/width", width);
-    emit windowSizeChanged();
-}
-
-void Settings::setWindowHeight(int height)
-{
-    if (m_windowHeight == height)
-        return;
-    m_windowHeight = height;
-    m_file.setValue("window/height", height);
-    emit windowSizeChanged();
-}
-
-void Settings::setWindowMaximized(bool maximized)
-{
-    if (m_windowMaximized == maximized)
-        return;
-    m_windowMaximized = maximized;
-    m_file.setValue("window/maximized", maximized);
-    emit windowMaximizedChanged();
 }
