@@ -22,12 +22,14 @@ The application id is `org.nuros.sanar.filer`.
 
 - Qt 6.8 or newer (Core, Gui, Quick, DBus)
 - Sanar Style
+- cfgd (libcfgd)
 - CMake 3.21 or newer
 - A C++20 compiler
 - gettext tools (xgettext, msgmerge, msgfmt)
 
 Optional at run time:
 
+- The cfgd daemon, to keep the settings (without it the defaults are used and changes are not saved)
 - UDisks2, for mounting and ejecting devices
 - Thumbnailers in `/usr/share/thumbnailers`, for video and PDF thumbnails
 
@@ -42,6 +44,12 @@ cmake --build build
 If Sanar Style is installed outside the system prefix, pass its prefix with `-DCMAKE_PREFIX_PATH=<prefix>` when configuring and set `QML_IMPORT_PATH=<prefix>/lib/qt6/qml` when running.
 
 To install, run `cmake --install build --prefix <prefix>`. This installs the executable, the icons, the desktop file and the AppStream metadata.
+
+## Settings
+
+Settings are stored in cfgd under `/org/nuros/sanar/filer/`. The schema is `resources/cfgd/org.nuros.sanar.filer.schema`; installation puts it in `<prefix>/share/cfgd/schemas`, and when running from the build tree it can be copied to `$XDG_DATA_HOME/cfgd/schemas`. A change made in another instance or with `cfgd set` is applied without a restart.
+
+On the first start the values of the old `~/.config/sanar-filer/settings.ini` are moved to cfgd and the file is renamed to `settings.ini.migrated`. The window size is not saved.
 
 ## Translations
 
