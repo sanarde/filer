@@ -94,7 +94,7 @@ qt_add_resources(sanar-filer resources
 
 target_include_directories(sanar-filer PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/i18n ${CMAKE_CURRENT_SOURCE_DIR}/fs ${CMAKE_CURRENT_SOURCE_DIR}/nav ${CMAKE_CURRENT_SOURCE_DIR}/settings ${CMAKE_CURRENT_SOURCE_DIR}/places ${CMAKE_CURRENT_SOURCE_DIR}/thumbs)
 
-target_link_libraries(sanar-filer PRIVATE Qt6::Core Qt6::Gui Qt6::Quick Qt6::DBus SanarStyle::sanar-style)
+target_link_libraries(sanar-filer PRIVATE Qt6::Core Qt6::Gui Qt6::Quick Qt6::DBus SanarStyle::sanar-style PkgConfig::CFGD)
 
 install(TARGETS sanar-filer RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 install(FILES

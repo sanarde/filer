@@ -1,8 +1,10 @@
 #pragma once
 
 #include <QObject>
-#include <QSettings>
+#include <QSocketNotifier>
 #include <QtQml/qqmlregistration.h>
+
+#include <cfgd/cfgd.h>
 
 #include "DirectoryModel.h"
 #include "Theme.h"
@@ -23,6 +25,7 @@ class Settings : public QObject
 
 public:
     explicit Settings(QObject *parent = nullptr);
+    ~Settings() override;
 
     Theme::Mode themeMode() const { return m_themeMode; }
     void setThemeMode(Theme::Mode mode);
@@ -52,7 +55,19 @@ signals:
     void viewModeChanged();
 
 private:
-    QSettings m_file;
+    static void keyChanged(const char *key, void *user);
+    void dispatch();
+    void reload(const QString &name);
+    bool readBool(const char *name, bool fallback) const;
+    QString readString(const char *name, const QString &fallback) const;
+    Theme::Mode readThemeMode() const;
+    DirectoryModel::SortKey readSortKey() const;
+    QString readViewMode() const;
+    void writeBool(const char *name, bool value);
+    void writeString(const char *name, const QString &value);
+
+    cfgd_t *m_cfgd = nullptr;
+    QSocketNotifier *m_notifier = nullptr;
     Theme::Mode m_themeMode;
     QString m_palette;
     bool m_showHidden;

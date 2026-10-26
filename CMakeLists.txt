@@ -7,6 +7,8 @@ set(CMAKE_AUTOMOC ON)
 
 find_package(Qt6 6.8 REQUIRED COMPONENTS Core Gui Quick DBus)
 find_package(SanarStyle REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(CFGD REQUIRED IMPORTED_TARGET libcfgd)
 qt_standard_project_setup(REQUIRES 6.8)
 
 include(GNUInstallDirs)
