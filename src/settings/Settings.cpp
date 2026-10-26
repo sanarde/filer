@@ -1,6 +1,9 @@
 #include "Settings.h"
 
 #include <QByteArray>
+#include <QFile>
+#include <QSettings>
+#include <QStandardPaths>
 
 #include <cstdlib>
 
@@ -25,6 +28,32 @@ Enum enumFromName(const QString &name, const char *const (&names)[N], Enum fallb
     return fallback;
 }
 
+
+int migrateBool(cfgd_t *cfgd, const QSettings &file, const char *legacyKey, const char *name)
+{
+    if (!file.contains(legacyKey))
+        return CFGD_OK;
+    return cfgd_set_bool(cfgd, keyPath(name).constData(), file.value(legacyKey).toBool());
+}
+
+int migrateString(cfgd_t *cfgd, const QSettings &file, const char *legacyKey, const char *name)
+{
+    if (!file.contains(legacyKey))
+        return CFGD_OK;
+    return cfgd_set_string(cfgd, keyPath(name).constData(),
+                           file.value(legacyKey).toString().toUtf8().constData());
+}
+
+template<size_t N>
+int migrateIndex(cfgd_t *cfgd, const QSettings &file, const char *legacyKey, const char *name,
+                 const char *const (&names)[N])
+{
+    const int index = file.value(legacyKey, -1).toInt();
+    if (index < 0 || size_t(index) >= N)
+        return CFGD_OK;
+    return cfgd_set_string(cfgd, keyPath(name).constData(), names[index]);
+}
+
 }
 
 Settings::Settings(QObject *parent)
@@ -41,6 +70,8 @@ Settings::Settings(QObject *parent)
             connect(m_notifier, &QSocketNotifier::activated, this, &Settings::dispatch);
         }
     }
+
+    migrateLegacy();
 
     m_themeMode = readThemeMode();
     m_palette = readString("palette", "teal");
@@ -63,6 +94,40 @@ void Settings::keyChanged(const char *key, void *user)
 
     if (path.startsWith(prefix))
         static_cast<Settings *>(user)->reload(path.mid(prefix.size()));
+}
+
+void Settings::migrateLegacy()
+{
+    const QString path = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation) + "/settings.ini";
+    static const char *const legacyPalettes[] = {"teal", "coral", "indigo", "green"};
+    int status = CFGD_OK;
+
+    if (!m_cfgd || !QFile::exists(path))
+        return;
+    const QSettings file(path, QSettings::IniFormat);
+
+    status = migrateIndex(m_cfgd, file, "appearance/mode", "theme-mode", themeModes);
+    if (status == CFGD_OK && file.contains("appearance/paletteId"))
+        status = migrateString(m_cfgd, file, "appearance/paletteId", "palette");
+    else if (status == CFGD_OK)
+        status = migrateIndex(m_cfgd, file, "appearance/palette", "palette", legacyPalettes);
+    if (status == CFGD_OK)
+        status = migrateBool(m_cfgd, file, "files/showHidden", "show-hidden");
+    if (status == CFGD_OK)
+        status = migrateBool(m_cfgd, file, "files/separateFolders", "separate-folders");
+    if (status == CFGD_OK)
+        status = migrateBool(m_cfgd, file, "experimental/detailsPanel", "details-panel");
+    if (status == CFGD_OK)
+        status = migrateIndex(m_cfgd, file, "view/sortKey", "sort-key", sortKeys);
+    if (status == CFGD_OK)
+        status = migrateBool(m_cfgd, file, "view/sortDescending", "sort-descending");
+    if (status == CFGD_OK)
+        status = migrateString(m_cfgd, file, "view/mode", "view-mode");
+
+    if (status == CFGD_OK)
+        QFile::rename(path, path + ".migrated");
+    else
+        qWarning("Cannot move the settings to cfgd, the old file is kept");
 }
 
 void Settings::dispatch()

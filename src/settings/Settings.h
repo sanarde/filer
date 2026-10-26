@@ -56,6 +56,7 @@ signals:
 
 private:
     static void keyChanged(const char *key, void *user);
+    void migrateLegacy();
     void dispatch();
     void reload(const QString &name);
     bool readBool(const char *name, bool fallback) const;
