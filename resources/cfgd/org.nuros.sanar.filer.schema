@@ -1,0 +1,46 @@
+[schema]
+id = org.nuros.sanar.filer
+path = /org/nuros/sanar/filer/
+
+[theme-mode]
+type = s
+default = system
+choices = system; light; dark
+summary = Color scheme used when Sanar Seurat is not running
+
+[palette]
+type = s
+default = teal
+summary = Id of the palette used when Sanar Seurat is not running
+
+[show-hidden]
+type = b
+default = false
+summary = Show hidden files
+
+[separate-folders]
+type = b
+default = true
+summary = Show folders first, in their own section
+
+[details-panel]
+type = b
+default = false
+summary = Show the details panel (experimental)
+
+[sort-key]
+type = s
+default = name
+choices = name; modified; size; type
+summary = Sort order of files
+
+[sort-descending]
+type = b
+default = false
+summary = Reverse the sort order
+
+[view-mode]
+type = s
+default = grid
+choices = grid; list
+summary = Layout of the file view

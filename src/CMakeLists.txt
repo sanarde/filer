@@ -105,3 +105,5 @@ install(FILES ${PROJECT_SOURCE_DIR}/resources/desktop/org.nuros.sanar.filer.desk
     DESTINATION ${CMAKE_INSTALL_DATADIR}/applications)
 install(FILES ${PROJECT_SOURCE_DIR}/resources/desktop/org.nuros.sanar.filer.metainfo.xml
     DESTINATION ${CMAKE_INSTALL_DATADIR}/metainfo)
+install(FILES ${PROJECT_SOURCE_DIR}/resources/cfgd/org.nuros.sanar.filer.schema
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/cfgd/schemas)
